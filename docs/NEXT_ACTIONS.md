@@ -17,7 +17,11 @@ Execution status:
 - Task 1 (Module baseline): completed.
 - Task 2 (Dependency rules): documentation completed, CI enforcement pending.
 - Task 3 (CI baseline): workflow added, pending first green run on GitHub.
-- Next recommended task: Task 4 (Transport contracts).
+- Task 4 (Transport contracts): typed contracts and baseline tests added.
+- Task 5 (Session state model hardening and guard rules): completed.
+- Task 6 (Fake adapters for tests): completed with scripted Bluetooth/USB fake gateway.
+- Task 7 (Read-only identification MVP start): baseline use case and UI state coordinator added.
+- Next recommended task: enforce dependency rules in CI, then add diagnostics screen wiring in `app`.
 
 ## Priority Queue
 
@@ -119,5 +123,6 @@ Before opening PR:
 ## Quick Resume Prompt
 
 If you return later, continue with:
-- Task 4 (Transport contracts).
+- Enforce dependency rules in CI.
+- Add diagnostics screen wiring in `app`.
 - Then continue in order.
