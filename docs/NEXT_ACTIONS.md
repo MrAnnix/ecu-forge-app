@@ -11,6 +11,11 @@ Current snapshot reference: `docs/PROJECT_STATUS.md`.
 Current target phase:
 - Phase 0 (foundation stabilization)
 
+Safety validation rules:
+- Validar cada incremento por hito en modo read-only primero.
+- Evitar validación big-bang al final.
+- Mantener write/flash bloqueado hasta validación de seguridad dedicada.
+
 Current objective:
 - Prepare architecture and tooling so transport/session work can be implemented safely in Phase 1.
 

@@ -48,6 +48,12 @@ Follow-up after wiring:
 - Extend diagnostics to DTC read flow.
 - Start telemetry screen wiring with buffered sampling strategy.
 
+## Safety Validation Rules
+
+- Validate each milestone increment in read-only mode first.
+- Avoid big-bang validation at the end.
+- Keep write/flash blocked until dedicated safety validation is completed.
+
 ## Risks and Watch Items
 
 - Gradle wrapper files are still expected from Android Studio sync in some environments.
