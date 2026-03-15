@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ECU Forge</string>
+    <string name="app_bootstrap_ready">Android project bootstrap is ready.</string>
+</resources>
