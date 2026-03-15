@@ -39,6 +39,10 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature-diagnostics"))
+    implementation(project(":feature-telemetry"))
+    implementation(project(":feature-map"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

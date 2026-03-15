@@ -31,12 +31,9 @@ The goal is to centralize architecture decisions, implementation milestones, and
 
 ## Initial Roadmap
 
-1. Define baseline architecture and package structure.
-2. Implement ECU transport abstraction (Bluetooth/USB where applicable).
-3. Add a first end-to-end diagnostic read flow.
-4. Build a live telemetry screen with buffered sampling.
-5. Add map backup/restore with integrity validation.
-6. Add basic automated tests and release pipeline.
+The canonical roadmap is maintained in:
+
+- [ECU Forge Roadmap](docs/ROADMAP.md)
 
 ## Working Agreement
 
@@ -71,6 +68,9 @@ The repository now includes a baseline Android project with:
 
 - [Contributing Guide](CONTRIBUTING.md)
 - [Contribution Workflow Manual](docs/CONTRIBUTION_WORKFLOW.md)
+- [Roadmap](docs/ROADMAP.md)
+- [Next Actions](docs/NEXT_ACTIONS.md)
+- [Module Dependency Rules](docs/MODULE_DEPENDENCY_RULES.md)
 
 ## Agent Working Contract
 

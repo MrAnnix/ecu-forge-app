@@ -16,3 +16,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "ecu-forge-app"
 include(":app")
+include(":core")
+include(":transport")
+include(":feature-diagnostics")
+include(":feature-telemetry")
+include(":feature-map")
