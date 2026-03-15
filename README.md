@@ -70,6 +70,7 @@ The repository now includes a baseline Android project with:
 - [Contribution Workflow Manual](docs/CONTRIBUTION_WORKFLOW.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Next Actions](docs/NEXT_ACTIONS.md)
+- [Project Status](docs/PROJECT_STATUS.md)
 - [Module Dependency Rules](docs/MODULE_DEPENDENCY_RULES.md)
 
 ## Agent Working Contract

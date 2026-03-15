@@ -4,6 +4,7 @@
 
 This is the practical execution companion for the roadmap.
 Use it to decide what to do next without replanning from scratch.
+Current snapshot reference: `docs/PROJECT_STATUS.md`.
 
 ## Current Focus
 
@@ -16,7 +17,7 @@ Current objective:
 Execution status:
 - Task 1 (Module baseline): completed.
 - Task 2 (Dependency rules): documentation completed, CI enforcement pending.
-- Task 3 (CI baseline): workflow added, pending first green run on GitHub.
+- Task 3 (CI baseline): workflow added and reported green.
 - Task 4 (Transport contracts): typed contracts and baseline tests added.
 - Task 5 (Session state model hardening and guard rules): completed.
 - Task 6 (Fake adapters for tests): completed with scripted Bluetooth/USB fake gateway.

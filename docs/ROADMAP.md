@@ -2,6 +2,7 @@
 
 Execution companion:
 - [Next Actions](NEXT_ACTIONS.md)
+- [Project Status](PROJECT_STATUS.md)
 
 ## Scope and Planning Horizon
 
