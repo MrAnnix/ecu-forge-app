@@ -45,6 +45,13 @@ jobs:
           chmod +x ./gradlew
           ./gradlew --no-daemon verifyModuleDependencyRules
 
+      - name: Kotlin quality gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          chmod +x ./gradlew
+          ./gradlew --no-daemon qualityCheck
+
       - name: Build, unit tests, and lint
         shell: bash
         run: |
