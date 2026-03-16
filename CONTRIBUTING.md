@@ -68,6 +68,17 @@ Every PR must include:
 - Risk assessment.
 - Validation evidence.
 - Rollback strategy for risky changes.
+- Confirmation that the contributor rights assignment has been signed.
+
+## Contributor Rights Assignment (Required)
+
+All contributors must sign the contributor rights assignment before a pull request can be merged.
+
+Reference:
+- [Contributor Rights Assignment](docs/CONTRIBUTOR_RIGHTS_ASSIGNMENT.md)
+
+Operational rule:
+- Maintainers may request proof of signature before review or merge.
 
 ## Security and Data Handling
 

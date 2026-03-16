@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ECU Forge</string>
-    <string name="app_bootstrap_ready">Android project bootstrap is ready.</string>
+    <string name="diagnostics_status_idle">Ready for read-only ECU identification.</string>
+    <string name="diagnostics_action_identify">Run ECU identification</string>
 </resources>

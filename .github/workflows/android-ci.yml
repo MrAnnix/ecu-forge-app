@@ -32,6 +32,17 @@ jobs:
         with:
           gradle-version: '8.10'
 
+      - name: Validate module dependency rules
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f "./gradlew" ]; then
+            chmod +x ./gradlew
+            ./gradlew --no-daemon verifyModuleDependencyRules
+          else
+            gradle --no-daemon verifyModuleDependencyRules
+          fi
+
       - name: Build, unit tests, and lint
         shell: bash
         run: |

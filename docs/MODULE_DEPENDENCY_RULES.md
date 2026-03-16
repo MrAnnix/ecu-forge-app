@@ -43,6 +43,14 @@ For every PR affecting module dependencies:
 - Verify dependency change is reflected in this document.
 - Verify rationale is included in PR risk/scope notes.
 
-## Next Enforcement Step
+## Enforcement
 
-Add a CI check to parse Gradle project dependencies and fail on forbidden edges.
+- Gradle task: `verifyModuleDependencyRules`
+- CI gate: `.github/workflows/android-ci.yml` runs this task before build/test/lint.
+
+### Current Scope
+
+- Validates project dependencies in production configurations (`*Implementation`, `*Api`, `*CompileOnly`, `*RuntimeOnly`).
+- Excludes test configurations to avoid noise from internal test-only wiring.
+- Fails if any existing module is not declared in the rule map.
+- Fails if the rule map contains entries for modules that are no longer present.

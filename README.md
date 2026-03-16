@@ -67,6 +67,7 @@ The repository now includes a baseline Android project with:
 ## Contributing Manuals
 
 - [Contributing Guide](CONTRIBUTING.md)
+- [Contributor Rights Assignment](docs/CONTRIBUTOR_RIGHTS_ASSIGNMENT.md)
 - [Contribution Workflow Manual](docs/CONTRIBUTION_WORKFLOW.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Next Actions](docs/NEXT_ACTIONS.md)
@@ -79,4 +80,7 @@ The repository now includes a baseline Android project with:
 
 ## License
 
-This project is distributed under the license in [LICENSE](LICENSE).
+This project is licensed under the GNU Affero General Public License v3.0 or later (AGPL-3.0-or-later).
+
+Important contributor policy:
+- Contributions are accepted only after signing the contributor rights assignment in [docs/CONTRIBUTOR_RIGHTS_ASSIGNMENT.md](docs/CONTRIBUTOR_RIGHTS_ASSIGNMENT.md).
