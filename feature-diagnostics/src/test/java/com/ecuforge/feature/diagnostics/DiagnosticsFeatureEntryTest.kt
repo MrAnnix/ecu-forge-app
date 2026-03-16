@@ -2,26 +2,26 @@ package com.ecuforge.feature.diagnostics
 
 import com.ecuforge.feature.diagnostics.domain.IdentificationUiState
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class DiagnosticsFeatureEntryTest {
 
-	@Test
-	fun readOnlyDemoReturnsSuccess() = runBlocking {
-		val result = DiagnosticsFeatureEntry.identifyReadOnlyDemo()
+    @Test
+    fun readOnlyDemoReturnsSupportedStateForActiveVariant() = runBlocking {
+        val result = DiagnosticsFeatureEntry.identifyReadOnlyDemo()
 
-		assertTrue(result is IdentificationUiState.Success)
-	}
+        val isExpectedDebugState = result is IdentificationUiState.Success
+        val isExpectedReleaseState = result is IdentificationUiState.Error && result.code == "DEMO_DISABLED"
+        assertTrue(isExpectedDebugState || isExpectedReleaseState)
+    }
 
-	@Test
-	fun timeoutDemoReturnsTimeoutError() = runBlocking {
-		val result = DiagnosticsFeatureEntry.identifyReadOnlyTimeoutDemo()
+    @Test
+    fun timeoutDemoReturnsSupportedStateForActiveVariant() = runBlocking {
+        val result = DiagnosticsFeatureEntry.identifyReadOnlyTimeoutDemo()
 
-		assertTrue(result is IdentificationUiState.Error)
-		val error = result as IdentificationUiState.Error
-		assertEquals("TIMEOUT", error.code)
-	}
+        val isExpectedDebugState = result is IdentificationUiState.Error && result.code == "TIMEOUT"
+        val isExpectedReleaseState = result is IdentificationUiState.Error && result.code == "DEMO_DISABLED"
+        assertTrue(isExpectedDebugState || isExpectedReleaseState)
+    }
 }
-

@@ -173,8 +173,8 @@ Mitigation:
 
 ## Immediate Next 30 Days
 
-1. Finalize module dependency rules and enforce via CI.
-2. Implement transport interfaces and fake adapters for tests.
-3. Define session state machine contract and transition tests.
-4. Ship first read-only ECU identification screen behind internal feature flag.
-5. Publish compatibility matrix v0 in docs.
+1. Implement read-only DTC retrieval flow in `feature-diagnostics`.
+2. Start telemetry read-only wiring with buffered sampling baseline.
+3. Harden diagnostics input validation and negative-path tests.
+4. Prepare a transport provider contract to replace demo fake wiring without touching `app` flow.
+5. Expand compatibility matrix from family-level baseline to model-level evidence.

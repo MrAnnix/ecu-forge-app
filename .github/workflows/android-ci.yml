@@ -29,30 +29,28 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.10'
+
+      - name: Gradle wrapper version
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -version
+          chmod +x ./gradlew
+          ./gradlew --version
 
       - name: Validate module dependency rules
         shell: bash
         run: |
           set -euo pipefail
-          if [ -f "./gradlew" ]; then
-            chmod +x ./gradlew
-            ./gradlew --no-daemon verifyModuleDependencyRules
-          else
-            gradle --no-daemon verifyModuleDependencyRules
-          fi
+          chmod +x ./gradlew
+          ./gradlew --no-daemon verifyModuleDependencyRules
 
       - name: Build, unit tests, and lint
         shell: bash
         run: |
           set -euo pipefail
-          if [ -f "./gradlew" ]; then
-            chmod +x ./gradlew
-            ./gradlew --no-daemon clean testDebugUnitTest lintDebug assembleDebug
-          else
-            gradle --no-daemon clean testDebugUnitTest lintDebug assembleDebug
-          fi
+          chmod +x ./gradlew
+          ./gradlew --no-daemon clean testDebugUnitTest :feature-diagnostics:testReleaseUnitTest lintDebug assembleDebug :app:assembleRelease
 
       - name: Upload lint reports
         if: always()

@@ -21,13 +21,14 @@ Current objective:
 
 Execution status:
 - Task 1 (Module baseline): completed.
-- Task 2 (Dependency rules): documentation completed, CI enforcement pending.
-- Task 3 (CI baseline): workflow added and reported green.
+- Task 2 (Dependency rules): completed (documented and enforced with `verifyModuleDependencyRules` in CI).
+- Task 3 (CI baseline): completed with debug/release coverage and toolchain traceability logs.
 - Task 4 (Transport contracts): typed contracts and baseline tests added.
 - Task 5 (Session state model hardening and guard rules): completed.
 - Task 6 (Fake adapters for tests): completed with scripted Bluetooth/USB fake gateway.
-- Task 7 (Read-only identification MVP start): baseline use case and UI state coordinator added.
-- Next recommended task: enforce dependency rules in CI, then add diagnostics screen wiring in `app`.
+- Task 7 (Read-only identification MVP start): baseline use case, app wiring, and variant-specific behavior/tests added.
+- Task 8 (Compatibility matrix v0): completed in `docs/COMPATIBILITY_MATRIX_V0.md`.
+- Next recommended task: implement read-only DTC flow, then continue telemetry wiring.
 
 ## Priority Queue
 
@@ -108,6 +109,14 @@ Definition of done:
 - End-to-end read-only identification flow works with fake adapter.
 - Errors are visible and actionable.
 
+8. Compatibility matrix v0
+- Define and document compatibility rules for ECU configurations.
+- Validate initial set of configurations against these rules.
+
+Definition of done:
+- Compatibility matrix is published and accessible.
+- Initial configurations are verified to meet compatibility requirements.
+
 ## Stop Conditions
 
 Do not start map write/flash work until all are true:
@@ -129,6 +138,6 @@ Before opening PR:
 ## Quick Resume Prompt
 
 If you return later, continue with:
-- Enforce dependency rules in CI.
-- Add diagnostics screen wiring in `app`.
-- Then continue in order.
+- Implement read-only DTC flow in `feature-diagnostics`.
+- Continue telemetry read-only wiring.
+- Expand compatibility matrix with model-level validation evidence.

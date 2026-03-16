@@ -1,7 +1,7 @@
 # ECU Forge Project Status
 
 Last updated:
-- 2026-03-15
+- 2026-03-16
 
 ## Summary
 
@@ -19,8 +19,9 @@ Architecture and modules:
 - Dependency directions documented in `docs/MODULE_DEPENDENCY_RULES.md`.
 
 CI and quality:
-- GitHub Actions workflow added for build, unit tests, and lint.
-- CI reported green by project update.
+- GitHub Actions workflow runs module dependency verification, unit tests, lint, and debug/release builds.
+- `verifyModuleDependencyRules` is enforced in CI and fails on forbidden edges or undeclared/stale module rules.
+- CI logs now include toolchain traceability (`java -version` and `./gradlew --version`).
 
 Core contracts:
 - Typed transport contracts and failure model in `core`.
@@ -34,19 +35,17 @@ Transport testability:
 Diagnostics MVP baseline:
 - Read-only ECU identification use case in `feature-diagnostics`.
 - Compatibility gate before transport usage.
+- Compatibility matrix v0 published in `docs/COMPATIBILITY_MATRIX_V0.md`.
 - UI-state model (`Loading`, `Success`, `Error`) and coordinator.
-- Unit tests for unsupported ECU, connect failure, nominal identification, timeout, and coordinator progression.
+- Demo transport wiring is isolated by variant (`debug` uses fake transport, `release` returns `DEMO_DISABLED`).
+- Variant-specific tests cover debug and release behavior.
 
 ## In Progress / Pending
 
 Near-term pending items:
-- Enforce module dependency rules in CI (automated forbidden-edge check).
-- Wire diagnostics read-only flow to a concrete screen in `app`.
-- Add compatibility matrix v0 document for supported ECU families.
-
-Follow-up after wiring:
-- Extend diagnostics to DTC read flow.
-- Start telemetry screen wiring with buffered sampling strategy.
+- Extend diagnostics with read-only DTC flow.
+- Continue telemetry read-only wiring after DTC baseline.
+- Add model-level compatibility evidence beyond family-gate baseline.
 
 ## Safety Validation Rules
 
@@ -56,16 +55,16 @@ Follow-up after wiring:
 
 ## Risks and Watch Items
 
-- Gradle wrapper files are still expected from Android Studio sync in some environments.
-- Dependency-rule enforcement is documented but not yet automated in CI.
-- Read-only identification logic is currently domain-first; app-level UX wiring is pending.
+- Android Gradle Plugin `8.5.2` with `compileSdk = 35` emits a compatibility warning in local/CI builds.
+- Read-only identification is wired and testable, but still demo-scaffolded pending real transport provider wiring.
+- Compatibility matrix baseline exists, but model-level validation evidence is still pending.
 
 ## Recommended Next Step
 
 Execute in this order:
-1. Add CI dependency-rule enforcement.
-2. Wire diagnostics identification flow into `app` screen/state.
-3. Publish compatibility matrix v0.
+1. Add read-only DTC flow in `feature-diagnostics`.
+2. Continue telemetry read-only wiring in `feature-telemetry` and `app`.
+3. Expand compatibility matrix from family-level to model-level evidence.
 
 ## Resume Pointers
 
