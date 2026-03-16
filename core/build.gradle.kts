@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -24,4 +26,5 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     testImplementation(libs.junit)
+    detektPlugins(libs.detekt.formatting)
 }

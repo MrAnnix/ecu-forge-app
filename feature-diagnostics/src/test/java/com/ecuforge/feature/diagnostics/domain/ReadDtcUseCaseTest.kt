@@ -11,27 +11,24 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class IdentifyEcuUseCaseTest {
+class ReadDtcUseCaseTest {
     @Test
     fun unsupportedFamilyReturnsErrorBeforeTransport() =
         runBlocking {
             val gateway =
                 FakeTransportGateway(
-                    scenario =
-                        FakeTransportScenario.of(
-                            FakeTransportStep(operation = FakeTransportOperation.CONNECT, success = true),
-                        ),
+                    scenario = FakeTransportScenario.of(),
                 )
 
-            val useCase = IdentifyEcuUseCase(transportGateway = gateway)
+            val useCase = ReadDtcUseCase(transportGateway = gateway)
             val result =
                 useCase.execute(
-                    request = IdentificationRequest(ecuFamily = "UNKNOWN", endpointHint = "BT"),
+                    request = ReadDtcRequest(ecuFamily = "UNKNOWN", endpointHint = "BT"),
                     endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
                 )
 
-            assertTrue(result is IdentificationUiState.Error)
-            val error = result as IdentificationUiState.Error
+            assertTrue(result is DtcUiState.Error)
+            val error = result as DtcUiState.Error
             assertEquals("ECU_UNSUPPORTED", error.code)
         }
 
@@ -51,52 +48,50 @@ class IdentifyEcuUseCaseTest {
                         ),
                 )
 
-            val useCase = IdentifyEcuUseCase(transportGateway = gateway)
+            val useCase = ReadDtcUseCase(transportGateway = gateway)
             val result =
                 useCase.execute(
-                    request = IdentificationRequest(ecuFamily = "KEIHIN", endpointHint = "BT"),
+                    request = ReadDtcRequest(ecuFamily = "KEIHIN", endpointHint = "BT"),
                     endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
                 )
 
-            assertTrue(result is IdentificationUiState.Error)
-            val error = result as IdentificationUiState.Error
+            assertTrue(result is DtcUiState.Error)
+            val error = result as DtcUiState.Error
             assertEquals("CONNECTION_FAILED", error.code)
         }
 
     @Test
-    fun nominalIdentificationReturnsSuccess() =
+    fun writeFailureIsMappedToUiError() =
         runBlocking {
             val gateway =
                 FakeTransportGateway(
                     scenario =
                         FakeTransportScenario.of(
                             FakeTransportStep(operation = FakeTransportOperation.CONNECT, success = true),
-                            FakeTransportStep(operation = FakeTransportOperation.WRITE, success = true),
                             FakeTransportStep(
-                                operation = FakeTransportOperation.READ,
-                                success = true,
-                                readPayload = "MODEL=KM601EU|FW=2.10.4|SN=A1B2C3".encodeToByteArray(),
+                                operation = FakeTransportOperation.WRITE,
+                                success = false,
+                                errorCode = TransportFailureCode.IO_ERROR,
+                                errorMessage = "Write failed",
                             ),
                             FakeTransportStep(operation = FakeTransportOperation.DISCONNECT, success = true),
                         ),
                 )
 
-            val useCase = IdentifyEcuUseCase(transportGateway = gateway)
+            val useCase = ReadDtcUseCase(transportGateway = gateway)
             val result =
                 useCase.execute(
-                    request = IdentificationRequest(ecuFamily = "KEIHIN", endpointHint = "BT"),
+                    request = ReadDtcRequest(ecuFamily = "KEIHIN", endpointHint = "BT"),
                     endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
                 )
 
-            assertTrue(result is IdentificationUiState.Success)
-            val success = result as IdentificationUiState.Success
-            assertEquals("KM601EU", success.identification.model)
-            assertEquals("2.10.4", success.identification.firmwareVersion)
-            assertEquals("A1B2C3", success.identification.serialNumber)
+            assertTrue(result is DtcUiState.Error)
+            val error = result as DtcUiState.Error
+            assertEquals("IO_ERROR", error.code)
         }
 
     @Test
-    fun readTimeoutReturnsError() =
+    fun readTimeoutIsMappedToUiError() =
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -114,20 +109,20 @@ class IdentifyEcuUseCaseTest {
                         ),
                 )
 
-            val useCase = IdentifyEcuUseCase(transportGateway = gateway)
+            val useCase = ReadDtcUseCase(transportGateway = gateway)
             val result =
                 useCase.execute(
-                    request = IdentificationRequest(ecuFamily = "WALBRO", endpointHint = "USB"),
+                    request = ReadDtcRequest(ecuFamily = "WALBRO", endpointHint = "USB"),
                     endpoint = TransportEndpoint.Usb(vendorId = 1027, productId = 48960),
                 )
 
-            assertTrue(result is IdentificationUiState.Error)
-            val error = result as IdentificationUiState.Error
+            assertTrue(result is DtcUiState.Error)
+            val error = result as DtcUiState.Error
             assertEquals("TIMEOUT", error.code)
         }
 
     @Test
-    fun coordinatorEmitsLoadingThenTerminalState() =
+    fun invalidPayloadReturnsParseError() =
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -138,23 +133,51 @@ class IdentifyEcuUseCaseTest {
                             FakeTransportStep(
                                 operation = FakeTransportOperation.READ,
                                 success = true,
-                                readPayload = "MODEL=KM601EU|FW=2.10.4|SN=A1B2C3".encodeToByteArray(),
+                                readPayload = "BROKEN_PAYLOAD".encodeToByteArray(),
                             ),
                             FakeTransportStep(operation = FakeTransportOperation.DISCONNECT, success = true),
                         ),
                 )
 
-            val useCase = IdentifyEcuUseCase(transportGateway = gateway)
-            val coordinator = IdentifyEcuCoordinator(identifyEcuUseCase = useCase)
-
-            val states =
-                coordinator.run(
-                    request = IdentificationRequest(ecuFamily = "KEIHIN", endpointHint = "BT"),
+            val useCase = ReadDtcUseCase(transportGateway = gateway)
+            val result =
+                useCase.execute(
+                    request = ReadDtcRequest(ecuFamily = "MARELLI", endpointHint = "BT"),
                     endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
                 )
 
-            assertEquals(2, states.size)
-            assertEquals(IdentificationUiState.Loading, states[0])
-            assertTrue(states[1] is IdentificationUiState.Success)
+            assertTrue(result is DtcUiState.Error)
+            val error = result as DtcUiState.Error
+            assertEquals("DTC_PARSE", error.code)
+        }
+
+    @Test
+    fun nonePayloadReturnsSuccessWithEmptyList() =
+        runBlocking {
+            val gateway =
+                FakeTransportGateway(
+                    scenario =
+                        FakeTransportScenario.of(
+                            FakeTransportStep(operation = FakeTransportOperation.CONNECT, success = true),
+                            FakeTransportStep(operation = FakeTransportOperation.WRITE, success = true),
+                            FakeTransportStep(
+                                operation = FakeTransportOperation.READ,
+                                success = true,
+                                readPayload = "NONE".encodeToByteArray(),
+                            ),
+                            FakeTransportStep(operation = FakeTransportOperation.DISCONNECT, success = true),
+                        ),
+                )
+
+            val useCase = ReadDtcUseCase(transportGateway = gateway)
+            val result =
+                useCase.execute(
+                    request = ReadDtcRequest(ecuFamily = "SIEMENS", endpointHint = "USB"),
+                    endpoint = TransportEndpoint.Usb(vendorId = 1027, productId = 48960),
+                )
+
+            assertTrue(result is DtcUiState.Success)
+            val success = result as DtcUiState.Success
+            assertTrue(success.dtcs.isEmpty())
         }
 }

@@ -4,18 +4,24 @@ import com.ecuforge.core.transport.TransportEndpoint
 import com.ecuforge.core.transport.TransportOperationResult
 import com.ecuforge.transport.TransportGateway
 
+/**
+ * Executes the read-only ECU identification flow.
+ */
 class IdentifyEcuUseCase(
     private val transportGateway: TransportGateway,
-    private val compatibilityGate: EcuCompatibilityGate = EcuCompatibilityGate()
+    private val compatibilityGate: EcuCompatibilityGate = EcuCompatibilityGate(),
 ) {
+    /**
+     * Runs identification for [request] against [endpoint] and maps outcomes to UI state.
+     */
     suspend fun execute(
         request: IdentificationRequest,
-        endpoint: TransportEndpoint
+        endpoint: TransportEndpoint,
     ): IdentificationUiState {
         if (!compatibilityGate.isSupported(request)) {
             return IdentificationUiState.Error(
                 code = "ECU_UNSUPPORTED",
-                message = "Unsupported ECU family: ${request.ecuFamily}"
+                message = "Unsupported ECU family: ${request.ecuFamily}",
             )
         }
 
@@ -23,7 +29,7 @@ class IdentifyEcuUseCase(
             is TransportOperationResult.Failure -> {
                 return IdentificationUiState.Error(
                     code = connectResult.error.code.name,
-                    message = connectResult.error.message
+                    message = connectResult.error.message,
                 )
             }
 
@@ -38,7 +44,7 @@ class IdentifyEcuUseCase(
                 transportGateway.disconnect()
                 return IdentificationUiState.Error(
                     code = writeResult.error.code.name,
-                    message = writeResult.error.message
+                    message = writeResult.error.message,
                 )
             }
 
@@ -52,7 +58,7 @@ class IdentifyEcuUseCase(
             transportGateway.disconnect()
             return IdentificationUiState.Error(
                 code = readResult.error.code.name,
-                message = readResult.error.message
+                message = readResult.error.message,
             )
         }
 
@@ -62,7 +68,7 @@ class IdentifyEcuUseCase(
             transportGateway.disconnect()
             return IdentificationUiState.Error(
                 code = "IDENT_PARSE",
-                message = "Invalid identification payload"
+                message = "Invalid identification payload",
             )
         }
 
@@ -70,11 +76,17 @@ class IdentifyEcuUseCase(
         return IdentificationUiState.Success(parsed)
     }
 
+    /**
+     * Builds the raw transport command for identification.
+     */
     private fun requestIdentificationPayload(request: IdentificationRequest): ByteArray {
         val command = "ID?;FAMILY=${request.ecuFamily};HINT=${request.endpointHint}"
         return command.encodeToByteArray()
     }
 
+    /**
+     * Parses identification payload format MODEL/FW/SN into a typed model.
+     */
     private fun parseIdentification(payload: ByteArray): EcuIdentification? {
         val text = payload.toString(Charsets.UTF_8)
         val segments = text.split("|")
@@ -97,7 +109,7 @@ class IdentifyEcuUseCase(
         return EcuIdentification(
             model = model,
             firmwareVersion = firmware,
-            serialNumber = serial
+            serialNumber = serial,
         )
     }
 }

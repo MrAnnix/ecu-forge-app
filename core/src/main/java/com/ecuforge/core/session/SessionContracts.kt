@@ -1,5 +1,8 @@
 package com.ecuforge.core.session
 
+/**
+ * High-level lifecycle states for an ECU session.
+ */
 enum class SessionState {
     IDLE,
     INITIALIZING,
@@ -8,9 +11,12 @@ enum class SessionState {
     READING,
     RETRY_WAIT,
     DISCONNECTED,
-    FAILED
+    FAILED,
 }
 
+/**
+ * Events that can trigger session state transitions.
+ */
 enum class SessionEvent {
     START,
     INIT_OK,
@@ -21,122 +27,146 @@ enum class SessionEvent {
     RETRY_REQUESTED,
     RETRY_TIMEOUT,
     RESET,
-    FAIL
+    FAIL,
 }
 
+/**
+ * Canonical error codes for rejected or degraded transitions.
+ */
 enum class SessionTransitionErrorCode {
     INVALID_TRANSITION,
     TRANSPORT_NOT_CONNECTED,
-    RETRY_LIMIT_REACHED
+    RETRY_LIMIT_REACHED,
 }
 
+/**
+ * Guard input evaluated before accepting a transition.
+ */
 data class SessionTransitionGuardInput(
     val transportConnected: Boolean = true,
     val retryCount: Int = 0,
-    val maxRetries: Int = 3
+    val maxRetries: Int = 3,
 )
 
+/**
+ * Result of evaluating a state transition.
+ */
 data class SessionTransition(
     val from: SessionState,
     val event: SessionEvent,
     val to: SessionState,
     val allowed: Boolean,
     val reason: String? = null,
-    val errorCode: SessionTransitionErrorCode? = null
+    val errorCode: SessionTransitionErrorCode? = null,
 )
 
+/**
+ * Evaluates session transitions and enforces guard rules.
+ */
 object SessionTransitionEvaluator {
+    /**
+     * Computes the next transition from [current] and [event] using [guardInput].
+     */
     fun transition(
         current: SessionState,
         event: SessionEvent,
-        guardInput: SessionTransitionGuardInput = SessionTransitionGuardInput()
+        guardInput: SessionTransitionGuardInput = SessionTransitionGuardInput(),
     ): SessionTransition {
         if (!guardInput.transportConnected && requiresConnection(event)) {
             return rejected(
                 current = current,
                 event = event,
                 reason = "Transport not connected for event: $event",
-                errorCode = SessionTransitionErrorCode.TRANSPORT_NOT_CONNECTED
+                errorCode = SessionTransitionErrorCode.TRANSPORT_NOT_CONNECTED,
             )
         }
 
-        val next = when (current) {
-            SessionState.IDLE -> when (event) {
-                SessionEvent.START -> SessionState.INITIALIZING
-                SessionEvent.RESET -> SessionState.IDLE
-                SessionEvent.FAIL -> SessionState.FAILED
-                else -> null
-            }
-
-            SessionState.INITIALIZING -> when (event) {
-                SessionEvent.INIT_OK -> SessionState.AUTHENTICATING
-                SessionEvent.TRANSPORT_LOST -> SessionState.DISCONNECTED
-                SessionEvent.FAIL -> SessionState.FAILED
-                else -> null
-            }
-
-            SessionState.AUTHENTICATING -> when (event) {
-                SessionEvent.AUTH_OK -> SessionState.READY
-                SessionEvent.TRANSPORT_LOST -> SessionState.DISCONNECTED
-                SessionEvent.FAIL -> SessionState.FAILED
-                else -> null
-            }
-
-            SessionState.READY -> when (event) {
-                SessionEvent.READ_REQUESTED -> SessionState.READING
-                SessionEvent.TRANSPORT_LOST -> SessionState.DISCONNECTED
-                SessionEvent.FAIL -> SessionState.FAILED
-                SessionEvent.RESET -> SessionState.IDLE
-                else -> null
-            }
-
-            SessionState.READING -> when (event) {
-                SessionEvent.READ_COMPLETED -> SessionState.READY
-                SessionEvent.RETRY_REQUESTED -> {
-                    if (guardInput.retryCount < guardInput.maxRetries) {
-                        SessionState.RETRY_WAIT
-                    } else {
-                        return forcedFailure(
-                            from = current,
-                            event = event,
-                            reason = "Retry limit reached: ${guardInput.retryCount}/${guardInput.maxRetries}",
-                            errorCode = SessionTransitionErrorCode.RETRY_LIMIT_REACHED
-                        )
+        val next =
+            when (current) {
+                SessionState.IDLE ->
+                    when (event) {
+                        SessionEvent.START -> SessionState.INITIALIZING
+                        SessionEvent.RESET -> SessionState.IDLE
+                        SessionEvent.FAIL -> SessionState.FAILED
+                        else -> null
                     }
-                }
-                SessionEvent.TRANSPORT_LOST -> SessionState.DISCONNECTED
-                SessionEvent.FAIL -> SessionState.FAILED
-                else -> null
-            }
 
-            SessionState.RETRY_WAIT -> when (event) {
-                SessionEvent.RETRY_TIMEOUT -> SessionState.READING
-                SessionEvent.TRANSPORT_LOST -> SessionState.DISCONNECTED
-                SessionEvent.FAIL -> SessionState.FAILED
-                SessionEvent.RESET -> SessionState.IDLE
-                else -> null
-            }
+                SessionState.INITIALIZING ->
+                    when (event) {
+                        SessionEvent.INIT_OK -> SessionState.AUTHENTICATING
+                        SessionEvent.TRANSPORT_LOST -> SessionState.DISCONNECTED
+                        SessionEvent.FAIL -> SessionState.FAILED
+                        else -> null
+                    }
 
-            SessionState.DISCONNECTED -> when (event) {
-                SessionEvent.START -> SessionState.INITIALIZING
-                SessionEvent.RESET -> SessionState.IDLE
-                SessionEvent.FAIL -> SessionState.FAILED
-                else -> null
-            }
+                SessionState.AUTHENTICATING ->
+                    when (event) {
+                        SessionEvent.AUTH_OK -> SessionState.READY
+                        SessionEvent.TRANSPORT_LOST -> SessionState.DISCONNECTED
+                        SessionEvent.FAIL -> SessionState.FAILED
+                        else -> null
+                    }
 
-            SessionState.FAILED -> when (event) {
-                SessionEvent.RESET -> SessionState.IDLE
-                SessionEvent.FAIL -> SessionState.FAILED
-                else -> null
+                SessionState.READY ->
+                    when (event) {
+                        SessionEvent.READ_REQUESTED -> SessionState.READING
+                        SessionEvent.TRANSPORT_LOST -> SessionState.DISCONNECTED
+                        SessionEvent.FAIL -> SessionState.FAILED
+                        SessionEvent.RESET -> SessionState.IDLE
+                        else -> null
+                    }
+
+                SessionState.READING ->
+                    when (event) {
+                        SessionEvent.READ_COMPLETED -> SessionState.READY
+                        SessionEvent.RETRY_REQUESTED -> {
+                            if (guardInput.retryCount < guardInput.maxRetries) {
+                                SessionState.RETRY_WAIT
+                            } else {
+                                return forcedFailure(
+                                    from = current,
+                                    event = event,
+                                    reason = "Retry limit reached: ${guardInput.retryCount}/${guardInput.maxRetries}",
+                                    errorCode = SessionTransitionErrorCode.RETRY_LIMIT_REACHED,
+                                )
+                            }
+                        }
+                        SessionEvent.TRANSPORT_LOST -> SessionState.DISCONNECTED
+                        SessionEvent.FAIL -> SessionState.FAILED
+                        else -> null
+                    }
+
+                SessionState.RETRY_WAIT ->
+                    when (event) {
+                        SessionEvent.RETRY_TIMEOUT -> SessionState.READING
+                        SessionEvent.TRANSPORT_LOST -> SessionState.DISCONNECTED
+                        SessionEvent.FAIL -> SessionState.FAILED
+                        SessionEvent.RESET -> SessionState.IDLE
+                        else -> null
+                    }
+
+                SessionState.DISCONNECTED ->
+                    when (event) {
+                        SessionEvent.START -> SessionState.INITIALIZING
+                        SessionEvent.RESET -> SessionState.IDLE
+                        SessionEvent.FAIL -> SessionState.FAILED
+                        else -> null
+                    }
+
+                SessionState.FAILED ->
+                    when (event) {
+                        SessionEvent.RESET -> SessionState.IDLE
+                        SessionEvent.FAIL -> SessionState.FAILED
+                        else -> null
+                    }
             }
-        }
 
         if (next == null) {
             return rejected(
                 current = current,
                 event = event,
                 reason = "Invalid transition: $current + $event",
-                errorCode = SessionTransitionErrorCode.INVALID_TRANSITION
+                errorCode = SessionTransitionErrorCode.INVALID_TRANSITION,
             )
         }
 
@@ -146,10 +176,13 @@ object SessionTransitionEvaluator {
             to = next,
             allowed = true,
             reason = null,
-            errorCode = null
+            errorCode = null,
         )
     }
 
+    /**
+     * Returns true when [event] requires an active transport connection.
+     */
     private fun requiresConnection(event: SessionEvent): Boolean {
         return when (event) {
             SessionEvent.INIT_OK,
@@ -157,17 +190,21 @@ object SessionTransitionEvaluator {
             SessionEvent.READ_REQUESTED,
             SessionEvent.READ_COMPLETED,
             SessionEvent.RETRY_REQUESTED,
-            SessionEvent.RETRY_TIMEOUT -> true
+            SessionEvent.RETRY_TIMEOUT,
+            -> true
 
             else -> false
         }
     }
 
+    /**
+     * Produces a rejected transition that keeps the current state unchanged.
+     */
     private fun rejected(
         current: SessionState,
         event: SessionEvent,
         reason: String,
-        errorCode: SessionTransitionErrorCode
+        errorCode: SessionTransitionErrorCode,
     ): SessionTransition {
         return SessionTransition(
             from = current,
@@ -175,15 +212,18 @@ object SessionTransitionEvaluator {
             to = current,
             allowed = false,
             reason = reason,
-            errorCode = errorCode
+            errorCode = errorCode,
         )
     }
 
+    /**
+     * Produces a forced transition to FAILED while preserving diagnostics context.
+     */
     private fun forcedFailure(
         from: SessionState,
         event: SessionEvent,
         reason: String,
-        errorCode: SessionTransitionErrorCode
+        errorCode: SessionTransitionErrorCode,
     ): SessionTransition {
         return SessionTransition(
             from = from,
@@ -191,7 +231,7 @@ object SessionTransitionEvaluator {
             to = SessionState.FAILED,
             allowed = true,
             reason = reason,
-            errorCode = errorCode
+            errorCode = errorCode,
         )
     }
 }

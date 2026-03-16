@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -27,4 +29,5 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     testImplementation(libs.junit)
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
+    detektPlugins(libs.detekt.formatting)
 }

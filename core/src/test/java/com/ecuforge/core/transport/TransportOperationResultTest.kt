@@ -6,7 +6,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class TransportOperationResultTest {
-
     @Test
     fun successFactoryReturnsSuccessResult() {
         val result = TransportOperationResult.success(7)
@@ -17,11 +16,12 @@ class TransportOperationResultTest {
 
     @Test
     fun failureFactoryReturnsFailureResult() {
-        val result = TransportOperationResult.failure(
-            code = TransportFailureCode.TIMEOUT,
-            message = "Read timeout",
-            recoverable = true
-        )
+        val result =
+            TransportOperationResult.failure(
+                code = TransportFailureCode.TIMEOUT,
+                message = "Read timeout",
+                recoverable = true,
+            )
 
         assertTrue(result is TransportOperationResult.Failure)
         val failure = (result as TransportOperationResult.Failure).error
@@ -32,11 +32,12 @@ class TransportOperationResultTest {
 
     @Test
     fun nonRecoverableFailureCanBeDeclared() {
-        val result = TransportOperationResult.failure(
-            code = TransportFailureCode.CONNECTION_FAILED,
-            message = "Could not establish link",
-            recoverable = false
-        )
+        val result =
+            TransportOperationResult.failure(
+                code = TransportFailureCode.CONNECTION_FAILED,
+                message = "Could not establish link",
+                recoverable = false,
+            )
 
         assertTrue(result is TransportOperationResult.Failure)
         val failure = (result as TransportOperationResult.Failure).error

@@ -6,7 +6,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class SessionTransitionEvaluatorTest {
-
     @Test
     fun startFromIdleMovesToInitializing() {
         val transition = SessionTransitionEvaluator.transition(SessionState.IDLE, SessionEvent.START)
@@ -43,11 +42,12 @@ class SessionTransitionEvaluatorTest {
 
     @Test
     fun disconnectedGuardRejectsReadRequested() {
-        val transition = SessionTransitionEvaluator.transition(
-            current = SessionState.READY,
-            event = SessionEvent.READ_REQUESTED,
-            guardInput = SessionTransitionGuardInput(transportConnected = false)
-        )
+        val transition =
+            SessionTransitionEvaluator.transition(
+                current = SessionState.READY,
+                event = SessionEvent.READ_REQUESTED,
+                guardInput = SessionTransitionGuardInput(transportConnected = false),
+            )
 
         assertFalse(transition.allowed)
         assertEquals(SessionState.READY, transition.to)
@@ -56,11 +56,12 @@ class SessionTransitionEvaluatorTest {
 
     @Test
     fun retryRequestedUnderLimitMovesToRetryWait() {
-        val transition = SessionTransitionEvaluator.transition(
-            current = SessionState.READING,
-            event = SessionEvent.RETRY_REQUESTED,
-            guardInput = SessionTransitionGuardInput(retryCount = 1, maxRetries = 3)
-        )
+        val transition =
+            SessionTransitionEvaluator.transition(
+                current = SessionState.READING,
+                event = SessionEvent.RETRY_REQUESTED,
+                guardInput = SessionTransitionGuardInput(retryCount = 1, maxRetries = 3),
+            )
 
         assertTrue(transition.allowed)
         assertEquals(SessionState.RETRY_WAIT, transition.to)
@@ -69,11 +70,12 @@ class SessionTransitionEvaluatorTest {
 
     @Test
     fun retryRequestedAtLimitForcesFailed() {
-        val transition = SessionTransitionEvaluator.transition(
-            current = SessionState.READING,
-            event = SessionEvent.RETRY_REQUESTED,
-            guardInput = SessionTransitionGuardInput(retryCount = 3, maxRetries = 3)
-        )
+        val transition =
+            SessionTransitionEvaluator.transition(
+                current = SessionState.READING,
+                event = SessionEvent.RETRY_REQUESTED,
+                guardInput = SessionTransitionGuardInput(retryCount = 3, maxRetries = 3),
+            )
 
         assertTrue(transition.allowed)
         assertEquals(SessionState.FAILED, transition.to)
@@ -82,10 +84,11 @@ class SessionTransitionEvaluatorTest {
 
     @Test
     fun startFromDisconnectedMovesToInitializing() {
-        val transition = SessionTransitionEvaluator.transition(
-            current = SessionState.DISCONNECTED,
-            event = SessionEvent.START
-        )
+        val transition =
+            SessionTransitionEvaluator.transition(
+                current = SessionState.DISCONNECTED,
+                event = SessionEvent.START,
+            )
 
         assertTrue(transition.allowed)
         assertEquals(SessionState.INITIALIZING, transition.to)

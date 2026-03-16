@@ -1,9 +1,38 @@
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
 import org.gradle.api.artifacts.ProjectDependency
 
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.ktlint) apply false
+    alias(libs.plugins.detekt) apply false
+}
+
+subprojects {
+    pluginManager.withPlugin("org.jlleitschuh.gradle.ktlint") {
+        extensions.configure<KtlintExtension> {
+            android.set(true)
+            ignoreFailures.set(false)
+        }
+    }
+
+    pluginManager.withPlugin("io.gitlab.arturbosch.detekt") {
+        extensions.configure<DetektExtension> {
+            buildUponDefaultConfig = false
+            allRules = false
+            ignoreFailures = false
+            config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
+            // Temporary baseline to introduce quality gates incrementally.
+            baseline = file("$rootDir/config/detekt/baseline.xml")
+        }
+
+        tasks.withType<Detekt>().configureEach {
+            jvmTarget = "17"
+        }
+    }
 }
 
 tasks.register("verifyModuleDependencyRules") {
@@ -85,3 +114,32 @@ tasks.register("verifyModuleDependencyRules") {
         }
     }
 }
+
+tasks.register("qualityFormat") {
+    group = "formatting"
+    description = "Applies Kotlin source auto-formatting using Ktlint."
+    dependsOn(":app:ktlintFormat")
+    dependsOn(":core:ktlintFormat")
+    dependsOn(":transport:ktlintFormat")
+    dependsOn(":feature-diagnostics:ktlintFormat")
+    dependsOn(":feature-telemetry:ktlintFormat")
+    dependsOn(":feature-map:ktlintFormat")
+}
+
+tasks.register("qualityCheck") {
+    group = "verification"
+    description = "Runs Kotlin style and static analysis checks (Ktlint + Detekt)."
+    dependsOn(":app:ktlintCheck")
+    dependsOn(":core:ktlintCheck")
+    dependsOn(":transport:ktlintCheck")
+    dependsOn(":feature-diagnostics:ktlintCheck")
+    dependsOn(":feature-telemetry:ktlintCheck")
+    dependsOn(":feature-map:ktlintCheck")
+    dependsOn(":app:detekt")
+    dependsOn(":core:detekt")
+    dependsOn(":transport:detekt")
+    dependsOn(":feature-diagnostics:detekt")
+    dependsOn(":feature-telemetry:detekt")
+    dependsOn(":feature-map:detekt")
+}
+

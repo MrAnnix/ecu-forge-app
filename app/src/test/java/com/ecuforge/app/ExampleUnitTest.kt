@@ -7,7 +7,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class ExampleUnitTest {
-
     @Test
     fun formatterReturnsLoadingMessage() {
         val text = IdentificationStatusFormatter.format(IdentificationUiState.Loading)
@@ -17,13 +16,15 @@ class ExampleUnitTest {
 
     @Test
     fun formatterReturnsSuccessDetails() {
-        val state = IdentificationUiState.Success(
-            identification = EcuIdentification(
-                model = "KM601EU",
-                firmwareVersion = "2.10.4",
-                serialNumber = "A1B2C3"
+        val state =
+            IdentificationUiState.Success(
+                identification =
+                    EcuIdentification(
+                        model = "KM601EU",
+                        firmwareVersion = "2.10.4",
+                        serialNumber = "A1B2C3",
+                    ),
             )
-        )
 
         val text = IdentificationStatusFormatter.format(state)
 
@@ -34,10 +35,11 @@ class ExampleUnitTest {
 
     @Test
     fun formatterReturnsErrorMessage() {
-        val state = IdentificationUiState.Error(
-            code = "TIMEOUT",
-            message = "Read timeout"
-        )
+        val state =
+            IdentificationUiState.Error(
+                code = "TIMEOUT",
+                message = "Read timeout",
+            )
 
         val text = IdentificationStatusFormatter.format(state)
 

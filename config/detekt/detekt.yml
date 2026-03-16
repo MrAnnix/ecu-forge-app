@@ -1,0 +1,39 @@
+build:
+  maxIssues: 0
+
+config:
+  validation: true
+
+style:
+  MagicNumber:
+    active: false
+
+formatting:
+  active: true
+  android: true
+  autoCorrect: false
+
+comments:
+  UndocumentedPublicClass:
+    active: true
+    searchInNestedClass: false
+    excludes:
+      - '**/src/test/**'
+      - '**/src/androidTest/**'
+      - '**/src/testDebug/**'
+      - '**/src/testRelease/**'
+  UndocumentedPublicFunction:
+    active: true
+    excludes:
+      - '**/src/test/**'
+      - '**/src/androidTest/**'
+      - '**/src/testDebug/**'
+      - '**/src/testRelease/**'
+  UndocumentedPublicProperty:
+    active: false
+    excludes:
+      - '**/src/test/**'
+      - '**/src/androidTest/**'
+      - '**/src/testDebug/**'
+      - '**/src/testRelease/**'
+
