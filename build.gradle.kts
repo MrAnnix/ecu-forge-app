@@ -25,8 +25,6 @@ subprojects {
             allRules = false
             ignoreFailures = false
             config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
-            // Temporary baseline to introduce quality gates incrementally.
-            baseline = file("$rootDir/config/detekt/baseline.xml")
         }
 
         tasks.withType<Detekt>().configureEach {
