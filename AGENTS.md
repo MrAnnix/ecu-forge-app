@@ -41,6 +41,7 @@ Use this file as the default working contract for all coding agents and contribu
 - Avoid unnecessary loops and deeply nested conditionals; use collection operators, guards, and clear composition when possible.
 - Split responsibilities into focused methods/classes to avoid spaghetti code.
 - Require production-ready code paths; avoid placeholder logic and partial implementations.
+- Document all production code with KDoc/JavaDoc (tests excluded).
 - Add concise comments only for non-obvious logic.
 - Do not introduce unrelated refactors in a feature fix.
 

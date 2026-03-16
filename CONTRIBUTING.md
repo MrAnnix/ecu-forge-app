@@ -19,6 +19,7 @@ All submitted code must be:
 - Keep methods short, focused, and single-purpose.
 - Keep side effects explicit and localized.
 - Prefer immutability and avoid broad shared mutable state.
+- Document all production code with KDoc/JavaDoc (tests excluded).
 - Add concise comments only for non-obvious logic.
 
 ## Validation and Error Handling
@@ -69,6 +70,7 @@ Every PR must include:
 - Validation evidence.
 - Rollback strategy for risky changes.
 - Confirmation that the contributor rights assignment has been signed.
+- PRs are not mergeable when Kotlin style or KDoc quality checks fail in CI.
 
 ## Contributor Rights Assignment (Required)
 

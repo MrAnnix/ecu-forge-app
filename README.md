@@ -57,6 +57,15 @@ The repository now includes a baseline Android project with:
 2. Let Android Studio sync Gradle and install required SDK components.
 3. Run the `app` configuration on an emulator/device.
 
+## Local Quality Workflow
+
+- Run autofix formatting locally:
+  - `./gradlew qualityFormat`
+- Run Kotlin quality checks without autofix:
+  - `./gradlew qualityCheck`
+- Run quality checks with unit tests:
+  - `./gradlew qualityCheck testDebugUnitTest`
+
 ## Next Steps
 
 1. Define module boundaries (`app`, `core`, `ecu`, `feature-*`).
