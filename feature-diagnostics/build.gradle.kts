@@ -32,6 +32,6 @@ dependencies {
     implementation(project(":transport"))
     implementation(libs.androidx.core.ktx)
     testImplementation(libs.junit)
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
+    testImplementation(libs.kotlinx.coroutines.test)
     detektPlugins(libs.detekt.formatting)
 }
