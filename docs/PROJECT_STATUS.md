@@ -84,6 +84,7 @@ Provider contract baseline:
 - Feature entrypoints now expose provider contracts (`DiagnosticsFlowProvider`, `TelemetryFlowProvider`) to replace demo/fake wiring without changing app call sites.
 - Default behavior remains variant-safe (`debug` demo provider, `release` demo-disabled provider) and can be swapped through `installProvider(...)`.
 - Contract tests were added to verify provider override behavior in both diagnostics and telemetry modules.
+- Transport-backed diagnostics provider scaffold is now available for read-only identification/DTC flows behind existing provider contracts, with deterministic scenario-unavailable responses for demo-only timeout entrypoints.
 
 ## In Progress / Pending
 
@@ -91,7 +92,7 @@ Near-term pending items:
 - Expand transport-specific parity evidence from baseline tuples to additional validated models and fresh live captures.
 - Add Android i18n resource mapping for DTC `titleKey` values once generation/maintenance workflow is defined.
 - Verify redistribution terms for external DTC source material before broad release packaging.
-- Prepare real transport provider implementation behind feature provider contracts for non-demo read-only validation.
+- Wire concrete Bluetooth/USB adapter implementations into transport-backed providers for non-demo read-only validation.
 
 ## Safety Validation Rules
 
