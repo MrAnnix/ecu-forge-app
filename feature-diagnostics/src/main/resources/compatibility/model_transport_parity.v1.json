@@ -17,6 +17,14 @@
     {
       "family": "KEIHIN",
       "model": "KM601EU",
+      "transport": "BLUETOOTH",
+      "status": "VALIDATED",
+      "traceRef": "analysis/fixtures/trace-bt-failure.json",
+      "evidenceRef": "analysis/PHASE0_VALIDATION_REPORT.md"
+    },
+    {
+      "family": "KEIHIN",
+      "model": "KM601EU",
       "transport": "USB",
       "status": "VALIDATED",
       "traceRef": "analysis/fixtures/trace-usb-nominal.json",
@@ -24,8 +32,40 @@
     },
     {
       "family": "KEIHIN",
+      "model": "KM601EU",
+      "transport": "USB",
+      "status": "VALIDATED",
+      "traceRef": "analysis/fixtures/trace-usb-permission-denied.json",
+      "evidenceRef": "analysis/PHASE0_VALIDATION_REPORT.md"
+    },
+    {
+      "family": "KEIHIN",
       "model": "KM602EU",
       "transport": "BLUETOOTH",
+      "status": "INFERRED",
+      "traceRef": "analysis/TRANSPORT_SEQUENCE_MAP.md",
+      "evidenceRef": "analysis/TRANSPORT_ENTRYPOINTS.md"
+    },
+    {
+      "family": "SIEMENS",
+      "model": "SIE-ECU-01",
+      "transport": "BLUETOOTH",
+      "status": "INFERRED",
+      "traceRef": "analysis/TRANSPORT_SEQUENCE_MAP.md",
+      "evidenceRef": "analysis/TRANSPORT_ENTRYPOINTS.md"
+    },
+    {
+      "family": "MARELLI",
+      "model": "IAW5AM",
+      "transport": "USB",
+      "status": "INFERRED",
+      "traceRef": "analysis/TRANSPORT_SEQUENCE_MAP.md",
+      "evidenceRef": "analysis/TRANSPORT_ENTRYPOINTS.md"
+    },
+    {
+      "family": "WALBRO",
+      "model": "WB-ECU-01",
+      "transport": "USB",
       "status": "INFERRED",
       "traceRef": "analysis/TRANSPORT_SEQUENCE_MAP.md",
       "evidenceRef": "analysis/TRANSPORT_ENTRYPOINTS.md"

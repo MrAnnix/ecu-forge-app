@@ -96,4 +96,18 @@ class EcuCompatibilityGateTest {
             .describedAs("Transport-aware compatibility should reject non-validated inferred evidence entries")
             .isFalse()
     }
+
+    @Test
+    fun modelTransportSupportReturnsFalseForUnknownTransportHint() {
+        val supported =
+            gate.isModelSupportedForTransport(
+                family = "KEIHIN",
+                model = "KM601EU",
+                endpointHint = "WIFI",
+            )
+
+        assertThat(supported)
+            .describedAs("Transport-aware compatibility should reject endpoint hints outside BLUETOOTH/USB baseline")
+            .isFalse()
+    }
 }

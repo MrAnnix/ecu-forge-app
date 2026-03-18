@@ -210,6 +210,37 @@ class IdentifyEcuUseCaseTest {
     }
 
     @Test
+    fun nominalIdentificationOverUsbWithValidatedModelReturnsSuccess() {
+        runBlocking {
+            val gateway =
+                FakeTransportGateway(
+                    scenario =
+                        FakeTransportScenario.of(
+                            FakeTransportStep(operation = FakeTransportOperation.CONNECT, success = true),
+                            FakeTransportStep(operation = FakeTransportOperation.WRITE, success = true),
+                            FakeTransportStep(
+                                operation = FakeTransportOperation.READ,
+                                success = true,
+                                readPayload = "MODEL=KM601EU|FW=2.10.4|SN=A1B2C3".encodeToByteArray(),
+                            ),
+                            FakeTransportStep(operation = FakeTransportOperation.DISCONNECT, success = true),
+                        ),
+                )
+
+            val useCase = IdentifyEcuUseCase(transportGateway = gateway)
+            val result =
+                useCase.execute(
+                    request = IdentificationRequest(ecuFamily = "KEIHIN", endpointHint = "USB"),
+                    endpoint = TransportEndpoint.Usb(vendorId = 1027, productId = 48960),
+                )
+
+            assertThat(result)
+                .describedAs("Validated KEIHIN KM601EU over USB should pass transport-aware compatibility gate")
+                .isInstanceOf(IdentificationUiState.Success::class.java)
+        }
+    }
+
+    @Test
     fun malformedPayloadWithUnknownKeyReturnsParseError() {
         runBlocking {
             val gateway =
