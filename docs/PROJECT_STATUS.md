@@ -57,6 +57,7 @@ Diagnostics MVP baseline:
 - DTC reference catalog baseline added in `feature-diagnostics` with a versioned JSON dataset (`triumph_pcodes_2016_2019.v1`) and deterministic validation (code format, duplicates, provenance metadata).
 - DTC data provenance documentation added in `docs/DTC_DATA_PROVENANCE.md` to track source metadata and licensing follow-up actions.
 - Multi-catalog DTC selection baseline added through `catalog_index.v1.json` and `IndexedDtcCatalogRepository` with deterministic fallback to `defaultCatalog`.
+- Default catalog fallback now points to `tuneecu_pcodes_en_default.v1.json` (English) with provisional `source.type=unknown` metadata.
 - `ReadDtcRequest` now supports vehicle context (`make`, `model`, `modelYear`) and opt-in catalog description replacement in `ReadDtcUseCase`.
 - Selection behavior and integration notes documented in `docs/DTC_CATALOG_SELECTION.md`.
 - English UX copy baseline for vehicle selector and DTC catalog messaging documented in `docs/DTC_UX_COPY.md`.

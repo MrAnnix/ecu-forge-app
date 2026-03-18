@@ -36,7 +36,7 @@ The selection path is read-only and must not change ECU write/flash behavior.
 ```json
 {
   "version": "1.0.0",
-  "defaultCatalog": "dtc/triumph_pcodes_2016_2019.v1.json",
+  "defaultCatalog": "dtc/tuneecu_pcodes_en_default.v1.json",
   "catalogs": [
     {
       "make": "Triumph",

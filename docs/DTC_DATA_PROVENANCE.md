@@ -1,18 +1,30 @@
 # DTC Data Provenance
 
-## Dataset
+## Datasets
+
+- Catalog ID: `tuneecu-pcodes-en-default`
+- File: `feature-diagnostics/src/main/resources/dtc/tuneecu_pcodes_en_default.v1.json`
+- Scope: Default cross-brand fallback dictionary (English)
+- Type: Runtime fallback catalog used when no specific make/model catalog match exists
 
 - Catalog ID: `triumph-modern-classics-2016-2019`
 - File: `feature-diagnostics/src/main/resources/dtc/triumph_pcodes_2016_2019.v1.json`
 - Scope: Triumph Modern Classics family (2016-2019)
-- Type: Reference catalog for read-only diagnostics UX enrichment
+- Type: Brand/model-specific reference catalog
 
 ## Source
 
-- Origin: User-provided extract in project continuity discussion
-- Claimed reference: Haynes manual extract for Triumph Modern Classics 2016-2019
-- Ingested on: 2026-03-18
-- License status: Not yet independently verified for redistribution
+- `tuneecu-pcodes-en-default`:
+  - Origin: Extracted from local TuneECU reverse-engineering workspace resources (`values/strings.xml`)
+  - Claimed reference: Unknown
+  - Ingested on: 2026-03-18
+  - License status: Unknown (pending source policy)
+
+- `triumph-modern-classics-2016-2019`:
+  - Origin: User-provided extract in project continuity discussion
+  - Claimed reference: Haynes manual extract for Triumph Modern Classics 2016-2019
+  - Ingested on: 2026-03-18
+  - License status: Not yet independently verified for redistribution
 
 ## Usage Constraints
 
