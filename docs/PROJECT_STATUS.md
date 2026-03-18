@@ -66,6 +66,7 @@ Diagnostics MVP baseline:
 - Selection behavior and integration notes documented in `docs/DTC_CATALOG_SELECTION.md`.
 - English UX copy baseline for vehicle selector and DTC catalog messaging documented in `docs/DTC_UX_COPY.md`.
 - App vehicle selector baseline is now wired to diagnostics DTC flow (`VehicleCatalogContext` + `preferCatalogDescriptions`) with mapper tests in `app` and contract coverage in `feature-diagnostics`.
+- App DTC rendering currently uses catalog/ECU descriptions from JSON datasets only; Android `titleKey` string lookup is intentionally deferred.
 
 Telemetry baseline:
 - Read-only telemetry snapshot use case added in `feature-telemetry` with input validation and parse error handling.
@@ -88,7 +89,7 @@ Provider contract baseline:
 
 Near-term pending items:
 - Expand transport-specific parity evidence from baseline tuples to additional validated models and fresh live captures.
-- Add i18n resource mapping for DTC `titleKey` values before exposing the catalog in UI flows.
+- Add Android i18n resource mapping for DTC `titleKey` values once generation/maintenance workflow is defined.
 - Verify redistribution terms for external DTC source material before broad release packaging.
 - Prepare real transport provider implementation behind feature provider contracts for non-demo read-only validation.
 

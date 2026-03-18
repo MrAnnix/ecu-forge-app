@@ -179,17 +179,20 @@ class ReadDtcUseCase(
             return records
         }
 
-        val descriptionByCode =
-            catalogResult.dataset.entries.associate { entry ->
-                entry.code to entry.defaultDescription
+        val entriesByCode =
+            catalogResult.dataset.entries.associateBy { entry ->
+                entry.code
             }
 
         return records.map { record ->
-            val catalogDescription = descriptionByCode[record.code]
-            if (catalogDescription == null) {
+            val catalogEntry = entriesByCode[record.code]
+            if (catalogEntry == null) {
                 record
             } else {
-                record.copy(description = catalogDescription)
+                record.copy(
+                    description = catalogEntry.defaultDescription,
+                    titleKey = catalogEntry.titleKey.ifBlank { null },
+                )
             }
         }
     }

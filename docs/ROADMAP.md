@@ -205,4 +205,4 @@ Mitigation:
 2. Resolve DTC dataset redistribution/licensing status and align provenance metadata.
 3. Prepare real transport provider implementation behind the new feature entry contracts.
 4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
-5. Add i18n mapping for DTC `titleKey` resources (English first, additional locales later).
+5. Define a maintainable DTC `titleKey` i18n workflow before enabling Android resource lookup at scale.

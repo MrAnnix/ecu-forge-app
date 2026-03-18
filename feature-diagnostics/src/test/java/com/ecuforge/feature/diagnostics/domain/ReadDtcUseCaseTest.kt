@@ -292,6 +292,7 @@ class ReadDtcUseCaseTest {
                     DtcRecord(
                         code = "P0030",
                         description = "Catalog specific description",
+                        titleKey = "test.P0030",
                     ),
                 )
         }

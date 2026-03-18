@@ -5,10 +5,12 @@ package com.ecuforge.feature.diagnostics.domain
  *
  * @property code Stable DTC code emitted by the ECU.
  * @property description Human-readable description associated with [code].
+ * @property titleKey Optional stable i18n key from catalog metadata for localized UI lookup.
  */
 data class DtcRecord(
     val code: String,
     val description: String,
+    val titleKey: String? = null,
 )
 
 /**

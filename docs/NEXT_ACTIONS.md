@@ -42,12 +42,13 @@ Execution status:
 - Task 20 (Telemetry export storage integration baseline): app-private export persistence + retention cleanup + deterministic export ids completed.
 - Task 21 (Compatibility transport evidence baseline): model+transport validated tuples loaded from versioned resource with TuneECU phase-0 references.
 - Task 22 (Compatibility scenario coverage baseline): BT/USB nominal+failure references expanded for KEIHIN model baseline and inferred tuples tracked for additional families.
+- Task 23 (DTC titleKey i18n decision): deferred Android `strings.xml` lookup and kept JSON-catalog descriptions as the single source for current read-only flows.
 - Next recommended task: promote additional models from inferred to validated using fresh live captures.
 
 ## Prioritized Pending Checklist
 
 - [ ] Promote additional family/model transport tuples from `INFERRED` to `VALIDATED` using live capture parity evidence.
-- [ ] Add i18n mapping for DTC `titleKey` resources (English first, other locales later).
+- [ ] Define and implement a maintainable workflow for DTC `titleKey` i18n (generation or controlled mapping) before enabling Android string lookup.
 - [ ] Resolve DTC source redistribution/licensing status and update provenance metadata.
 - [ ] Execute phased AGP/Gradle deprecation cleanup to preserve Gradle 10 compatibility.
 - [ ] Prepare real transport provider implementation behind feature provider contracts for non-demo read-only validation.
@@ -150,6 +151,6 @@ Before opening PR:
 If you return later, continue with:
 - Expand model-level compatibility evidence with transport/hardware parity validation traces.
 - Implement real transport providers behind `DiagnosticsFlowProvider` and `TelemetryFlowProvider` for non-demo read-only validation.
-- Add DTC i18n `titleKey` resource mapping and confirm dataset redistribution terms.
+- Define DTC i18n `titleKey` maintenance workflow and confirm dataset redistribution terms.
 - Track AGP/Gradle deprecation cleanup and remove temporary suppressions safely.
 - Keep map/write/flash work blocked until Phase 4 pre-check gates and rollback evidence are implemented and validated.
