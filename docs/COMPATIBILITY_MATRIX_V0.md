@@ -10,7 +10,8 @@ Define the initial compatibility baseline for read-only diagnostics and make sup
 - Operation scope: read-only identification only
 - Data source for family support: `EcuCompatibilityGate.DEFAULT_SUPPORTED_FAMILIES`
 - Data source for model evidence: `EcuCompatibilityGate.DEFAULT_SUPPORTED_MODELS_BY_FAMILY`
-- Transport scope in this baseline: fake transport scenarios used by unit tests
+- Data source for model+transport evidence: `feature-diagnostics/src/main/resources/compatibility/model_transport_parity.v1.json`
+- Upstream technical evidence base: `C:/Users/thean/Repos/TuneECU`
 
 ## Support Status Legend
 
@@ -31,7 +32,8 @@ Define the initial compatibility baseline for read-only diagnostics and make sup
 ## Validation Notes
 
 - This matrix reflects family-level gate support plus initial model-level baseline evidence.
-- Current evidence is domain/test baseline; hardware parity validation is pending.
+- Transport-aware model checks now require `status=VALIDATED` evidence tuples for runtime support.
+- Inferred tuples are tracked for traceability but are not promoted to runtime-supported combinations.
 - Write/flash behavior remains out of scope and blocked.
 
 ## Model Evidence Baseline
@@ -44,6 +46,14 @@ Define the initial compatibility baseline for read-only diagnostics and make sup
 | `MARELLI` | `IAW5AM` | `EcuCompatibilityGate.DEFAULT_SUPPORTED_MODELS_BY_FAMILY` constant coverage | SUPPORTED | Baseline evidence; hardware parity pending. |
 | `WALBRO` | `WB-ECU-01` | `EcuCompatibilityGate.DEFAULT_SUPPORTED_MODELS_BY_FAMILY` constant coverage | SUPPORTED | Baseline evidence; hardware parity pending. |
 | Known family, unknown model | Any not listed | `EcuCompatibilityGateTest.modelSupportReturnsFalseForUnknownModelInKnownFamily` | UNSUPPORTED | Explicitly rejected by model-level check. |
+
+## Model + Transport Evidence Baseline
+
+| ECU family | ECU model | Transport | Evidence status | Runtime support | Evidence reference |
+| --- | --- | --- | --- | --- | --- |
+| `KEIHIN` | `KM601EU` | `BLUETOOTH` | VALIDATED | SUPPORTED | `TuneECU/analysis/fixtures/trace-bt-nominal.json`, `TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
+| `KEIHIN` | `KM601EU` | `USB` | VALIDATED | SUPPORTED | `TuneECU/analysis/fixtures/trace-usb-nominal.json`, `TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
+| `KEIHIN` | `KM602EU` | `BLUETOOTH` | INFERRED | UNSUPPORTED | `TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
 
 ## Promotion Criteria for Next Matrix Revision
 

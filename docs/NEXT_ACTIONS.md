@@ -40,11 +40,12 @@ Execution status:
 - Task 18 (Default DTC fallback baseline): TuneECU-derived English fallback dictionary added as `defaultCatalog` with provisional `source.type=unknown`.
 - Task 19 (App DTC selector wiring baseline): app inputs now map to `VehicleCatalogContext` and opt-in catalog descriptions in diagnostics flow.
 - Task 20 (Telemetry export storage integration baseline): app-private export persistence + retention cleanup + deterministic export ids completed.
-- Next recommended task: expand compatibility evidence with transport/hardware parity traces.
+- Task 21 (Compatibility transport evidence baseline): model+transport validated tuples loaded from versioned resource with TuneECU phase-0 references.
+- Next recommended task: expand compatibility evidence coverage with additional models and live captures.
 
 ## Prioritized Pending Checklist
 
-- [ ] Expand compatibility evidence with transport/hardware parity traces per model.
+- [ ] Expand compatibility evidence with transport/hardware parity traces per model and capture scenario coverage.
 - [ ] Add i18n mapping for DTC `titleKey` resources (English first, other locales later).
 - [ ] Resolve DTC source redistribution/licensing status and update provenance metadata.
 - [ ] Execute phased AGP/Gradle deprecation cleanup to preserve Gradle 10 compatibility.

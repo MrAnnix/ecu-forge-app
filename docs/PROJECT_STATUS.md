@@ -55,6 +55,8 @@ Diagnostics MVP baseline:
 - Identification and DTC requests now enforce explicit input validation (`REQUEST_INVALID`) before transport access.
 - Identification parser now rejects malformed payloads with unknown/duplicate keys through negative-path tests.
 - Compatibility gate now exposes model-level evidence checks (`isModelSupported`) with deterministic unit coverage.
+- Compatibility gate now enforces model+transport validation (`isModelSupportedForTransport`) using versioned evidence resource `compatibility/model_transport_parity.v1.json`.
+- Transport parity baseline references TuneECU phase-0 artifacts (`analysis/fixtures` and transport validation report) for validated tuples.
 - DTC reference catalog baseline added in `feature-diagnostics` with a versioned JSON dataset (`triumph_pcodes_2016_2019.v1`) and deterministic validation (code format, duplicates, provenance metadata).
 - DTC data provenance documentation added in `docs/DTC_DATA_PROVENANCE.md` to track source metadata and licensing follow-up actions.
 - Multi-catalog DTC selection baseline added through `catalog_index.v1.json` and `IndexedDtcCatalogRepository` with deterministic fallback to `defaultCatalog`.
@@ -84,7 +86,7 @@ Provider contract baseline:
 ## In Progress / Pending
 
 Near-term pending items:
-- Expand model-level compatibility evidence from baseline constants/tests to transport-specific parity evidence.
+- Expand transport-specific parity evidence from baseline validated tuples to additional models and live capture scenarios.
 - Add i18n resource mapping for DTC `titleKey` values before exposing the catalog in UI flows.
 - Verify redistribution terms for external DTC source material before broad release packaging.
 - Prepare real transport provider implementation behind feature provider contracts for non-demo read-only validation.
