@@ -10,4 +10,5 @@
     <string name="diagnostics_dtc_catalog_opt_in">Use catalog descriptions from selected vehicle</string>
     <string name="telemetry_status_idle">Ready for read-only telemetry snapshot.</string>
     <string name="telemetry_action_read_snapshot">Read telemetry snapshot</string>
+    <string name="telemetry_action_export_snapshot">Export telemetry snapshot</string>
 </resources>

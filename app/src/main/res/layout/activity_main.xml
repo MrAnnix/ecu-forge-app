@@ -139,4 +139,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/telemetryStatusText" />
 
+    <Button
+        android:id="@+id/exportTelemetryButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:enabled="false"
+        android:text="@string/telemetry_action_export_snapshot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/readTelemetryButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
