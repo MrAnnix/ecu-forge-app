@@ -77,6 +77,22 @@ class IdentifyEcuUseCase(
             )
         }
 
+        val isModelTransportSupported =
+            compatibilityGate.isModelSupportedForTransport(
+                family = request.ecuFamily,
+                model = parsed.model,
+                endpointHint = request.endpointHint,
+            )
+        if (!isModelTransportSupported) {
+            transportGateway.disconnect()
+            return IdentificationUiState.Error(
+                code = "ECU_MODEL_UNSUPPORTED",
+                message =
+                    "Unsupported model transport combination: " +
+                        "${request.ecuFamily}/${parsed.model} on ${request.endpointHint}",
+            )
+        }
+
         transportGateway.disconnect()
         return IdentificationUiState.Success(parsed)
     }

@@ -54,4 +54,46 @@ class EcuCompatibilityGateTest {
             .describedAs("Blank model should be rejected by model-level compatibility check")
             .isFalse()
     }
+
+    @Test
+    fun modelTransportSupportReturnsTrueForValidatedBluetoothEvidence() {
+        val supported =
+            gate.isModelSupportedForTransport(
+                family = "KEIHIN",
+                model = "KM601EU",
+                endpointHint = "BT",
+            )
+
+        assertThat(supported)
+            .describedAs("Transport-aware compatibility should accept KEIHIN KM601EU over validated Bluetooth evidence")
+            .isTrue()
+    }
+
+    @Test
+    fun modelTransportSupportReturnsTrueForValidatedUsbEvidence() {
+        val supported =
+            gate.isModelSupportedForTransport(
+                family = "KEIHIN",
+                model = "KM601EU",
+                endpointHint = "USB",
+            )
+
+        assertThat(supported)
+            .describedAs("Transport-aware compatibility should accept KEIHIN KM601EU over validated USB evidence")
+            .isTrue()
+    }
+
+    @Test
+    fun modelTransportSupportRejectsInferredEvidenceEntries() {
+        val supported =
+            gate.isModelSupportedForTransport(
+                family = "KEIHIN",
+                model = "KM602EU",
+                endpointHint = "BT",
+            )
+
+        assertThat(supported)
+            .describedAs("Transport-aware compatibility should reject non-validated inferred evidence entries")
+            .isFalse()
+    }
 }

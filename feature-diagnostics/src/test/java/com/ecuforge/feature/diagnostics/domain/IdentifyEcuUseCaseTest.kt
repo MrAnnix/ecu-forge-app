@@ -175,6 +175,41 @@ class IdentifyEcuUseCaseTest {
     }
 
     @Test
+    fun unsupportedModelTransportCombinationReturnsModelUnsupportedError() {
+        runBlocking {
+            val gateway =
+                FakeTransportGateway(
+                    scenario =
+                        FakeTransportScenario.of(
+                            FakeTransportStep(operation = FakeTransportOperation.CONNECT, success = true),
+                            FakeTransportStep(operation = FakeTransportOperation.WRITE, success = true),
+                            FakeTransportStep(
+                                operation = FakeTransportOperation.READ,
+                                success = true,
+                                readPayload = "MODEL=KM602EU|FW=2.10.4|SN=A1B2C3".encodeToByteArray(),
+                            ),
+                            FakeTransportStep(operation = FakeTransportOperation.DISCONNECT, success = true),
+                        ),
+                )
+
+            val useCase = IdentifyEcuUseCase(transportGateway = gateway)
+            val result =
+                useCase.execute(
+                    request = IdentificationRequest(ecuFamily = "KEIHIN", endpointHint = "BT"),
+                    endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
+                )
+
+            assertThat(result)
+                .describedAs("Non-validated model/transport combinations should be blocked after identification parse")
+                .isInstanceOf(IdentificationUiState.Error::class.java)
+            val error = result as IdentificationUiState.Error
+            assertThat(error.code)
+                .describedAs("Unsupported model/transport combinations should return ECU_MODEL_UNSUPPORTED")
+                .isEqualTo("ECU_MODEL_UNSUPPORTED")
+        }
+    }
+
+    @Test
     fun malformedPayloadWithUnknownKeyReturnsParseError() {
         runBlocking {
             val gateway =
