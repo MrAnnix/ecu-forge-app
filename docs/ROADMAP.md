@@ -181,8 +181,8 @@ Mitigation:
 
 ## Immediate Next 30 Days
 
-1. Wire app vehicle selection to DTC catalog context (`make`/`model`/`modelYear`) and enable controlled catalog description enrichment.
-2. Implement telemetry export storage path integration using the v1 schema and retention policy.
-3. Expand model-level compatibility evidence with transport/hardware parity traces.
-4. Resolve DTC dataset redistribution/licensing status and align provenance metadata.
-5. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
+1. Implement telemetry export storage path integration using the v1 schema and retention policy.
+2. Expand model-level compatibility evidence with transport/hardware parity traces.
+3. Resolve DTC dataset redistribution/licensing status and align provenance metadata.
+4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
+5. Prepare real transport provider implementation behind the new feature entry contracts.

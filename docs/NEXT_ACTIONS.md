@@ -38,11 +38,11 @@ Execution status:
 - Task 16 (DTC reference catalog baseline): versioned Triumph 2016-2019 dataset, validator, and provenance doc completed.
 - Task 17 (DTC multi-catalog selection baseline): catalog index, vehicle-context selector, and ReadDtc opt-in enrichment completed.
 - Task 18 (Default DTC fallback baseline): TuneECU-derived English fallback dictionary added as `defaultCatalog` with provisional `source.type=unknown`.
-- Next recommended task: wire app vehicle selector into diagnostics DTC catalog resolution.
+- Task 19 (App DTC selector wiring baseline): app inputs now map to `VehicleCatalogContext` and opt-in catalog descriptions in diagnostics flow.
+- Next recommended task: implement storage path integration for telemetry export artifacts.
 
 ## Prioritized Pending Checklist
 
-- [ ] Wire app vehicle selector to pass `VehicleCatalogContext` and opt-in `preferCatalogDescriptions`.
 - [ ] Implement telemetry export storage path integration using `telemetry-export.v1` and retention policy.
 - [ ] Expand compatibility evidence with transport/hardware parity traces per model.
 - [ ] Add i18n mapping for DTC `titleKey` resources (English first, other locales later).

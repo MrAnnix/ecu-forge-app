@@ -62,6 +62,7 @@ Diagnostics MVP baseline:
 - `ReadDtcRequest` now supports vehicle context (`make`, `model`, `modelYear`) and opt-in catalog description replacement in `ReadDtcUseCase`.
 - Selection behavior and integration notes documented in `docs/DTC_CATALOG_SELECTION.md`.
 - English UX copy baseline for vehicle selector and DTC catalog messaging documented in `docs/DTC_UX_COPY.md`.
+- App vehicle selector baseline is now wired to diagnostics DTC flow (`VehicleCatalogContext` + `preferCatalogDescriptions`) with mapper tests in `app` and contract coverage in `feature-diagnostics`.
 
 Telemetry baseline:
 - Read-only telemetry snapshot use case added in `feature-telemetry` with input validation and parse error handling.
@@ -81,7 +82,6 @@ Provider contract baseline:
 ## In Progress / Pending
 
 Near-term pending items:
-- Wire app vehicle selector to pass catalog context into diagnostics flow for brand/model-based DTC description resolution.
 - Expand model-level compatibility evidence from baseline constants/tests to transport-specific parity evidence.
 - Implement storage path integration for telemetry exports using the new schema/policy contracts.
 - Add i18n resource mapping for DTC `titleKey` values before exposing the catalog in UI flows.
@@ -108,11 +108,10 @@ Near-term pending items:
 ## Recommended Next Step
 
 Execute in this order:
-1. Wire app vehicle selection to `ReadDtcRequest.vehicleCatalogContext` and enable catalog description opt-in.
-2. Implement storage path integration for telemetry export artifacts.
-3. Expand model-level compatibility evidence with transport/hardware parity traces.
-4. Verify DTC dataset redistribution status and align provenance metadata.
-5. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
+1. Implement storage path integration for telemetry export artifacts.
+2. Expand model-level compatibility evidence with transport/hardware parity traces.
+3. Verify DTC dataset redistribution status and align provenance metadata.
+4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
 
 ## Resume Pointers
 
