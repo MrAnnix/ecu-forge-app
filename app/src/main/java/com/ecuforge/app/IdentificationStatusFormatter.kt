@@ -9,8 +9,8 @@ object IdentificationStatusFormatter {
     /**
      * Returns a display string for the provided identification [state].
      */
-    fun format(state: IdentificationUiState): String {
-        return when (state) {
+    fun format(state: IdentificationUiState): String =
+        when (state) {
             IdentificationUiState.Idle -> "Ready for read-only ECU identification."
             IdentificationUiState.Loading -> "Reading ECU identification..."
             is IdentificationUiState.Success -> {
@@ -22,5 +22,4 @@ object IdentificationStatusFormatter {
                 "Identification failed (${state.code}): ${state.message}"
             }
         }
-    }
 }
