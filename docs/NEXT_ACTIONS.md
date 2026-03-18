@@ -33,7 +33,8 @@ Execution status:
 - Task 11 (Read-only telemetry buffered sampling baseline): multi-frame sampling, stability checks, and tests completed.
 - Task 12 (Provider contract baseline): feature entrypoint contracts added to swap demo/fake providers without app-flow changes.
 - Task 13 (Diagnostics input hardening): identification and DTC request validation + negative-path parser tests completed.
-- Next recommended task: expand compatibility matrix with model-level evidence.
+- Task 14 (Compatibility matrix model baseline): model-level gate evidence and matrix entries added.
+- Next recommended task: expand model-level evidence with transport/hardware parity traces.
 
 ## Priority Queue
 
@@ -143,5 +144,5 @@ Before opening PR:
 ## Quick Resume Prompt
 
 If you return later, continue with:
-- Expand compatibility matrix with model-level validation evidence.
+- Expand model-level compatibility evidence with transport/hardware parity validation traces.
 - Track AGP/Gradle deprecation cleanup and remove temporary suppressions safely.

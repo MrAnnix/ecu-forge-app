@@ -53,6 +53,7 @@ Diagnostics MVP baseline:
 - App formatter tests cover DTC state rendering (loading, empty, populated, error).
 - Identification and DTC requests now enforce explicit input validation (`REQUEST_INVALID`) before transport access.
 - Identification parser now rejects malformed payloads with unknown/duplicate keys through negative-path tests.
+- Compatibility gate now exposes model-level evidence checks (`isModelSupported`) with deterministic unit coverage.
 
 Telemetry baseline:
 - Read-only telemetry snapshot use case added in `feature-telemetry` with input validation and parse error handling.
@@ -70,7 +71,7 @@ Provider contract baseline:
 ## In Progress / Pending
 
 Near-term pending items:
-- Add model-level compatibility evidence beyond family-gate baseline.
+- Expand model-level compatibility evidence from baseline constants/tests to transport-specific parity evidence.
 
 ## Safety Validation Rules
 
@@ -83,7 +84,7 @@ Near-term pending items:
 - `android.suppressUnsupportedCompileSdk=36` is temporary and should be removed once AGP/toolchain is fully aligned.
 - Gradle deprecation warnings remain (`incompatible with Gradle 10`) and need phased cleanup.
 - Read-only identification is wired and testable, but still demo-scaffolded pending real transport provider wiring.
-- Compatibility matrix baseline exists, but model-level validation evidence is still pending.
+- Model-level baseline evidence exists, but transport/hardware parity validation by model remains pending.
 
 ## Status Update Policy
 
@@ -92,7 +93,7 @@ Near-term pending items:
 ## Recommended Next Step
 
 Execute in this order:
-1. Expand compatibility matrix from family-level to model-level evidence.
+1. Expand model-level compatibility evidence with transport/hardware parity traces.
 2. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
 3. Define telemetry export format and retention policy for support diagnostics.
 

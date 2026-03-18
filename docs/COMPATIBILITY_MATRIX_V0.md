@@ -2,13 +2,14 @@
 
 ## Purpose
 
-Define the initial compatibility baseline for read-only diagnostics and make supported ECU families explicit.
+Define the initial compatibility baseline for read-only diagnostics and make supported ECU families/models explicit.
 
 ## Scope
 
 - Version: `v0`
 - Operation scope: read-only identification only
 - Data source for family support: `EcuCompatibilityGate.DEFAULT_SUPPORTED_FAMILIES`
+- Data source for model evidence: `EcuCompatibilityGate.DEFAULT_SUPPORTED_MODELS_BY_FAMILY`
 - Transport scope in this baseline: fake transport scenarios used by unit tests
 
 ## Support Status Legend
@@ -29,9 +30,20 @@ Define the initial compatibility baseline for read-only diagnostics and make sup
 
 ## Validation Notes
 
-- This matrix reflects family-level gate support, not full model-level validation.
+- This matrix reflects family-level gate support plus initial model-level baseline evidence.
 - Current evidence is domain/test baseline; hardware parity validation is pending.
 - Write/flash behavior remains out of scope and blocked.
+
+## Model Evidence Baseline
+
+| ECU family | ECU model | Gate evidence | Status | Notes |
+| --- | --- | --- | --- | --- |
+| `KEIHIN` | `KM601EU` | `EcuCompatibilityGateTest.modelSupportReturnsTrueForValidatedModelEvidence` | SUPPORTED | Used in nominal identification payload fixtures. |
+| `KEIHIN` | `KM602EU` | `EcuCompatibilityGateTest.modelSupportIsCaseInsensitiveAndTrimAware` | SUPPORTED | Case/trim normalization validated. |
+| `SIEMENS` | `SIE-ECU-01` | `EcuCompatibilityGate.DEFAULT_SUPPORTED_MODELS_BY_FAMILY` constant coverage | SUPPORTED | Baseline evidence; hardware parity pending. |
+| `MARELLI` | `IAW5AM` | `EcuCompatibilityGate.DEFAULT_SUPPORTED_MODELS_BY_FAMILY` constant coverage | SUPPORTED | Baseline evidence; hardware parity pending. |
+| `WALBRO` | `WB-ECU-01` | `EcuCompatibilityGate.DEFAULT_SUPPORTED_MODELS_BY_FAMILY` constant coverage | SUPPORTED | Baseline evidence; hardware parity pending. |
+| Known family, unknown model | Any not listed | `EcuCompatibilityGateTest.modelSupportReturnsFalseForUnknownModelInKnownFamily` | UNSUPPORTED | Explicitly rejected by model-level check. |
 
 ## Promotion Criteria for Next Matrix Revision
 
