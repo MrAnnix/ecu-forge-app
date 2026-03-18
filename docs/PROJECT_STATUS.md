@@ -1,7 +1,7 @@
 # ECU Forge Project Status
 
 Last updated:
-- 2026-03-16
+- 2026-03-18
 
 ## Summary
 
@@ -22,6 +22,13 @@ CI and quality:
 - GitHub Actions workflow runs module dependency verification, unit tests, lint, and debug/release builds.
 - `verifyModuleDependencyRules` is enforced in CI and fails on forbidden edges or undeclared/stale module rules.
 - CI logs now include toolchain traceability (`java -version` and `./gradlew --version`).
+- Kotlin quality gates are enforced with `qualityCheck` (Ktlint + Detekt), including KDoc rules for public APIs.
+
+Build and toolchain hardening:
+- `compileSdk` is aligned to `36` across Android modules (`app`, `core`, `transport`, `feature-diagnostics`, `feature-telemetry`, `feature-map`).
+- Version catalog updates applied for stable AndroidX/tooling revisions (`core-ktx`, `activity`, `material`, `versions` plugin).
+- Temporary warning suppression added in `gradle.properties`: `android.suppressUnsupportedCompileSdk=36`.
+- Minor Ktlint compliance fix applied in app formatting path (`IdentificationStatusFormatter`).
 
 Core contracts:
 - Typed transport contracts and failure model in `core`.
@@ -55,9 +62,14 @@ Near-term pending items:
 
 ## Risks and Watch Items
 
-- Android Gradle Plugin `8.5.2` with `compileSdk = 35` emits a compatibility warning in local/CI builds.
+- `android.suppressUnsupportedCompileSdk=36` is temporary and should be removed once AGP/toolchain is fully aligned.
+- Gradle deprecation warnings remain (`incompatible with Gradle 10`) and need phased cleanup.
 - Read-only identification is wired and testable, but still demo-scaffolded pending real transport provider wiring.
 - Compatibility matrix baseline exists, but model-level validation evidence is still pending.
+
+## Status Update Policy
+
+- Every relevant change (build, CI, architecture wiring, quality gates, dependencies) must be reflected in this file on the same delivery cycle.
 
 ## Recommended Next Step
 
