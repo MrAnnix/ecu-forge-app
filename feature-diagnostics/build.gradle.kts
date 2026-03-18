@@ -31,6 +31,7 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":transport"))
     implementation(libs.androidx.core.ktx)
+    implementation(libs.json)
     testImplementation(libs.junit)
     testImplementation(libs.assertj.core)
     testImplementation(libs.kotlinx.coroutines.test)

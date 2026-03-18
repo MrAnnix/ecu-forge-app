@@ -8,7 +8,29 @@ interface DtcCatalogRepository {
      * Loads the catalog dataset from the configured source.
      */
     fun loadCatalog(): DtcCatalogLoadResult
+
+    /**
+     * Loads the best matching catalog for a selected vehicle context.
+     *
+     * Implementations may fallback to [loadCatalog] when no specific match exists.
+     */
+    fun loadCatalog(context: VehicleCatalogContext): DtcCatalogLoadResult {
+        return loadCatalog()
+    }
 }
+
+/**
+ * Vehicle selection context used to resolve a DTC reference catalog.
+ *
+ * @property make Vehicle brand selected by the user.
+ * @property model Vehicle model selected by the user.
+ * @property modelYear Optional vehicle model year.
+ */
+data class VehicleCatalogContext(
+    val make: String,
+    val model: String,
+    val modelYear: Int?,
+)
 
 /**
  * Represents a versioned DTC catalog dataset with provenance metadata.
@@ -81,4 +103,3 @@ sealed interface DtcCatalogLoadResult {
         val message: String,
     ) : DtcCatalogLoadResult
 }
-

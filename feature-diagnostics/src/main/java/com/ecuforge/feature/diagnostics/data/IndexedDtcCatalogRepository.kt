@@ -3,9 +3,9 @@ package com.ecuforge.feature.diagnostics.data
 import com.ecuforge.feature.diagnostics.domain.DtcCatalogLoadResult
 import com.ecuforge.feature.diagnostics.domain.DtcCatalogRepository
 import com.ecuforge.feature.diagnostics.domain.VehicleCatalogContext
+import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 import java.util.Locale
-import org.json.JSONObject
 
 /**
  * Resolves a DTC catalog resource from an index and delegates loading to a versioned JSON repository.
@@ -133,4 +133,3 @@ class IndexedDtcCatalogRepository(
         }
     }
 }
-

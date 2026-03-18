@@ -69,4 +69,3 @@ class IndexedDtcCatalogRepositoryTest {
             .isEqualTo("triumph-modern-classics-2016-2019")
     }
 }
-

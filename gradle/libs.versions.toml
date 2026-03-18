@@ -12,6 +12,7 @@ constraintlayout = "2.2.1"
 coroutines = "1.10.2"
 coroutinesTest = "1.10.2"
 assertj = "3.27.3"
+json = "20240303"
 ktlintGradle = "12.1.1"
 detekt = "1.23.8"
 versionsPlugin = "0.53.0"
@@ -28,6 +29,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
 assertj-core = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
+json = { group = "org.json", name = "json", version.ref = "json" }
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 
 [plugins]

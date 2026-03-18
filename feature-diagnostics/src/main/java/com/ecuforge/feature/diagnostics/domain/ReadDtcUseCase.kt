@@ -10,6 +10,7 @@ import com.ecuforge.transport.TransportGateway
 class ReadDtcUseCase(
     private val transportGateway: TransportGateway,
     private val compatibilityGate: EcuCompatibilityGate = EcuCompatibilityGate(),
+    private val dtcCatalogRepository: DtcCatalogRepository? = null,
 ) {
     /**
      * Runs DTC retrieval for [request] against [endpoint] and maps outcomes to UI state.
@@ -69,7 +70,12 @@ class ReadDtcUseCase(
                                 message = "Invalid DTC payload",
                             )
                         } else {
-                            DtcUiState.Success(parsed)
+                            DtcUiState.Success(
+                                enrichWithCatalogDescriptions(
+                                    records = parsed,
+                                    request = request,
+                                ),
+                            )
                         }
                     }
                 }
@@ -150,6 +156,41 @@ class ReadDtcUseCase(
             }
 
             DtcRecord(code = code, description = description)
+        }
+    }
+
+    /**
+     * Applies catalog descriptions when request opts in and a mapping is available.
+     */
+    private fun enrichWithCatalogDescriptions(
+        records: List<DtcRecord>,
+        request: ReadDtcRequest,
+    ): List<DtcRecord> {
+        if (!request.preferCatalogDescriptions) {
+            return records
+        }
+
+        val repository = dtcCatalogRepository ?: return records
+        val catalogResult =
+            request.vehicleCatalogContext?.let { context -> repository.loadCatalog(context) }
+                ?: repository.loadCatalog()
+
+        if (catalogResult !is DtcCatalogLoadResult.Success) {
+            return records
+        }
+
+        val descriptionByCode =
+            catalogResult.dataset.entries.associate { entry ->
+                entry.code to entry.defaultDescription
+            }
+
+        return records.map { record ->
+            val catalogDescription = descriptionByCode[record.code]
+            if (catalogDescription == null) {
+                record
+            } else {
+                record.copy(description = catalogDescription)
+            }
         }
     }
 }

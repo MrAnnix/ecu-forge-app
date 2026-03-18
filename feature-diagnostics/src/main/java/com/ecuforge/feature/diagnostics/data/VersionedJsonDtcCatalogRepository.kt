@@ -5,10 +5,9 @@ import com.ecuforge.feature.diagnostics.domain.DtcCatalogEntry
 import com.ecuforge.feature.diagnostics.domain.DtcCatalogLoadResult
 import com.ecuforge.feature.diagnostics.domain.DtcCatalogRepository
 import com.ecuforge.feature.diagnostics.domain.DtcCatalogSource
+import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 import java.util.Locale
-import org.json.JSONArray
-import org.json.JSONObject
 
 /**
  * Loads a versioned DTC catalog from a JSON resource and validates the dataset.
@@ -75,11 +74,12 @@ class VersionedJsonDtcCatalogRepository(
         val entries = mutableListOf<DtcCatalogEntry>()
         val duplicateGuard = mutableSetOf<String>()
         for (index in 0 until entriesJson.length()) {
-            val entryJson = entriesJson.optJSONObject(index)
-                ?: return DtcCatalogLoadResult.Failure(
-                    code = "DTC_CATALOG_ENTRY",
-                    message = "Catalog entry at index $index must be an object",
-                )
+            val entryJson =
+                entriesJson.optJSONObject(index)
+                    ?: return DtcCatalogLoadResult.Failure(
+                        code = "DTC_CATALOG_ENTRY",
+                        message = "Catalog entry at index $index must be an object",
+                    )
 
             val entry =
                 parseEntry(entryJson)
@@ -169,4 +169,3 @@ class VersionedJsonDtcCatalogRepository(
         }
     }
 }
-

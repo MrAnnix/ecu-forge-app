@@ -119,4 +119,3 @@ class VersionedJsonDtcCatalogRepositoryTest {
             .isEqualTo("DTC_CATALOG_SOURCE")
     }
 }
-

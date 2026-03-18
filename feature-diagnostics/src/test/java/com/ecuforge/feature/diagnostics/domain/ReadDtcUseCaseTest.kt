@@ -234,4 +234,159 @@ class ReadDtcUseCaseTest {
                 .isEmpty()
         }
     }
+
+    @Test
+    fun preferCatalogDescriptionsReplacesMappedDescription() {
+        runBlocking {
+            val gateway =
+                FakeTransportGateway(
+                    scenario =
+                        FakeTransportScenario.of(
+                            FakeTransportStep(operation = FakeTransportOperation.CONNECT, success = true),
+                            FakeTransportStep(operation = FakeTransportOperation.WRITE, success = true),
+                            FakeTransportStep(
+                                operation = FakeTransportOperation.READ,
+                                success = true,
+                                readPayload = "P0030;GENERIC ECU DESC".encodeToByteArray(),
+                            ),
+                            FakeTransportStep(operation = FakeTransportOperation.DISCONNECT, success = true),
+                        ),
+                )
+            val catalogRepository =
+                StubDtcCatalogRepository(
+                    descriptionByCode =
+                        mapOf(
+                            "P0030" to "Catalog specific description",
+                        ),
+                )
+
+            val useCase =
+                ReadDtcUseCase(
+                    transportGateway = gateway,
+                    dtcCatalogRepository = catalogRepository,
+                )
+            val result =
+                useCase.execute(
+                    request =
+                        ReadDtcRequest(
+                            ecuFamily = "KEIHIN",
+                            endpointHint = "BT",
+                            vehicleCatalogContext =
+                                VehicleCatalogContext(
+                                    make = "Triumph",
+                                    model = "Bonneville T120",
+                                    modelYear = 2018,
+                                ),
+                            preferCatalogDescriptions = true,
+                        ),
+                    endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
+                )
+
+            assertThat(result)
+                .describedAs("Catalog-aware request should still return Success when payload is valid")
+                .isInstanceOf(DtcUiState.Success::class.java)
+            val success = result as DtcUiState.Success
+            assertThat(success.dtcs)
+                .describedAs("Mapped code should use selected catalog description when opt-in is enabled")
+                .containsExactly(
+                    DtcRecord(
+                        code = "P0030",
+                        description = "Catalog specific description",
+                    ),
+                )
+        }
+    }
+
+    @Test
+    fun withoutCatalogPreferenceKeepsEcuDescription() {
+        runBlocking {
+            val gateway =
+                FakeTransportGateway(
+                    scenario =
+                        FakeTransportScenario.of(
+                            FakeTransportStep(operation = FakeTransportOperation.CONNECT, success = true),
+                            FakeTransportStep(operation = FakeTransportOperation.WRITE, success = true),
+                            FakeTransportStep(
+                                operation = FakeTransportOperation.READ,
+                                success = true,
+                                readPayload = "P0030;GENERIC ECU DESC".encodeToByteArray(),
+                            ),
+                            FakeTransportStep(operation = FakeTransportOperation.DISCONNECT, success = true),
+                        ),
+                )
+            val catalogRepository =
+                StubDtcCatalogRepository(
+                    descriptionByCode =
+                        mapOf(
+                            "P0030" to "Catalog specific description",
+                        ),
+                )
+
+            val useCase =
+                ReadDtcUseCase(
+                    transportGateway = gateway,
+                    dtcCatalogRepository = catalogRepository,
+                )
+            val result =
+                useCase.execute(
+                    request =
+                        ReadDtcRequest(
+                            ecuFamily = "KEIHIN",
+                            endpointHint = "BT",
+                            vehicleCatalogContext =
+                                VehicleCatalogContext(
+                                    make = "Triumph",
+                                    model = "Bonneville T120",
+                                    modelYear = 2018,
+                                ),
+                            preferCatalogDescriptions = false,
+                        ),
+                    endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
+                )
+
+            assertThat(result)
+                .describedAs("Non catalog-preferred request should still return Success")
+                .isInstanceOf(DtcUiState.Success::class.java)
+            val success = result as DtcUiState.Success
+            assertThat(success.dtcs)
+                .describedAs("When opt-in is disabled, ECU payload description should remain unchanged")
+                .containsExactly(
+                    DtcRecord(
+                        code = "P0030",
+                        description = "GENERIC ECU DESC",
+                    ),
+                )
+        }
+    }
+
+    private class StubDtcCatalogRepository(
+        descriptionByCode: Map<String, String>,
+    ) : DtcCatalogRepository {
+        private val dataset =
+            DtcCatalogDataset(
+                catalogId = "stub-catalog",
+                version = "1.0.0",
+                source =
+                    DtcCatalogSource(
+                        type = "test",
+                        reference = "test",
+                        receivedAt = "2026-03-18",
+                    ),
+                entries =
+                    descriptionByCode.map { (code, description) ->
+                        DtcCatalogEntry(
+                            code = code,
+                            platform = "test-platform",
+                            yearFrom = 2016,
+                            yearTo = 2019,
+                            titleKey = "test.$code",
+                            defaultDescription = description,
+                        )
+                    },
+            )
+
+        override fun loadCatalog(): DtcCatalogLoadResult {
+            return DtcCatalogLoadResult.Success(dataset)
+        }
+    }
 }

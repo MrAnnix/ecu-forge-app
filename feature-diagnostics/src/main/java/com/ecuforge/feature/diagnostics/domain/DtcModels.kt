@@ -16,8 +16,12 @@ data class DtcRecord(
  *
  * @property ecuFamily ECU family identifier used for compatibility checks.
  * @property endpointHint Transport endpoint hint used by the diagnostics adapter.
+ * @property vehicleCatalogContext Optional user-selected vehicle context for DTC catalog resolution.
+ * @property preferCatalogDescriptions Whether to prefer catalog descriptions when code mappings exist.
  */
 data class ReadDtcRequest(
     val ecuFamily: String,
     val endpointHint: String,
+    val vehicleCatalogContext: VehicleCatalogContext? = null,
+    val preferCatalogDescriptions: Boolean = false,
 )
