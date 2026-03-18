@@ -15,10 +15,12 @@ sealed interface TelemetryUiState {
     data object Loading : TelemetryUiState
 
     /**
-     * Terminal success state with one snapshot of telemetry samples.
+     * Terminal success state with consolidated samples and buffered frame context.
      */
     data class Success(
         val samples: List<TelemetrySample>,
+        val capturedFrameCount: Int,
+        val bufferedFrames: List<List<TelemetrySample>>,
     ) : TelemetryUiState
 
     /**

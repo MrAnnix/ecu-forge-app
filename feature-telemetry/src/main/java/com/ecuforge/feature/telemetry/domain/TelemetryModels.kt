@@ -10,9 +10,11 @@ data class TelemetrySample(
 )
 
 /**
- * Input request for read-only telemetry snapshot retrieval.
+ * Input request for read-only telemetry retrieval with buffered sampling.
  */
 data class ReadTelemetryRequest(
     val ecuFamily: String,
     val endpointHint: String,
+    val bufferFrameCount: Int = 3,
+    val requiredStableFrameCount: Int = 2,
 )

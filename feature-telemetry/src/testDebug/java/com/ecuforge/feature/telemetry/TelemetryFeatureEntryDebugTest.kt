@@ -18,6 +18,12 @@ class TelemetryFeatureEntryDebugTest {
             assertThat(success.samples)
                 .describedAs("Debug telemetry demo should include scripted sample values")
                 .isNotEmpty()
+            assertThat(success.capturedFrameCount)
+                .describedAs("Debug telemetry demo should capture all buffered frames in nominal scenario")
+                .isEqualTo(3)
+            assertThat(success.bufferedFrames)
+                .describedAs("Debug telemetry demo should expose buffered frame history for auditability")
+                .hasSize(3)
         }
     }
 

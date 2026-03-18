@@ -57,12 +57,14 @@ Telemetry baseline:
 - Demo transport wiring is isolated by variant (`debug` uses fake transport, `release` returns `DEMO_DISABLED`).
 - App wiring added with dedicated telemetry action, UI state rendering, and formatter coverage.
 - Telemetry unit tests cover success, timeout, invalid payload, and variant behavior.
+- Buffered sampling baseline added (multi-frame read, buffer validation, and signal-set stability checks).
+- Telemetry success state now includes buffered frame metadata for auditable read-only traces.
 
 ## In Progress / Pending
 
 Near-term pending items:
-- Evolve telemetry from single snapshot baseline to buffered sampling behavior.
 - Add model-level compatibility evidence beyond family-gate baseline.
+- Prepare transport provider contract to replace demo fake wiring without touching app flow.
 
 ## Safety Validation Rules
 
@@ -84,9 +86,9 @@ Near-term pending items:
 ## Recommended Next Step
 
 Execute in this order:
-1. Evolve telemetry from snapshot baseline to buffered sampling and stability checks.
-2. Expand compatibility matrix from family-level to model-level evidence.
-3. Prepare transport provider contract to replace demo fake wiring without touching app flow.
+1. Expand compatibility matrix from family-level to model-level evidence.
+2. Prepare transport provider contract to replace demo fake wiring without touching app flow.
+3. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
 
 ## Resume Pointers
 

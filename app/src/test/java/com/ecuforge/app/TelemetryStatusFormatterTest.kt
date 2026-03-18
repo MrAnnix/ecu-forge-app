@@ -17,7 +17,14 @@ class TelemetryStatusFormatterTest {
 
     @Test
     fun formatterReturnsEmptySnapshotMessage() {
-        val text = TelemetryStatusFormatter.format(TelemetryUiState.Success(samples = emptyList()))
+        val text =
+            TelemetryStatusFormatter.format(
+                TelemetryUiState.Success(
+                    samples = emptyList(),
+                    capturedFrameCount = 3,
+                    bufferedFrames = listOf(emptyList(), emptyList(), emptyList()),
+                ),
+            )
 
         assertThat(text)
             .describedAs("Empty telemetry snapshot should explain that no samples were returned")
@@ -33,10 +40,29 @@ class TelemetryStatusFormatterTest {
                         TelemetrySample(signal = "RPM", value = 1450.0, unit = "rpm"),
                         TelemetrySample(signal = "TPS", value = 2.1, unit = "%"),
                     ),
+                capturedFrameCount = 3,
+                bufferedFrames =
+                    listOf(
+                        listOf(
+                            TelemetrySample(signal = "RPM", value = 1440.0, unit = "rpm"),
+                            TelemetrySample(signal = "TPS", value = 2.0, unit = "%"),
+                        ),
+                        listOf(
+                            TelemetrySample(signal = "RPM", value = 1450.0, unit = "rpm"),
+                            TelemetrySample(signal = "TPS", value = 2.1, unit = "%"),
+                        ),
+                        listOf(
+                            TelemetrySample(signal = "RPM", value = 1460.0, unit = "rpm"),
+                            TelemetrySample(signal = "TPS", value = 2.2, unit = "%"),
+                        ),
+                    ),
             )
 
         val text = TelemetryStatusFormatter.format(state)
 
+        assertThat(text)
+            .describedAs("Telemetry success text should include buffered frame count")
+            .contains("frames=3")
         assertThat(text)
             .describedAs("Telemetry success text should include RPM sample")
             .contains("RPM=1450.0rpm")

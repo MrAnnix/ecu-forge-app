@@ -116,7 +116,17 @@ class ReadTelemetryUseCaseTest {
                             FakeTransportStep(
                                 operation = FakeTransportOperation.READ,
                                 success = true,
+                                readPayload = "RPM=1440|TPS=2.0|ECT=81.8".encodeToByteArray(),
+                            ),
+                            FakeTransportStep(
+                                operation = FakeTransportOperation.READ,
+                                success = true,
                                 readPayload = "RPM=1450|TPS=2.1|ECT=82.0".encodeToByteArray(),
+                            ),
+                            FakeTransportStep(
+                                operation = FakeTransportOperation.READ,
+                                success = true,
+                                readPayload = "RPM=1460|TPS=2.2|ECT=82.1".encodeToByteArray(),
                             ),
                             FakeTransportStep(operation = FakeTransportOperation.DISCONNECT, success = true),
                         ),
@@ -136,9 +146,88 @@ class ReadTelemetryUseCaseTest {
             assertThat(success.samples)
                 .describedAs("Nominal telemetry snapshot should parse all telemetry signals")
                 .hasSize(3)
+            assertThat(success.capturedFrameCount)
+                .describedAs("Nominal telemetry sampling should capture the configured buffered frame count")
+                .isEqualTo(3)
+            assertThat(success.bufferedFrames)
+                .describedAs("Nominal telemetry sampling should preserve buffered frames for auditability")
+                .hasSize(3)
             assertThat(success.samples.map { sample -> sample.signal })
                 .describedAs("Parsed telemetry snapshot should include expected signal names")
                 .containsExactly("RPM", "TPS", "ECT")
+        }
+    }
+
+    @Test
+    fun invalidBufferConfigurationReturnsValidationError() {
+        runBlocking {
+            val gateway = FakeTransportGateway(scenario = FakeTransportScenario.of())
+            val useCase = ReadTelemetryUseCase(transportGateway = gateway)
+
+            val result =
+                useCase.execute(
+                    request =
+                        ReadTelemetryRequest(
+                            ecuFamily = "KEIHIN",
+                            endpointHint = "BT",
+                            bufferFrameCount = 0,
+                            requiredStableFrameCount = 1,
+                        ),
+                    endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
+                )
+
+            assertThat(result)
+                .describedAs("Invalid telemetry buffer configuration should return Error before transport operations")
+                .isInstanceOf(TelemetryUiState.Error::class.java)
+            val error = result as TelemetryUiState.Error
+            assertThat(error.code)
+                .describedAs("Invalid telemetry buffer configuration should map to TELEMETRY_BUFFER_INVALID")
+                .isEqualTo("TELEMETRY_BUFFER_INVALID")
+        }
+    }
+
+    @Test
+    fun unstableSignalSetReturnsUnstableError() {
+        runBlocking {
+            val gateway =
+                FakeTransportGateway(
+                    scenario =
+                        FakeTransportScenario.of(
+                            FakeTransportStep(operation = FakeTransportOperation.CONNECT, success = true),
+                            FakeTransportStep(operation = FakeTransportOperation.WRITE, success = true),
+                            FakeTransportStep(
+                                operation = FakeTransportOperation.READ,
+                                success = true,
+                                readPayload = "RPM=1450|TPS=2.1|ECT=82.0".encodeToByteArray(),
+                            ),
+                            FakeTransportStep(
+                                operation = FakeTransportOperation.READ,
+                                success = true,
+                                readPayload = "RPM=1455|TPS=2.2".encodeToByteArray(),
+                            ),
+                            FakeTransportStep(
+                                operation = FakeTransportOperation.READ,
+                                success = true,
+                                readPayload = "RPM=1460|TPS=2.3|ECT=82.1".encodeToByteArray(),
+                            ),
+                            FakeTransportStep(operation = FakeTransportOperation.DISCONNECT, success = true),
+                        ),
+                )
+            val useCase = ReadTelemetryUseCase(transportGateway = gateway)
+
+            val result =
+                useCase.execute(
+                    request = ReadTelemetryRequest(ecuFamily = "KEIHIN", endpointHint = "BT"),
+                    endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
+                )
+
+            assertThat(result)
+                .describedAs("Inconsistent telemetry signal set across buffered frames should return Error")
+                .isInstanceOf(TelemetryUiState.Error::class.java)
+            val error = result as TelemetryUiState.Error
+            assertThat(error.code)
+                .describedAs("Inconsistent telemetry signal set should map to TELEMETRY_UNSTABLE")
+                .isEqualTo("TELEMETRY_UNSTABLE")
         }
     }
 }

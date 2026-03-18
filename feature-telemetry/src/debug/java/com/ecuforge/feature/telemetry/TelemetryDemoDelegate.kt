@@ -50,7 +50,17 @@ internal object TelemetryDemoDelegate {
             FakeTransportStep(
                 operation = FakeTransportOperation.READ,
                 success = true,
+                readPayload = "RPM=1440|TPS=2.0|ECT=81.8|VBAT=13.8".encodeToByteArray(),
+            ),
+            FakeTransportStep(
+                operation = FakeTransportOperation.READ,
+                success = true,
                 readPayload = "RPM=1450|TPS=2.1|ECT=82.0|VBAT=13.9".encodeToByteArray(),
+            ),
+            FakeTransportStep(
+                operation = FakeTransportOperation.READ,
+                success = true,
+                readPayload = "RPM=1460|TPS=2.2|ECT=82.1|VBAT=13.9".encodeToByteArray(),
             ),
             FakeTransportStep(operation = FakeTransportOperation.DISCONNECT, success = true),
         )
@@ -63,6 +73,11 @@ internal object TelemetryDemoDelegate {
         return FakeTransportScenario.of(
             FakeTransportStep(operation = FakeTransportOperation.CONNECT, success = true),
             FakeTransportStep(operation = FakeTransportOperation.WRITE, success = true),
+            FakeTransportStep(
+                operation = FakeTransportOperation.READ,
+                success = true,
+                readPayload = "RPM=1450|TPS=2.1|ECT=82.0|VBAT=13.9".encodeToByteArray(),
+            ),
             FakeTransportStep(
                 operation = FakeTransportOperation.READ,
                 success = false,

@@ -21,7 +21,7 @@ object TelemetryStatusFormatter {
                         state.samples.joinToString(separator = " | ") { sample ->
                             "${sample.signal}=${sample.value}${sample.unit}"
                         }
-                    "Telemetry: $summary"
+                    "Telemetry (frames=${state.capturedFrameCount}): $summary"
                 }
             }
             is TelemetryUiState.Error -> "Telemetry retrieval failed (${state.code}): ${state.message}"

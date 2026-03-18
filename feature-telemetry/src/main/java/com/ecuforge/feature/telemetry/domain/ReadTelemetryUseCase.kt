@@ -17,6 +17,11 @@ class ReadTelemetryUseCase(
         request: ReadTelemetryRequest,
         endpoint: TransportEndpoint,
     ): TelemetryUiState {
+        val bufferValidationError = validateBuffer(request)
+        if (bufferValidationError != null) {
+            return bufferValidationError
+        }
+
         if (!isSupported(request)) {
             return TelemetryUiState.Error(
                 code = "ECU_UNSUPPORTED",
@@ -48,25 +53,41 @@ class ReadTelemetryUseCase(
                 }
 
                 is TransportOperationResult.Success -> {
-                    when (val readResult = transportGateway.read(maxBytes = 1024)) {
-                        is TransportOperationResult.Failure -> {
-                            TelemetryUiState.Error(
-                                code = readResult.error.code.name,
-                                message = readResult.error.message,
-                            )
-                        }
-
-                        is TransportOperationResult.Success -> {
-                            val parsed = parseTelemetryPayload(readResult.value)
-                            if (parsed == null) {
-                                TelemetryUiState.Error(
-                                    code = "TELEMETRY_PARSE",
-                                    message = "Invalid telemetry payload",
+                    val bufferedFrames = mutableListOf<List<TelemetrySample>>()
+                    repeat(request.bufferFrameCount) {
+                        when (val readResult = transportGateway.read(maxBytes = 1024)) {
+                            is TransportOperationResult.Failure -> {
+                                return TelemetryUiState.Error(
+                                    code = readResult.error.code.name,
+                                    message = readResult.error.message,
                                 )
-                            } else {
-                                TelemetryUiState.Success(parsed)
+                            }
+
+                            is TransportOperationResult.Success -> {
+                                val parsed = parseTelemetryPayload(readResult.value)
+                                if (parsed == null) {
+                                    return TelemetryUiState.Error(
+                                        code = "TELEMETRY_PARSE",
+                                        message = "Invalid telemetry payload",
+                                    )
+                                }
+                                bufferedFrames.add(parsed)
                             }
                         }
+                    }
+
+                    if (!hasStableSignalSet(bufferedFrames, request.requiredStableFrameCount)) {
+                        TelemetryUiState.Error(
+                            code = "TELEMETRY_UNSTABLE",
+                            message = "Telemetry signal set was unstable across buffered frames",
+                        )
+                    } else {
+                        val consolidatedSamples = bufferedFrames.last()
+                        TelemetryUiState.Success(
+                            samples = consolidatedSamples,
+                            capturedFrameCount = bufferedFrames.size,
+                            bufferedFrames = bufferedFrames.toList(),
+                        )
                     }
                 }
             }
@@ -80,6 +101,27 @@ class ReadTelemetryUseCase(
      */
     private fun isSupported(request: ReadTelemetryRequest): Boolean {
         return request.ecuFamily in SUPPORTED_FAMILIES
+    }
+
+    /**
+     * Validates buffered sampling parameters before transport access.
+     */
+    private fun validateBuffer(request: ReadTelemetryRequest): TelemetryUiState.Error? {
+        val invalidBufferSize = request.bufferFrameCount <= 0
+        val invalidStableSize = request.requiredStableFrameCount <= 0
+        val stableLargerThanBuffer = request.requiredStableFrameCount > request.bufferFrameCount
+
+        return if (invalidBufferSize || invalidStableSize || stableLargerThanBuffer) {
+            TelemetryUiState.Error(
+                code = "TELEMETRY_BUFFER_INVALID",
+                message =
+                    "Invalid telemetry buffer configuration: " +
+                        "bufferFrameCount=${request.bufferFrameCount}, " +
+                        "requiredStableFrameCount=${request.requiredStableFrameCount}",
+            )
+        } else {
+            null
+        }
     }
 
     /**
@@ -131,6 +173,26 @@ class ReadTelemetryUseCase(
                 unit = unitBySignal[signal] ?: "raw",
             )
         }
+    }
+
+    /**
+     * Verifies that the last [requiredStableFrameCount] frames expose the same signal set.
+     */
+    private fun hasStableSignalSet(
+        bufferedFrames: List<List<TelemetrySample>>,
+        requiredStableFrameCount: Int,
+    ): Boolean {
+        if (bufferedFrames.size < requiredStableFrameCount) {
+            return false
+        }
+
+        val recentFrames = bufferedFrames.takeLast(requiredStableFrameCount)
+        val referenceSignalSet = recentFrames.first().map { sample -> sample.signal }.toSet()
+        if (referenceSignalSet.isEmpty()) {
+            return false
+        }
+
+        return recentFrames.all { frame -> frame.map { sample -> sample.signal }.toSet() == referenceSignalSet }
     }
 
     private companion object {

@@ -173,8 +173,8 @@ Mitigation:
 
 ## Immediate Next 30 Days
 
-1. Evolve telemetry from snapshot baseline to buffered sampling behavior.
-2. Harden diagnostics input validation and negative-path tests.
-3. Prepare a transport provider contract to replace demo fake wiring without touching `app` flow.
-4. Expand compatibility matrix from family-level baseline to model-level evidence.
-5. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
+1. Harden diagnostics input validation and negative-path tests.
+2. Prepare a transport provider contract to replace demo fake wiring without touching `app` flow.
+3. Expand compatibility matrix from family-level baseline to model-level evidence.
+4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
+5. Define telemetry export format and retention policy for support diagnostics.
