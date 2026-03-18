@@ -1,0 +1,2891 @@
+{
+    "catalogId":  "tuneecu-pcodes-en-default",
+    "version":  "1.0.0",
+    "source":  {
+                   "type":  "unknown",
+                   "reference":  "unknown",
+                   "receivedAt":  "2026-03-18"
+               },
+    "entries":  [
+                    {
+                        "code":  "P0030",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0030.title",
+                        "defaultDescription":  "Lambda sensor heater - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P0031",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0031.title",
+                        "defaultDescription":  "Lambda sensor heater - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P0032",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0032.title",
+                        "defaultDescription":  "Lambda sensor heater - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P0050",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0050.title",
+                        "defaultDescription":  "Lambda sensor 2 heater - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P0051",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0051.title",
+                        "defaultDescription":  "Lambda sensor 2 heater - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P0052",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0052.title",
+                        "defaultDescription":  "Lambda sensor 2 heater - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P0053",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0053.title",
+                        "defaultDescription":  "Lambda sensor heater resistance - Bank 1 sensor 1"
+                    },
+                    {
+                        "code":  "P0059",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0059.title",
+                        "defaultDescription":  "Lambda sensor heater resistance - Bank 2 sensor 1"
+                    },
+                    {
+                        "code":  "P0068",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0068.title",
+                        "defaultDescription":  "Manifold absolute pressure sensor - Correlation error with throttle position sensor"
+                    },
+                    {
+                        "code":  "P0069",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0069.title",
+                        "defaultDescription":  "Manifold absolute pressure sensor - Correlation error with ambient pressure sensor"
+                    },
+                    {
+                        "code":  "P0078",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0078.title",
+                        "defaultDescription":  "Exhaust control valve actuator - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0105",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0105.title",
+                        "defaultDescription":  "Barometric pressure sensor - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0107",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0107.title",
+                        "defaultDescription":  "MAP sensor - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P0108",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0108.title",
+                        "defaultDescription":  "MAP sensor - Short circuit to positive - Open circuit"
+                    },
+                    {
+                        "code":  "P0110",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0110.title",
+                        "defaultDescription":  "Intake air temperature sensor - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0111",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0111.title",
+                        "defaultDescription":  "Intake air temperature sensor - Signal out of range"
+                    },
+                    {
+                        "code":  "P0112",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0112.title",
+                        "defaultDescription":  "Intake air temperature sensor - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P0113",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0113.title",
+                        "defaultDescription":  "Intake air temperature sensor - Open circuit - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P0115",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0115.title",
+                        "defaultDescription":  "Coolant temperature sensor - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0116",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0116.title",
+                        "defaultDescription":  "Coolant temperature sensor - Circuit malfunction (cylinder 1)"
+                    },
+                    {
+                        "code":  "P0117",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0117.title",
+                        "defaultDescription":  "Coolant temperature sensor - Signal too high - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P0118",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0118.title",
+                        "defaultDescription":  "Coolant temperature sensor - Signal too low - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P0119",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0119.title",
+                        "defaultDescription":  "Coolant temperature sensor - High voltage"
+                    },
+                    {
+                        "code":  "P011B",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p011b.title",
+                        "defaultDescription":  "Engine coolant temperature sensor - Correlation error with intake air temperature sensor"
+                    },
+                    {
+                        "code":  "P0120",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0120.title",
+                        "defaultDescription":  "Throttle position sensor 1 - short circuit to positive - Open circuit"
+                    },
+                    {
+                        "code":  "P0121",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0121.title",
+                        "defaultDescription":  "Throttle position sensor 1 - Signal out of range"
+                    },
+                    {
+                        "code":  "P0122",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0122.title",
+                        "defaultDescription":  "Throttle position sensor 1 - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P0123",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0123.title",
+                        "defaultDescription":  "Throttle position sensor 1 - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P0125",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0125.title",
+                        "defaultDescription":  "Engine coolant temperature sensor - Signal low - Not reaching temperature required for closed loop fuel control"
+                    },
+                    {
+                        "code":  "P0130",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0130.title",
+                        "defaultDescription":  "Lambda sensor - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0131",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0131.title",
+                        "defaultDescription":  "Lambda sensor - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P0132",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0132.title",
+                        "defaultDescription":  "Lambda sensor - Signal too high"
+                    },
+                    {
+                        "code":  "P0133",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0133.title",
+                        "defaultDescription":  "Lambda sensor - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P0134",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0134.title",
+                        "defaultDescription":  "Lambda sensor rear cylinder - Tension not varied"
+                    },
+                    {
+                        "code":  "P0135",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0135.title",
+                        "defaultDescription":  "Lambda sensor heater - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0140",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0140.title",
+                        "defaultDescription":  "Lambda sensor - No activity detected"
+                    },
+                    {
+                        "code":  "P0141",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0141.title",
+                        "defaultDescription":  "Lambda sensor heater front cylinder - Short circuit to positive - Open circuit - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P0150",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0150.title",
+                        "defaultDescription":  "Lambda sensor 2 - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0165",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0165.title",
+                        "defaultDescription":  "Rear throttle first self-learning - Not performed"
+                    },
+                    {
+                        "code":  "P0168",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0168.title",
+                        "defaultDescription":  "Rear throttle mechanical (opening) springs self-learning - Test failed"
+                    },
+                    {
+                        "code":  "P0170",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0170.title",
+                        "defaultDescription":  "Lambda feedback fuel trim - Malfunction"
+                    },
+                    {
+                        "code":  "P0171",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0171.title",
+                        "defaultDescription":  "System too lean - Bank 1"
+                    },
+                    {
+                        "code":  "P0172",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0172.title",
+                        "defaultDescription":  "System too rich - Bank 1"
+                    },
+                    {
+                        "code":  "P0174",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0174.title",
+                        "defaultDescription":  "System too lean - Bank 2"
+                    },
+                    {
+                        "code":  "P0175",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0175.title",
+                        "defaultDescription":  "System too rich - Bank 2"
+                    },
+                    {
+                        "code":  "P0185",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0185.title",
+                        "defaultDescription":  "Front throttle first self-learning - Not performed"
+                    },
+                    {
+                        "code":  "P0188",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0188.title",
+                        "defaultDescription":  "Front throttle mechanical (opening) springs self-learning - Test failed"
+                    },
+                    {
+                        "code":  "P0201",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0201.title",
+                        "defaultDescription":  "Injector 1 - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0202",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0202.title",
+                        "defaultDescription":  "Injector 2 - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0203",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0203.title",
+                        "defaultDescription":  "Injector 3 - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0204",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0204.title",
+                        "defaultDescription":  "Injector 4 - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0205",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0205.title",
+                        "defaultDescription":  "Second Injector 1 - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0206",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0206.title",
+                        "defaultDescription":  "Second Injector 2 - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0207",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0207.title",
+                        "defaultDescription":  "Second Injector 3 - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0208",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0208.title",
+                        "defaultDescription":  "Second Injector 4 - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0217",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0217.title",
+                        "defaultDescription":  "Engine Coolant - Over Temperature Condition"
+                    },
+                    {
+                        "code":  "P0220",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0220.title",
+                        "defaultDescription":  "Throttle position sensor 2 - Short circuit to positive - Open circuit"
+                    },
+                    {
+                        "code":  "P0221",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0221.title",
+                        "defaultDescription":  "Throttle position sensor 2 - Signal out of range"
+                    },
+                    {
+                        "code":  "P0222",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0222.title",
+                        "defaultDescription":  "Throttle position sensor 2 - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P0223",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0223.title",
+                        "defaultDescription":  "2nd Throttle position sensor - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P0225",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0225.title",
+                        "defaultDescription":  "Throttle grip position sensor track A (blue connector) - Short circuit to positive - Open circuit - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P0227",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0227.title",
+                        "defaultDescription":  "2nd Throttle position sensor - Low voltage - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P0228",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0228.title",
+                        "defaultDescription":  "2nd Throttle position sensor - High voltage - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P0230",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0230.title",
+                        "defaultDescription":  "Fuel pump relay - Fault"
+                    },
+                    {
+                        "code":  "P0261",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0261.title",
+                        "defaultDescription":  "Cylinder 1 Injector A - Circuit Low"
+                    },
+                    {
+                        "code":  "P0262",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0262.title",
+                        "defaultDescription":  "Cylinder 1 Injector A - Circuit High"
+                    },
+                    {
+                        "code":  "P0300",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0300.title",
+                        "defaultDescription":  "Random/Multiple cylinder misfire detected"
+                    },
+                    {
+                        "code":  "P0301",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0301.title",
+                        "defaultDescription":  "Cylinder 1 - misfire detected"
+                    },
+                    {
+                        "code":  "P0302",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0302.title",
+                        "defaultDescription":  "Cylinder 2 - misfire detected"
+                    },
+                    {
+                        "code":  "P0303",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0303.title",
+                        "defaultDescription":  "Cylinder 2 - misfire detected"
+                    },
+                    {
+                        "code":  "P0314",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0314.title",
+                        "defaultDescription":  "Cylinder 1 - Misfire detected"
+                    },
+                    {
+                        "code":  "P0315",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0315.title",
+                        "defaultDescription":  "Crankshaft position not adapted - To clear this DTC, adapt the crankshaft position, then turn the ignition off for at least 120 seconds"
+                    },
+                    {
+                        "code":  "P0316",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0316.title",
+                        "defaultDescription":  "Engine misfire detected on startup (first 1000 revolutions)"
+                    },
+                    {
+                        "code":  "P0335",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0335.title",
+                        "defaultDescription":  "Crankshaft sensor - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0336",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0336.title",
+                        "defaultDescription":  "Engine speed sensor - Signal not valid"
+                    },
+                    {
+                        "code":  "P0340",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0340.title",
+                        "defaultDescription":  "Camshaft sensor - Malfunction"
+                    },
+                    {
+                        "code":  "P0341",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0341.title",
+                        "defaultDescription":  "Camshaft sensor - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0351",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0351.title",
+                        "defaultDescription":  "Ignition coil 1 - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0352",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0352.title",
+                        "defaultDescription":  "Ignition coil 2 - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0353",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0353.title",
+                        "defaultDescription":  "Ignition coil 3 - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0354",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0354.title",
+                        "defaultDescription":  "Ignition coil 4 - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0410",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0410.title",
+                        "defaultDescription":  "Secondary air valve control - Short circuit to positive - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P0412",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0412.title",
+                        "defaultDescription":  "Secondary air injection system - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P0413",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0413.title",
+                        "defaultDescription":  "Secondary air injection system - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P0414",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0414.title",
+                        "defaultDescription":  "Secondary air injection system - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P0443",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0443.title",
+                        "defaultDescription":  "Purge valve system - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0444",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0444.title",
+                        "defaultDescription":  "Purge Valve system - Open circuit - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P0445",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0445.title",
+                        "defaultDescription":  "Purge valve system - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P0446",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0446.title",
+                        "defaultDescription":  "Secondary air valve control - Short circuit to positive - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P0447",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0447.title",
+                        "defaultDescription":  "Variable geometry intake - Short circuit to positive - Short circuit to negative - Open circuit - Signal not valid"
+                    },
+                    {
+                        "code":  "P0458",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0458.title",
+                        "defaultDescription":  "EVAP System Purge Control Valve A - Circuit Low"
+                    },
+                    {
+                        "code":  "P0459",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0459.title",
+                        "defaultDescription":  "EVAP System Purge Control Valve A - Circuit High"
+                    },
+                    {
+                        "code":  "P0460",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0460.title",
+                        "defaultDescription":  "Fuel level sensor - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0461",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0461.title",
+                        "defaultDescription":  "Gear position sensor - Short circuit to positive - Open circuit - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P0462",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0462.title",
+                        "defaultDescription":  "Fuel level sensor circuit - Low input"
+                    },
+                    {
+                        "code":  "P0463",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0463.title",
+                        "defaultDescription":  "Fuel level sensor circuit - High input"
+                    },
+                    {
+                        "code":  "P0475",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0475.title",
+                        "defaultDescription":  "Exhaust valve actuator - Malfunction"
+                    },
+                    {
+                        "code":  "P0476",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0476.title",
+                        "defaultDescription":  "Exhaust valve actuator - Range/performance error"
+                    },
+                    {
+                        "code":  "P0480",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0480.title",
+                        "defaultDescription":  "Fan 1 Control - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0481",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0481.title",
+                        "defaultDescription":  "Fan 2 control - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0484",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0484.title",
+                        "defaultDescription":  "Fan circuit - Over current"
+                    },
+                    {
+                        "code":  "P0485",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0485.title",
+                        "defaultDescription":  "Fan power supply - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P048B",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p048b.title",
+                        "defaultDescription":  "Exhaust position sensor - Short circuit to positive - Open circuit"
+                    },
+                    {
+                        "code":  "P048D",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p048d.title",
+                        "defaultDescription":  "Exhaust position sensor - short circuit to negative"
+                    },
+                    {
+                        "code":  "P0490",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0490.title",
+                        "defaultDescription":  "Engine event config. checksum calc. error"
+                    },
+                    {
+                        "code":  "P0500",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0500.title",
+                        "defaultDescription":  "Vehicle speed sensor - Malfunction"
+                    },
+                    {
+                        "code":  "P0501",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0501.title",
+                        "defaultDescription":  "Front wheel speed sensor - Malfunction"
+                    },
+                    {
+                        "code":  "P0502",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0502.title",
+                        "defaultDescription":  "Rear wheel speed sensor - Malfunction"
+                    },
+                    {
+                        "code":  "P0503",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0503.title",
+                        "defaultDescription":  "Wheel speed plausibility - Front axle - Rear axle"
+                    },
+                    {
+                        "code":  "P0505",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0505.title",
+                        "defaultDescription":  "Idle speed control - System malfunction"
+                    },
+                    {
+                        "code":  "P0506",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0506.title",
+                        "defaultDescription":  "Idle control system - RPM lower than expected"
+                    },
+                    {
+                        "code":  "P0507",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0507.title",
+                        "defaultDescription":  "Idle control system - RPM higher than expected"
+                    },
+                    {
+                        "code":  "P050C",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p050c.title",
+                        "defaultDescription":  "Engine coolant temperature sensor - Signal high - Too warm for cold start conditions"
+                    },
+                    {
+                        "code":  "P0510",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0510.title",
+                        "defaultDescription":  "Twist grip cruise cancel switch - Malfunction"
+                    },
+                    {
+                        "code":  "P0512",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0512.title",
+                        "defaultDescription":  "Starter switch - Signal not valid"
+                    },
+                    {
+                        "code":  "P0513",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0513.title",
+                        "defaultDescription":  "Incorrect Immobiliser Key"
+                    },
+                    {
+                        "code":  "P0560",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0560.title",
+                        "defaultDescription":  "ECM power supply - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0562",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0562.title",
+                        "defaultDescription":  "System voltage low"
+                    },
+                    {
+                        "code":  "P0563",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0563.title",
+                        "defaultDescription":  "System voltage high"
+                    },
+                    {
+                        "code":  "P0564",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0564.title",
+                        "defaultDescription":  "Cruise control / brake switch button"
+                    },
+                    {
+                        "code":  "P0569",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0569.title",
+                        "defaultDescription":  "\\\"+\\\" button sensor - Open contacts - Closed contacts"
+                    },
+                    {
+                        "code":  "P0570",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0570.title",
+                        "defaultDescription":  "\\\"-\\\" button sensor - Open contacts - Closed contacts"
+                    },
+                    {
+                        "code":  "P0571",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0571.title",
+                        "defaultDescription":  "Brake 1 switch - Malfunction"
+                    },
+                    {
+                        "code":  "P0601",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0601.title",
+                        "defaultDescription":  "EEPROM error - Circuit failure"
+                    },
+                    {
+                        "code":  "P0603",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0603.title",
+                        "defaultDescription":  "EEPROM fault"
+                    },
+                    {
+                        "code":  "P0604",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0604.title",
+                        "defaultDescription":  "RAM error - Circuit failure"
+                    },
+                    {
+                        "code":  "P0605",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0605.title",
+                        "defaultDescription":  "ROM error - Circuit failure"
+                    },
+                    {
+                        "code":  "P0606",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0606.title",
+                        "defaultDescription":  "Engine ECM - Internal error"
+                    },
+                    {
+                        "code":  "P0607",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0607.title",
+                        "defaultDescription":  "A/D converter - Circuit not operational"
+                    },
+                    {
+                        "code":  "P0608",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0608.title",
+                        "defaultDescription":  "Level 2 safety reset"
+                    },
+                    {
+                        "code":  "P0609",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0609.title",
+                        "defaultDescription":  "Safety Engine Stop"
+                    },
+                    {
+                        "code":  "P060A",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p060a.title",
+                        "defaultDescription":  "Internal Control Module Monitoring Processor Performance"
+                    },
+                    {
+                        "code":  "P060B",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p060b.title",
+                        "defaultDescription":  "A/D converter - Circuit not operational"
+                    },
+                    {
+                        "code":  "P060C",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p060c.title",
+                        "defaultDescription":  "Safety engine Stop"
+                    },
+                    {
+                        "code":  "P060D",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p060d.title",
+                        "defaultDescription":  "Internal Control Module Accelerator Pedal Position Performance"
+                    },
+                    {
+                        "code":  "P060E",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p060e.title",
+                        "defaultDescription":  "Internal Control Module Throttle Position Performance"
+                    },
+                    {
+                        "code":  "P0610",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0610.title",
+                        "defaultDescription":  "Stop lights relay error - Short circuit to positive - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P0611",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0611.title",
+                        "defaultDescription":  "Saved data file (for safety) - Filled"
+                    },
+                    {
+                        "code":  "P0615",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0615.title",
+                        "defaultDescription":  "Starter switch - Short circuit to positive - Open circuit - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P0616",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0616.title",
+                        "defaultDescription":  "Starter relay - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P0617",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0617.title",
+                        "defaultDescription":  "Starter relay - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P061B",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p061b.title",
+                        "defaultDescription":  "Internal Control Module Torque Calculation Performance"
+                    },
+                    {
+                        "code":  "P061C",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p061c.title",
+                        "defaultDescription":  "Internal Control Module Engine RPM Performance"
+                    },
+                    {
+                        "code":  "P061F",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p061f.title",
+                        "defaultDescription":  "Internal Control Module Throttle Actuator Controller Performance"
+                    },
+                    {
+                        "code":  "P0627",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0627.title",
+                        "defaultDescription":  "Fuel Pump A Control Circuit - Open"
+                    },
+                    {
+                        "code":  "P0628",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0628.title",
+                        "defaultDescription":  "Fuel Pump A Control Circuit - Low"
+                    },
+                    {
+                        "code":  "P0629",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0629.title",
+                        "defaultDescription":  "Fuel Pump A Control Circuit - High"
+                    },
+                    {
+                        "code":  "P0630",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0630.title",
+                        "defaultDescription":  "EEPROM-Error"
+                    },
+                    {
+                        "code":  "P0633",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0633.title",
+                        "defaultDescription":  "Immobiliser Key - Not Programmed ECM/PCM"
+                    },
+                    {
+                        "code":  "P0638",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0638.title",
+                        "defaultDescription":  "2nd Throttle control - System malfunction"
+                    },
+                    {
+                        "code":  "P0641",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0641.title",
+                        "defaultDescription":  "Sensor Reference Voltage A - Circuit open"
+                    },
+                    {
+                        "code":  "P0642",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0642.title",
+                        "defaultDescription":  "5V Sensor circuit A - Reference voltage low"
+                    },
+                    {
+                        "code":  "P0643",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0643.title",
+                        "defaultDescription":  "5V Sensor circuit A - Reference voltage high"
+                    },
+                    {
+                        "code":  "P0650",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0650.title",
+                        "defaultDescription":  "Indicator lamp (MIL) control - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0651",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0651.title",
+                        "defaultDescription":  "Sensor reference voltage B - Circuit Open"
+                    },
+                    {
+                        "code":  "P0652",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0652.title",
+                        "defaultDescription":  "5V Sensor circuit B - Reference voltage low"
+                    },
+                    {
+                        "code":  "P0653",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0653.title",
+                        "defaultDescription":  "5V Sensor circuit B - Reference voltage high"
+                    },
+                    {
+                        "code":  "P0654",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0654.title",
+                        "defaultDescription":  "Tachometer - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0655",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0655.title",
+                        "defaultDescription":  "Engine hot lamp output control - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0656",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0656.title",
+                        "defaultDescription":  "Fuel gauge - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0691",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0691.title",
+                        "defaultDescription":  "Fan 1 Control Circuit - Low"
+                    },
+                    {
+                        "code":  "P0692",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0692.title",
+                        "defaultDescription":  "Fan 1 Control Circuit - High"
+                    },
+                    {
+                        "code":  "P0698",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0698.title",
+                        "defaultDescription":  "5V Sensor circuit C - Reference voltage low"
+                    },
+                    {
+                        "code":  "P0699",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0699.title",
+                        "defaultDescription":  "5V Sensor circuit C - Reference voltage high"
+                    },
+                    {
+                        "code":  "P06A4",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p06a4.title",
+                        "defaultDescription":  "5V Sensor circuit D - Reference voltage low"
+                    },
+                    {
+                        "code":  "P06A5",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p06a5.title",
+                        "defaultDescription":  "5V Sensor circuit D - Reference voltage high"
+                    },
+                    {
+                        "code":  "P06A6",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p06a6.title",
+                        "defaultDescription":  "5V Sensor circuit A - Reference voltage out of range"
+                    },
+                    {
+                        "code":  "P06A7",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p06a7.title",
+                        "defaultDescription":  "5V Sensor circuit B - Reference voltage out of range"
+                    },
+                    {
+                        "code":  "P06A8",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p06a8.title",
+                        "defaultDescription":  "5V Sensor circuit C - Reference voltage out of range"
+                    },
+                    {
+                        "code":  "P06A9",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p06a9.title",
+                        "defaultDescription":  "5V Sensor circuit D - Reference voltage out of range"
+                    },
+                    {
+                        "code":  "P06B8",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p06b8.title",
+                        "defaultDescription":  "EEPROM error"
+                    },
+                    {
+                        "code":  "P0700",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0700.title",
+                        "defaultDescription":  "A-PRC (Aprilia Performance Ride Control) - Functional error"
+                    },
+                    {
+                        "code":  "P0701",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0701.title",
+                        "defaultDescription":  "Low battery voltage"
+                    },
+                    {
+                        "code":  "P0704",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0704.title",
+                        "defaultDescription":  "Clutch switch 1 - Input circuit malfunction"
+                    },
+                    {
+                        "code":  "P0705",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0705.title",
+                        "defaultDescription":  "Gear position sensor - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P0710",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0710.title",
+                        "defaultDescription":  "Ax acceleration sensor - Faulty - Signal Failure"
+                    },
+                    {
+                        "code":  "P0711",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0711.title",
+                        "defaultDescription":  "Ay acceleration sensor - Faulty - Signal Failure"
+                    },
+                    {
+                        "code":  "P0712",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0712.title",
+                        "defaultDescription":  "Yaw sensor - Faulty - Signal Failure"
+                    },
+                    {
+                        "code":  "P0713",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0713.title",
+                        "defaultDescription":  "Roll sensor - Faulty - Signal Failure"
+                    },
+                    {
+                        "code":  "P0720",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0720.title",
+                        "defaultDescription":  "\\\"+\\\" button sensor - Open contacts - Closed contacts"
+                    },
+                    {
+                        "code":  "P0721",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0721.title",
+                        "defaultDescription":  "\\\"-\\\" button sensor - Open contacts - Closed contacts"
+                    },
+                    {
+                        "code":  "P0730",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0730.title",
+                        "defaultDescription":  "Reached wheelie time-out"
+                    },
+                    {
+                        "code":  "P0914",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0914.title",
+                        "defaultDescription":  "Gear position sensor - Short circuit to positive - Short circuit to negative - Open circuit - Signal not plausible"
+                    },
+                    {
+                        "code":  "P0915",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0915.title",
+                        "defaultDescription":  "Gear position sensor signal error - Correlation error with vehicle speed"
+                    },
+                    {
+                        "code":  "P0916",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0916.title",
+                        "defaultDescription":  "Gear Shift Position Circuit A - Low"
+                    },
+                    {
+                        "code":  "P0917",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p0917.title",
+                        "defaultDescription":  "Gear Shift Position Circuit A - High"
+                    },
+                    {
+                        "code":  "P1030",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1030.title",
+                        "defaultDescription":  "Lambda sensor - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P1078",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1078.title",
+                        "defaultDescription":  "Exhaust control valve actuator position sensor - Low voltage - Short to negative"
+                    },
+                    {
+                        "code":  "P1079",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1079.title",
+                        "defaultDescription":  "Exhaust control valve actuator position sensor - High voltage - Short to positive"
+                    },
+                    {
+                        "code":  "P1080",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1080.title",
+                        "defaultDescription":  "Exhaust control valve actuator - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P1081",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1081.title",
+                        "defaultDescription":  "CAN fault - Lost communication with exhaust valve actuator"
+                    },
+                    {
+                        "code":  "P1105",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1105.title",
+                        "defaultDescription":  "MAP sensor - Pipe fault"
+                    },
+                    {
+                        "code":  "P1106",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1106.title",
+                        "defaultDescription":  "MAP sensor 2 - Pipe fault"
+                    },
+                    {
+                        "code":  "P1107",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1107.title",
+                        "defaultDescription":  "Barometric pressure sensor - Low voltage - Short to negative"
+                    },
+                    {
+                        "code":  "P1108",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1108.title",
+                        "defaultDescription":  "Barometric pressure sensor - High voltage - Open circuit"
+                    },
+                    {
+                        "code":  "P1111",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1111.title",
+                        "defaultDescription":  "Manifold absolute pressure sensor - Pipes reversed"
+                    },
+                    {
+                        "code":  "P1115",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1115.title",
+                        "defaultDescription":  "Coolant temperature gauge - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P1116",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1116.title",
+                        "defaultDescription":  "Coolant temperature gauge - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P1117",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1117.title",
+                        "defaultDescription":  "Coolant temperature gauge - Short circuit to positive - Over temperature"
+                    },
+                    {
+                        "code":  "P1119",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1119.title",
+                        "defaultDescription":  "Engine coolant sensor - High voltage"
+                    },
+                    {
+                        "code":  "P1131",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1131.title",
+                        "defaultDescription":  "Lambda sensors - Circuits reversed"
+                    },
+                    {
+                        "code":  "P1133",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1133.title",
+                        "defaultDescription":  "Lambda sensor - Over voltage"
+                    },
+                    {
+                        "code":  "P1135",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1135.title",
+                        "defaultDescription":  "Traction Control disabled due to ABS malfunction"
+                    },
+                    {
+                        "code":  "P1136",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1136.title",
+                        "defaultDescription":  "Cornering Traction Control disabled due to Inertial Measurement Unit (IMU) malfunction"
+                    },
+                    {
+                        "code":  "P1150",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1150.title",
+                        "defaultDescription":  "Manifold absolute pressure sensor 2 - Correlation error with throttle position sensor 2"
+                    },
+                    {
+                        "code":  "P1151",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1151.title",
+                        "defaultDescription":  "Manifold absolute pressure sensor 2 - Correlation error with ambient pressure sensor"
+                    },
+                    {
+                        "code":  "P1171",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1171.title",
+                        "defaultDescription":  "Lambda feedback maximum enrichment"
+                    },
+                    {
+                        "code":  "P1172",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1172.title",
+                        "defaultDescription":  "Lambda feedback maximum enleanment"
+                    },
+                    {
+                        "code":  "P1178",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1178.title",
+                        "defaultDescription":  "Lambda feedback reached maximum air leakage adaption"
+                    },
+                    {
+                        "code":  "P1179",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1179.title",
+                        "defaultDescription":  "Lambda feedback reached minimum air leakage adaption"
+                    },
+                    {
+                        "code":  "P1201",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1201.title",
+                        "defaultDescription":  "Injector 1 - Open circuit - Short to negative"
+                    },
+                    {
+                        "code":  "P1202",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1202.title",
+                        "defaultDescription":  "Injector 2 - Open circuit - Short to negative"
+                    },
+                    {
+                        "code":  "P1203",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1203.title",
+                        "defaultDescription":  "Injector 3 - Open circuit - Short to negative"
+                    },
+                    {
+                        "code":  "P1204",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1204.title",
+                        "defaultDescription":  "Injector 4 - Open circuit - Short to negative"
+                    },
+                    {
+                        "code":  "P1205",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1205.title",
+                        "defaultDescription":  "Injector 1 - Short circuit to positive - Over temperature"
+                    },
+                    {
+                        "code":  "P1206",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1206.title",
+                        "defaultDescription":  "Injector 2 - Short circuit to positive - Over temperature"
+                    },
+                    {
+                        "code":  "P1207",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1207.title",
+                        "defaultDescription":  "Injector 3 - Short circuit to positive - Over temperature"
+                    },
+                    {
+                        "code":  "P1208",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1208.title",
+                        "defaultDescription":  "Injector 4 - Short circuit to positive - Over temperature"
+                    },
+                    {
+                        "code":  "P1227",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1227.title",
+                        "defaultDescription":  "Throttle grip position tracks A-B (blue connector) - Incongruent signal"
+                    },
+                    {
+                        "code":  "P1231",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1231.title",
+                        "defaultDescription":  "Fuel pump relay - Open circuit - Short to negative"
+                    },
+                    {
+                        "code":  "P1232",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1232.title",
+                        "defaultDescription":  "Fuel pump relay - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P1301",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1301.title",
+                        "defaultDescription":  "Stop lights relay error - Short circuit to positive - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P1335",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1335.title",
+                        "defaultDescription":  "Crankshaft sensor - Incorrect sequence pattern"
+                    },
+                    {
+                        "code":  "P1340",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1340.title",
+                        "defaultDescription":  "Camshaft sensor - Electrical noise signal"
+                    },
+                    {
+                        "code":  "P1341",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1341.title",
+                        "defaultDescription":  "Camshaft sensor - Incorrect sequence pattern"
+                    },
+                    {
+                        "code":  "P1351",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1351.title",
+                        "defaultDescription":  "Ignition coil 1 - Open circuit - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P1352",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1352.title",
+                        "defaultDescription":  "Ignition coil 2 - Open circuit - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P1353",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1353.title",
+                        "defaultDescription":  "Ignition coil 3 - Open circuit - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P1354",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1354.title",
+                        "defaultDescription":  "Ignition coil 4 - Open circuit - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P1355",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1355.title",
+                        "defaultDescription":  "Ignition coil 1 - Short circuit to positive - Over temperature"
+                    },
+                    {
+                        "code":  "P1356",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1356.title",
+                        "defaultDescription":  "Ignition coil 2 - Short circuit to positive - Over temperature"
+                    },
+                    {
+                        "code":  "P1357",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1357.title",
+                        "defaultDescription":  "Ignition coil 3 - Short circuit to positive - Over temperature"
+                    },
+                    {
+                        "code":  "P1358",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1358.title",
+                        "defaultDescription":  "Ignition coil 4 - Short circuit to positive - Over temperature"
+                    },
+                    {
+                        "code":  "P1385",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1385.title",
+                        "defaultDescription":  "Tachometer - System malfunction"
+                    },
+                    {
+                        "code":  "P1386",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1386.title",
+                        "defaultDescription":  "Tachometer - Open circuit - Short to negative"
+                    },
+                    {
+                        "code":  "P1387",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1387.title",
+                        "defaultDescription":  "Tachometer - Short circuit to positive - Over temperature"
+                    },
+                    {
+                        "code":  "P1400",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1400.title",
+                        "defaultDescription":  "Rear throttle Limp Home self-acquisition - Test failed"
+                    },
+                    {
+                        "code":  "P1401",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1401.title",
+                        "defaultDescription":  "Rear throttle mechanical (opening) springs self-learning - Test failed"
+                    },
+                    {
+                        "code":  "P1402",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1402.title",
+                        "defaultDescription":  "Rear throttle minimum mechanical position self-acquisition - Test failed"
+                    },
+                    {
+                        "code":  "P1403",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1403.title",
+                        "defaultDescription":  "Rear throttle - Detection of recovery conditions (air temp., water temp.) - Possible presence of ice"
+                    },
+                    {
+                        "code":  "P1404",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1404.title",
+                        "defaultDescription":  "Rear throttle power supply voltage during self-learning - Low supply voltage"
+                    },
+                    {
+                        "code":  "P1405",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1405.title",
+                        "defaultDescription":  "Rear throttle mechanical (return) springs self-learning - Test failed"
+                    },
+                    {
+                        "code":  "P1406",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1406.title",
+                        "defaultDescription":  "Front throttle Limp Home self-acquisition - Test failed"
+                    },
+                    {
+                        "code":  "P1407",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1407.title",
+                        "defaultDescription":  "Front throttle mechanical (opening) springs self-learning - Test failed"
+                    },
+                    {
+                        "code":  "P1408",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1408.title",
+                        "defaultDescription":  "Front throttle minimum mechanical position self-acquisition - Test failed"
+                    },
+                    {
+                        "code":  "P1409",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1409.title",
+                        "defaultDescription":  "Front throttle - Detection of recovery conditions (air temp., water temp.) - Possible presence of ice"
+                    },
+                    {
+                        "code":  "P1410",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1410.title",
+                        "defaultDescription":  "Front throttle power supply voltage during self-learning - Low supply voltage"
+                    },
+                    {
+                        "code":  "P1411",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1411.title",
+                        "defaultDescription":  "Front throttle mechanical (return) springs self-acquisition - Test failed"
+                    },
+                    {
+                        "code":  "P1500",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1500.title",
+                        "defaultDescription":  "Vehicle speed sensor - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P1501",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1501.title",
+                        "defaultDescription":  "Speedometer driver - Open circuit - Short to negative"
+                    },
+                    {
+                        "code":  "P1502",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1502.title",
+                        "defaultDescription":  "Speedometer driver - Short circuit to positive - Over temperature"
+                    },
+                    {
+                        "code":  "P1503",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1503.title",
+                        "defaultDescription":  "Exhaust valve potentiometer - Short circuit to positive - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P1504",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1504.title",
+                        "defaultDescription":  "Exhaust valve - Hang-up"
+                    },
+                    {
+                        "code":  "P1506",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1506.title",
+                        "defaultDescription":  "Side Stand Sensor Circui - Open"
+                    },
+                    {
+                        "code":  "P1507",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1507.title",
+                        "defaultDescription":  "Side Stand Sensor Circuit - Short To Ground"
+                    },
+                    {
+                        "code":  "P1508",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1508.title",
+                        "defaultDescription":  "Immobilizer ECM - Unmatched"
+                    },
+                    {
+                        "code":  "P1509",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1509.title",
+                        "defaultDescription":  "Head Lamp Relay - Short Circuit To Battery"
+                    },
+                    {
+                        "code":  "P1510",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1510.title",
+                        "defaultDescription":  "Head Lamp Relay - Short Circuit To Ground"
+                    },
+                    {
+                        "code":  "P1511",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1511.title",
+                        "defaultDescription":  "Head Lamp Relay - Open Circuit"
+                    },
+                    {
+                        "code":  "P1520",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1520.title",
+                        "defaultDescription":  "ABS ECM - Unmatched"
+                    },
+                    {
+                        "code":  "P1521",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1521.title",
+                        "defaultDescription":  "CAN fault - Lost communication with ABS module or ABS system status error"
+                    },
+                    {
+                        "code":  "P1530",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1530.title",
+                        "defaultDescription":  "Throttle hall effect sensor - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P1534",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1534.title",
+                        "defaultDescription":  "Engine oil level sensor - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P1551",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1551.title",
+                        "defaultDescription":  "Cooling fan - System malfunction"
+                    },
+                    {
+                        "code":  "P1552",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1552.title",
+                        "defaultDescription":  "Cooling fan - Open circuit - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P1553",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1553.title",
+                        "defaultDescription":  "Cooling fan - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P1560",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1560.title",
+                        "defaultDescription":  "Sensor supply voltage - Circuit fault"
+                    },
+                    {
+                        "code":  "P1570",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1570.title",
+                        "defaultDescription":  "Clutch switch 2 - Input circuit malfunction"
+                    },
+                    {
+                        "code":  "P1571",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1571.title",
+                        "defaultDescription":  "Brake 2 switch - Malfunction"
+                    },
+                    {
+                        "code":  "P1574",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1574.title",
+                        "defaultDescription":  "Cruise Control - Prevented due to other malfunction condition"
+                    },
+                    {
+                        "code":  "P1575",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1575.title",
+                        "defaultDescription":  "Cruise Control - Disabled until button press sequence completed"
+                    },
+                    {
+                        "code":  "P1576",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1576.title",
+                        "defaultDescription":  "Brake 1 switch - Correlation error with brake switch 2"
+                    },
+                    {
+                        "code":  "P1577",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1577.title",
+                        "defaultDescription":  "Brake 2 switch - Correlation error with brake switch 1"
+                    },
+                    {
+                        "code":  "P1590",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1590.title",
+                        "defaultDescription":  "Side stand switch - Low voltage - Short to negative"
+                    },
+                    {
+                        "code":  "P1600",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1600.title",
+                        "defaultDescription":  "Indicator lamp (MIL) - System fault"
+                    },
+                    {
+                        "code":  "P1601",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1601.title",
+                        "defaultDescription":  "Indicator lamp (MIL) - Open circuit - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P1602",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1602.title",
+                        "defaultDescription":  "Indicator lamp (MIL) - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P1604",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1604.title",
+                        "defaultDescription":  "ECM tamper detected - Return to Triumph"
+                    },
+                    {
+                        "code":  "P1605",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1605.title",
+                        "defaultDescription":  "ECM locked by the Calibration Lock function"
+                    },
+                    {
+                        "code":  "P1606",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1606.title",
+                        "defaultDescription":  "Engine ECM - Internal error"
+                    },
+                    {
+                        "code":  "P1607",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1607.title",
+                        "defaultDescription":  "ECM Ride by Wire - Internal error"
+                    },
+                    {
+                        "code":  "P1608",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1608.title",
+                        "defaultDescription":  "ECM Ride by Wire - Internal error"
+                    },
+                    {
+                        "code":  "P160C",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p160c.title",
+                        "defaultDescription":  "Level 2 safety reset"
+                    },
+                    {
+                        "code":  "P1610",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1610.title",
+                        "defaultDescription":  "Low fuel output - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P1611",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1611.title",
+                        "defaultDescription":  "Low fuel indicator lamp - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P1612",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1612.title",
+                        "defaultDescription":  "Low fuel indicator lamp - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P1614",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1614.title",
+                        "defaultDescription":  "Instrument ID incompatible"
+                    },
+                    {
+                        "code":  "P1616",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1616.title",
+                        "defaultDescription":  "Accessory control relay - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P1617",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1617.title",
+                        "defaultDescription":  "Accessory control relay - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P1619",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1619.title",
+                        "defaultDescription":  "Headlamp relay - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P1620",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1620.title",
+                        "defaultDescription":  "Headlamp relay - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P1621",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1621.title",
+                        "defaultDescription":  "Fuel gauge - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P1622",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1622.title",
+                        "defaultDescription":  "Fuel gauge - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P1628",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1628.title",
+                        "defaultDescription":  "Fuel pump - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P1629",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1629.title",
+                        "defaultDescription":  "Fuel pump - Short to positive"
+                    },
+                    {
+                        "code":  "P1631",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1631.title",
+                        "defaultDescription":  "Fall detection sensor - Low voltage - Short to negative"
+                    },
+                    {
+                        "code":  "P1632",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1632.title",
+                        "defaultDescription":  "Fall detection sensor - High voltage - Open circuit"
+                    },
+                    {
+                        "code":  "P1633",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1633.title",
+                        "defaultDescription":  "Windscreen - System malfunction"
+                    },
+                    {
+                        "code":  "P1640",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1640.title",
+                        "defaultDescription":  "Roll-over detection disabled due to Inertial Measurement Unit (IMU) malfunction"
+                    },
+                    {
+                        "code":  "P1650",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1650.title",
+                        "defaultDescription":  "CAN fault - Lost communication with RCU (or immobiliser malfunction)"
+                    },
+                    {
+                        "code":  "P1659",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1659.title",
+                        "defaultDescription":  "Ignition power supply - Malfunction"
+                    },
+                    {
+                        "code":  "P1670",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1670.title",
+                        "defaultDescription":  "Intake flap solenoid - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P1671",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1671.title",
+                        "defaultDescription":  "Intake flap solenoid - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P1680",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1680.title",
+                        "defaultDescription":  "Exhaust actuator control internal motor relay - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P1685",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1685.title",
+                        "defaultDescription":  "EMS main relay - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P1687",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1687.title",
+                        "defaultDescription":  "MAP sensor 2 - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P1688",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1688.title",
+                        "defaultDescription":  "MAP sensor 2 - Short circuit to positive - Open circuit"
+                    },
+                    {
+                        "code":  "P1690",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1690.title",
+                        "defaultDescription":  "CAN-Bus communication - Malfunction"
+                    },
+                    {
+                        "code":  "P1695",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1695.title",
+                        "defaultDescription":  "Lost communication with instrument panel"
+                    },
+                    {
+                        "code":  "P1696",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1696.title",
+                        "defaultDescription":  "5V sensor supply - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P1697",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1697.title",
+                        "defaultDescription":  "5V sensor supply - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P1698",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1698.title",
+                        "defaultDescription":  "5V sensor supply - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P16A0",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p16a0.title",
+                        "defaultDescription":  "Inertial Measurement Unit (IMU) - ID incompatible"
+                    },
+                    {
+                        "code":  "P16A1",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p16a1.title",
+                        "defaultDescription":  "Inertial Measurement Unit (IMU) - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P16A2",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p16a2.title",
+                        "defaultDescription":  "Inertial Measurement Unit (IMU) - Signal error"
+                    },
+                    {
+                        "code":  "P16A3",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p16a3.title",
+                        "defaultDescription":  "Chassis ECM - Communication error"
+                    },
+                    {
+                        "code":  "P16A4",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p16a4.title",
+                        "defaultDescription":  "Chassis ECM - Requested function not available - Check Chassis ECM for DTCs"
+                    },
+                    {
+                        "code":  "P16B0",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p16b0.title",
+                        "defaultDescription":  "Fully closed throttle position - Adaption incomplete or unsuccessful"
+                    },
+                    {
+                        "code":  "P1702",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1702.title",
+                        "defaultDescription":  "Shift force sensor - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P1703",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1703.title",
+                        "defaultDescription":  "Shift force sensor - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P1800",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1800.title",
+                        "defaultDescription":  "Rear wheel radius learning - Error during acquisition - Invalid value"
+                    },
+                    {
+                        "code":  "P1850",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1850.title",
+                        "defaultDescription":  "Side stand (functional) diagnosis - Signal not plausible"
+                    },
+                    {
+                        "code":  "P1900",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1900.title",
+                        "defaultDescription":  "Quick Shift sensor - Short circuit to negative - Signal not plausible"
+                    },
+                    {
+                        "code":  "P1901",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1901.title",
+                        "defaultDescription":  "Ax acceleration sensor - Faulty - Signal Failure"
+                    },
+                    {
+                        "code":  "P1902",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1902.title",
+                        "defaultDescription":  "Ay acceleration sensor - Faulty - Signal Failure"
+                    },
+                    {
+                        "code":  "P1903",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1903.title",
+                        "defaultDescription":  "Yaw sensor - Faulty - Signal Failure"
+                    },
+                    {
+                        "code":  "P1904",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1904.title",
+                        "defaultDescription":  "Roll sensor - Faulty - Signal Failure"
+                    },
+                    {
+                        "code":  "P1905",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1905.title",
+                        "defaultDescription":  "Reached wheelie time-out"
+                    },
+                    {
+                        "code":  "P1906",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p1906.title",
+                        "defaultDescription":  "Quick Shift (functional) sensor - Signal stuck in up state - Signal stuck in down state - Signal not plausible"
+                    },
+                    {
+                        "code":  "P2100",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2100.title",
+                        "defaultDescription":  "Throttle actuator motor - Open circuit"
+                    },
+                    {
+                        "code":  "P2101",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2101.title",
+                        "defaultDescription":  "Throttle Actuator A Control Motor Circuit Range/Performance"
+                    },
+                    {
+                        "code":  "P2102",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2102.title",
+                        "defaultDescription":  "Throttle actuator control internal motor relay - Does not operate"
+                    },
+                    {
+                        "code":  "P2103",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2103.title",
+                        "defaultDescription":  "Throttle actuator control internal motor relay - Operates continually"
+                    },
+                    {
+                        "code":  "P2106",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2106.title",
+                        "defaultDescription":  "Throttle Actuator Control System - Forced Limited Power"
+                    },
+                    {
+                        "code":  "P2107",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2107.title",
+                        "defaultDescription":  "Throttle valve drive - Error"
+                    },
+                    {
+                        "code":  "P2108",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2108.title",
+                        "defaultDescription":  "Throttle actuator - Short circuit to negative - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P2111",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2111.title",
+                        "defaultDescription":  "Throttle valve drive - Error (stuck open)"
+                    },
+                    {
+                        "code":  "P2118",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2118.title",
+                        "defaultDescription":  "Throttle motor drive - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P2119",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2119.title",
+                        "defaultDescription":  "Throttle valve drive - Error"
+                    },
+                    {
+                        "code":  "P2120",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2120.title",
+                        "defaultDescription":  "Twist grip position sensor 1 - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P2121",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2121.title",
+                        "defaultDescription":  "Twist grip position sensor 1 - Signal out of range"
+                    },
+                    {
+                        "code":  "P2122",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2122.title",
+                        "defaultDescription":  "Twist grip position sensor 1 - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P2123",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2123.title",
+                        "defaultDescription":  "Twist grip position sensor 1 - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P2125",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2125.title",
+                        "defaultDescription":  "Twist grip position sensor 2 - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P2126",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2126.title",
+                        "defaultDescription":  "Twist grip position sensor 2 - Signal out of range"
+                    },
+                    {
+                        "code":  "P2127",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2127.title",
+                        "defaultDescription":  "Twist grip position sensor 2 - Short circuit to negative - Open circuit"
+                    },
+                    {
+                        "code":  "P2128",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2128.title",
+                        "defaultDescription":  "Twist grip position sensor 2 - Short circuit to positive"
+                    },
+                    {
+                        "code":  "P2130",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2130.title",
+                        "defaultDescription":  "Throttle grip position sensor track B (blue connector) - Short circuit to positive - Open circuit - Short circuit to negative"
+                    },
+                    {
+                        "code":  "P2135",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2135.title",
+                        "defaultDescription":  "Throttle position sensor 1 - Correlation error with throttle position sensor 2"
+                    },
+                    {
+                        "code":  "P2136",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2136.title",
+                        "defaultDescription":  "Throttle position sensor 1 - Correlation error with throttle position sensor 2"
+                    },
+                    {
+                        "code":  "P2138",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2138.title",
+                        "defaultDescription":  "Twist grip position sensor 1 - Correlation error with twist grip position sensor 2"
+                    },
+                    {
+                        "code":  "P2158",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2158.title",
+                        "defaultDescription":  "Rear wheel sensor - Signal not valid"
+                    },
+                    {
+                        "code":  "P2162",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2162.title",
+                        "defaultDescription":  "Wheel speed plausibility - Front axle - Rear axle"
+                    },
+                    {
+                        "code":  "P2176",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2176.title",
+                        "defaultDescription":  "Throttle Actuator A Control System - Idle Position Not Learned"
+                    },
+                    {
+                        "code":  "P2183",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2183.title",
+                        "defaultDescription":  "Coolant temperature sensor (cylinder 2) - Circuit malfunction"
+                    },
+                    {
+                        "code":  "P2226",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2226.title",
+                        "defaultDescription":  "Barometric pressure sensor - High voltage - Open circuit"
+                    },
+                    {
+                        "code":  "P2227",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2227.title",
+                        "defaultDescription":  "Barometric Pressure Sensor A Circuit Range/Performance"
+                    },
+                    {
+                        "code":  "P2228",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2228.title",
+                        "defaultDescription":  "Barometric pressure sensor - Low voltage - Short to negative"
+                    },
+                    {
+                        "code":  "P2229",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2229.title",
+                        "defaultDescription":  "Barometric Pressure Sensor A - Circuit High"
+                    },
+                    {
+                        "code":  "P2231",
+                        "platform":  "TuneECU Fallback",
+                        "yearFrom":  2000,
+                        "yearTo":  2100,
+                        "titleKey":  "dtc.p2231.title",
+                        "defaultDescription":  "Lambda Sensor Signal Circuit Short Circuit to Heater Circuit Bank 1 Sensor 1"
+                    }
+                ]
+}

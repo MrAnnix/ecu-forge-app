@@ -118,4 +118,25 @@ class VersionedJsonDtcCatalogRepositoryTest {
             .describedAs("Missing source metadata should map to DTC_CATALOG_SOURCE")
             .isEqualTo("DTC_CATALOG_SOURCE")
     }
+
+    @Test
+    fun loadTuneEcuFallbackCatalogAcceptsUnknownSourceMetadata() {
+        val repository =
+            VersionedJsonDtcCatalogRepository(
+                resourcePath = "dtc/tuneecu_pcodes_en_default.v1.json",
+            )
+
+        val result = repository.loadCatalog()
+
+        assertThat(result)
+            .describedAs("TuneECU fallback catalog should parse even when provenance is explicitly unknown")
+            .isInstanceOf(DtcCatalogLoadResult.Success::class.java)
+        val success = result as DtcCatalogLoadResult.Success
+        assertThat(success.dataset.catalogId)
+            .describedAs("Fallback catalog id should match the generated default dataset")
+            .isEqualTo("tuneecu-pcodes-en-default")
+        assertThat(success.dataset.source.type)
+            .describedAs("Fallback catalog source should remain unknown until source policy is finalized")
+            .isEqualTo("unknown")
+    }
 }

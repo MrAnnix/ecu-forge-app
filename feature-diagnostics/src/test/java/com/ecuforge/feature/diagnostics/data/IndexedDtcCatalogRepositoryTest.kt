@@ -17,8 +17,11 @@ class IndexedDtcCatalogRepositoryTest {
             .isInstanceOf(DtcCatalogLoadResult.Success::class.java)
         val success = result as DtcCatalogLoadResult.Success
         assertThat(success.dataset.catalogId)
-            .describedAs("Default indexed catalog should resolve to the Triumph Modern Classics dataset")
-            .isEqualTo("triumph-modern-classics-2016-2019")
+            .describedAs("Default indexed catalog should resolve to the generic TuneECU fallback dataset")
+            .isEqualTo("tuneecu-pcodes-en-default")
+        assertThat(success.dataset.source.type)
+            .describedAs("Fallback dataset should be marked with unknown provenance until source policy is finalized")
+            .isEqualTo("unknown")
     }
 
     @Test
@@ -66,6 +69,6 @@ class IndexedDtcCatalogRepositoryTest {
         val success = result as DtcCatalogLoadResult.Success
         assertThat(success.dataset.catalogId)
             .describedAs("Fallback selection should still return the default configured catalog")
-            .isEqualTo("triumph-modern-classics-2016-2019")
+            .isEqualTo("tuneecu-pcodes-en-default")
     }
 }
