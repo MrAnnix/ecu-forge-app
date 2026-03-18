@@ -5,6 +5,7 @@
 This is the practical execution companion for the roadmap.
 Use it to decide what to do next without replanning from scratch.
 Current snapshot reference: `docs/PROJECT_STATUS.md`.
+Current sprint brief: `docs/SPRINT_PLAN_2026-03-18.md`.
 
 ## Current Focus
 
@@ -44,7 +45,30 @@ Execution status:
 - Task 22 (Compatibility scenario coverage baseline): BT/USB nominal+failure references expanded for KEIHIN model baseline and inferred tuples tracked for additional families.
 - Task 23 (DTC titleKey i18n decision): deferred Android `strings.xml` lookup and kept JSON-catalog descriptions as the single source for current read-only flows.
 - Task 24 (Diagnostics transport-backed provider scaffold): added read-only transport-backed provider wiring for identification/DTC behind feature contracts with deterministic non-demo timeout behavior.
-- Next recommended task: promote additional models from inferred to validated using fresh live captures.
+- Task 25 (Compatibility tuple promotion): promoted `KEIHIN/KM602EU + BLUETOOTH` from `INFERRED` to `VALIDATED` with transport-gate and identification-flow test coverage.
+- Task 26 (Diagnostics debug adapter pilot): wired default debug diagnostics identification/DTC flows through transport-backed provider using concrete `DebugBluetoothTransportGateway` with deterministic boundary tests (invalid endpoint, connect failure, read timeout).
+- Task 27 (Diagnostics USB debug adapter pilot): switched default debug diagnostics provider to concrete `DebugUsbTransportGateway` with deterministic boundary tests (invalid endpoint, connect failure, read timeout).
+- Task 28 (Telemetry USB debug adapter pilot): wired default debug telemetry flow through `TransportBackedTelemetryFlowProvider` using concrete `DebugUsbTelemetryTransportGateway` with deterministic boundary tests (invalid endpoint, connect failure, read timeout).
+- Task 29 (Transport requirement documentation): documented ELM327-compatible Bluetooth, USB cable, and WiFi as the explicit transport baseline for read-only diagnostics continuity.
+- Next recommended task: expand live-capture parity evidence for remaining inferred tuples, then close DTC redistribution/licensing status.
+- Prepared promotion candidate in sprint template: `SIEMENS/SIE-ECU-01 + BLUETOOTH`.
+
+Parity blocker snapshot (2026-03-18):
+- Verified via TuneECU batch parity run: `analysis/phase0/task-0.6/tools/run-all-scenarios-parity.ps1`.
+- `bt-nominal` observed trace is present and passes schema/sequence/payload parity.
+- ADB diagnostics check runs successfully, but `adb devices` currently returns no attached/authorized device.
+- Missing capture files block the remaining scenarios:
+	- `analysis/phase0/task-0.6/live/logcat-bt-failure.txt`
+	- `analysis/phase0/task-0.6/live/logcat-usb-nominal.txt`
+	- `analysis/phase0/task-0.6/live/logcat-usb-permission-denied.txt`
+- Capture-quality blocker: batch parity fails when a scenario log exists but has no `TransportEvent` JSON entries (needs recapture while actively reproducing that scenario in-app).
+- Immediate closure commands (TuneECU workspace):
+	- `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force`
+	- `./analysis/phase0/task-0.6/tools/capture-scenario-logcat.ps1 -Scenario bt-failure`
+	- `./analysis/phase0/task-0.6/tools/capture-scenario-logcat.ps1 -Scenario usb-nominal`
+	- `./analysis/phase0/task-0.6/tools/capture-scenario-logcat.ps1 -Scenario usb-permission-denied`
+	- `./analysis/phase0/task-0.6/tools/run-all-scenarios-parity.ps1 -LogcatDirectory ./analysis/phase0/task-0.6/live`
+- PR write-up template: `docs/SPRINT_PLAN_2026-03-18.md` (`## Parity Promotion PR Template`).
 
 ## Prioritized Pending Checklist
 
@@ -52,7 +76,7 @@ Execution status:
 - [ ] Define and implement a maintainable workflow for DTC `titleKey` i18n (generation or controlled mapping) before enabling Android string lookup.
 - [ ] Resolve DTC source redistribution/licensing status and update provenance metadata.
 - [ ] Execute phased AGP/Gradle deprecation cleanup to preserve Gradle 10 compatibility.
-- [ ] Wire concrete Bluetooth/USB transport adapters into transport-backed providers for non-demo read-only validation.
+- [ ] Promote debug adapter pilots into non-demo hardware-backed validation paths with reproducible transport verification evidence (ELM327 Bluetooth, USB cable, and WiFi) based on user-available hardware.
 
 ## Historical Baseline Task List (Completed)
 

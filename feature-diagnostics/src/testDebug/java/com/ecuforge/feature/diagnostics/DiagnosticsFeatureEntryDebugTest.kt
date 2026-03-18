@@ -16,6 +16,10 @@ class DiagnosticsFeatureEntryDebugTest {
             assertThat(result)
                 .describedAs("Debug identifyReadOnlyDemo should return Success state")
                 .isInstanceOf(IdentificationUiState.Success::class.java)
+            val success = result as IdentificationUiState.Success
+            assertThat(success.identification.model)
+                .describedAs("Debug identifyReadOnlyDemo should return KM601EU model from USB transport-backed gateway")
+                .isEqualTo("KM601EU")
         }
     }
 

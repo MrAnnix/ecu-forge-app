@@ -175,7 +175,7 @@ class IdentifyEcuUseCaseTest {
     }
 
     @Test
-    fun unsupportedModelTransportCombinationReturnsModelUnsupportedError() {
+    fun promotedModelTransportCombinationReturnsSuccess() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -200,11 +200,42 @@ class IdentifyEcuUseCaseTest {
                 )
 
             assertThat(result)
-                .describedAs("Non-validated model/transport combinations should be blocked after identification parse")
+                .describedAs("Promoted KEIHIN KM602EU over BT should pass transport-aware compatibility gate")
+                .isInstanceOf(IdentificationUiState.Success::class.java)
+        }
+    }
+
+    @Test
+    fun remainingInferredModelTransportCombinationReturnsModelUnsupportedError() {
+        runBlocking {
+            val gateway =
+                FakeTransportGateway(
+                    scenario =
+                        FakeTransportScenario.of(
+                            FakeTransportStep(operation = FakeTransportOperation.CONNECT, success = true),
+                            FakeTransportStep(operation = FakeTransportOperation.WRITE, success = true),
+                            FakeTransportStep(
+                                operation = FakeTransportOperation.READ,
+                                success = true,
+                                readPayload = "MODEL=SIE-ECU-01|FW=3.2.1|SN=ZX9Y8X".encodeToByteArray(),
+                            ),
+                            FakeTransportStep(operation = FakeTransportOperation.DISCONNECT, success = true),
+                        ),
+                )
+
+            val useCase = IdentifyEcuUseCase(transportGateway = gateway)
+            val result =
+                useCase.execute(
+                    request = IdentificationRequest(ecuFamily = "SIEMENS", endpointHint = "BT"),
+                    endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
+                )
+
+            assertThat(result)
+                .describedAs("Remaining inferred model/transport combinations should be blocked after identification parse")
                 .isInstanceOf(IdentificationUiState.Error::class.java)
             val error = result as IdentificationUiState.Error
             assertThat(error.code)
-                .describedAs("Unsupported model/transport combinations should return ECU_MODEL_UNSUPPORTED")
+                .describedAs("Unsupported inferred model/transport combinations should return ECU_MODEL_UNSUPPORTED")
                 .isEqualTo("ECU_MODEL_UNSUPPORTED")
         }
     }

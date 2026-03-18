@@ -84,7 +84,7 @@ class EcuCompatibilityGateTest {
     }
 
     @Test
-    fun modelTransportSupportRejectsInferredEvidenceEntries() {
+    fun modelTransportSupportReturnsTrueForPromotedValidatedBluetoothEvidence() {
         val supported =
             gate.isModelSupportedForTransport(
                 family = "KEIHIN",
@@ -93,7 +93,21 @@ class EcuCompatibilityGateTest {
             )
 
         assertThat(supported)
-            .describedAs("Transport-aware compatibility should reject non-validated inferred evidence entries")
+            .describedAs("Transport-aware compatibility should accept promoted validated KEIHIN KM602EU over Bluetooth")
+            .isTrue()
+    }
+
+    @Test
+    fun modelTransportSupportRejectsRemainingInferredEvidenceEntries() {
+        val supported =
+            gate.isModelSupportedForTransport(
+                family = "SIEMENS",
+                model = "SIE-ECU-01",
+                endpointHint = "BT",
+            )
+
+        assertThat(supported)
+            .describedAs("Transport-aware compatibility should reject tuples that remain inferred")
             .isFalse()
     }
 

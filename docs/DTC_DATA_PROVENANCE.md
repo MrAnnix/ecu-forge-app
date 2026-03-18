@@ -73,3 +73,20 @@
 3. Add per-locale string resources mapped via `titleKey` before UI exposure.
 4. Define catalog update cadence (version bump, changelog, and validation checklist) for future imports.
 
+## Licensing Closure Checklist (Execution-Ready)
+
+Use this checklist to close redistribution blockers before broad packaging:
+
+1. Identify owner for licensing decision and target review date.
+2. Capture source artifact references for each catalog (origin file path, extraction date, claimed source).
+3. Record decision per catalog:
+  - Approved for redistribution, or
+  - Restricted (development/reference only), or
+  - Requires replacement dataset.
+4. If restricted, define remediation path:
+  - remove from packaging, or
+  - replace with approved source, and
+  - add migration note in release documentation.
+5. Update `source.type`, `source.reference`, and this document in the same PR as the decision.
+6. Add validation evidence in PR notes (review ticket/link, reviewer, decision date).
+

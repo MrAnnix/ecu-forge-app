@@ -76,7 +76,7 @@ Goal:
 - Establish safe, testable ECU communication boundaries.
 
 Deliverables:
-- Transport interfaces for Bluetooth and USB adapters.
+- Transport interfaces for ELM327-compatible Bluetooth, USB cable, and WiFi adapters, with protocol selected by the user based on available hardware.
 - Session state model with explicit state transitions.
 - Timeout/retry policy abstraction with deterministic behavior.
 - Structured event logging at transport and session boundaries.
@@ -201,8 +201,8 @@ Mitigation:
 
 ## Immediate Next 30 Days
 
-1. Promote additional family/model tuples from inferred to validated using live-capture transport parity evidence.
+1. Promote additional non-KEIHIN family/model tuples from inferred to validated using live-capture transport parity evidence.
 2. Resolve DTC dataset redistribution/licensing status and align provenance metadata.
-3. Wire concrete Bluetooth/USB adapters into the transport-backed provider scaffolds behind feature entry contracts.
+3. Promote completed debug adapter pilots (diagnostics and telemetry) into non-demo hardware-backed validation increments (ELM327 Bluetooth, USB cable, and WiFi) according to user-available hardware.
 4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
 5. Define a maintainable DTC `titleKey` i18n workflow before enabling Android resource lookup at scale.

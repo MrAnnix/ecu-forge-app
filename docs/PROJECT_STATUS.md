@@ -42,6 +42,7 @@ Core contracts:
 Transport testability:
 - Scripted fake transport gateway for deterministic Bluetooth/USB-like scenarios.
 - Unit tests for nominal, connection failure, invalid endpoint, and timeout behavior.
+- Product transport baseline is explicitly ELM327-compatible Bluetooth, USB cable, and WiFi for read-only diagnostics continuity.
 
 Diagnostics MVP baseline:
 - Read-only ECU identification use case in `feature-diagnostics`.
@@ -58,6 +59,7 @@ Diagnostics MVP baseline:
 - Compatibility gate now enforces model+transport validation (`isModelSupportedForTransport`) using versioned evidence resource `compatibility/model_transport_parity.v1.json`.
 - Transport parity baseline references TuneECU phase-0 artifacts (`analysis/fixtures` and transport validation report) for validated tuples.
 - Transport parity coverage now includes explicit nominal/failure scenario references for Bluetooth and USB baseline tuples.
+- Compatibility transport evidence now promotes `KEIHIN/KM602EU + BLUETOOTH` to `VALIDATED` with gate and use-case tests updated to preserve inferred-tuple rejection behavior for remaining entries.
 - DTC reference catalog baseline added in `feature-diagnostics` with a versioned JSON dataset (`triumph_pcodes_2016_2019.v1`) and deterministic validation (code format, duplicates, provenance metadata).
 - DTC data provenance documentation added in `docs/DTC_DATA_PROVENANCE.md` to track source metadata and licensing follow-up actions.
 - Multi-catalog DTC selection baseline added through `catalog_index.v1.json` and `IndexedDtcCatalogRepository` with deterministic fallback to `defaultCatalog`.
@@ -85,6 +87,11 @@ Provider contract baseline:
 - Default behavior remains variant-safe (`debug` demo provider, `release` demo-disabled provider) and can be swapped through `installProvider(...)`.
 - Contract tests were added to verify provider override behavior in both diagnostics and telemetry modules.
 - Transport-backed diagnostics provider scaffold is now available for read-only identification/DTC flows behind existing provider contracts, with deterministic scenario-unavailable responses for demo-only timeout entrypoints.
+- Debug diagnostics default provider now pilots transport-backed read-only identification and DTC flows through a concrete Bluetooth adapter wrapper (`DebugBluetoothTransportGateway`) while preserving release `DEMO_DISABLED` behavior.
+- Debug adapter boundary tests now cover invalid endpoint, connection failure, and read-timeout mappings with deterministic error codes.
+- Debug diagnostics provider pilot now includes USB adapter wiring (`DebugUsbTransportGateway`) as the default debug path, with deterministic connect and timeout behavior for read-only identification/DTC flows.
+- Transport-backed telemetry provider scaffold is now available for read-only telemetry flows (`TransportBackedTelemetryFlowProvider`) behind existing feature contracts.
+- Debug telemetry default provider now pilots concrete USB adapter wiring (`DebugUsbTelemetryTransportGateway`) with deterministic boundary tests (invalid endpoint, connection failure, read timeout) while preserving release `DEMO_DISABLED` behavior.
 
 ## In Progress / Pending
 
@@ -92,7 +99,11 @@ Near-term pending items:
 - Expand transport-specific parity evidence from baseline tuples to additional validated models and fresh live captures.
 - Add Android i18n resource mapping for DTC `titleKey` values once generation/maintenance workflow is defined.
 - Verify redistribution terms for external DTC source material before broad release packaging.
-- Wire concrete Bluetooth/USB adapter implementations into transport-backed providers for non-demo read-only validation.
+- Promote debug adapter pilots into non-demo hardware-backed validation paths (ELM327 Bluetooth, USB cable, and WiFi) with reproducible verification evidence aligned to user-selected hardware.
+
+Parity evidence blocker snapshot (2026-03-18):
+- TuneECU batch parity run confirms `bt-nominal` parity pass.
+- Remaining scenario captures are missing in TuneECU live folder (`bt-failure`, `usb-nominal`, `usb-permission-denied`), blocking additional tuple promotion.
 
 ## Safety Validation Rules
 
@@ -106,6 +117,7 @@ Near-term pending items:
 - Gradle deprecation warnings remain (`incompatible with Gradle 10`) and need phased cleanup.
 - Read-only identification is wired and testable, but still demo-scaffolded pending real transport provider wiring.
 - Model-level baseline evidence exists, but transport/hardware parity validation by model remains pending.
+- Live parity closure is currently gated by missing TuneECU capture files for 3 of 4 baseline scenarios.
 
 ## Status Update Policy
 
@@ -114,9 +126,9 @@ Near-term pending items:
 ## Recommended Next Step
 
 Execute in this order:
-1. Expand model-level compatibility evidence with transport/hardware parity traces.
+1. Expand transport parity evidence for remaining inferred tuples with fresh live-capture traces.
 2. Verify DTC dataset redistribution status and align provenance metadata.
-3. Prepare real transport provider implementation behind feature provider contracts for non-demo read-only validation.
+3. Promote debug adapter pilots into non-demo hardware-backed validation paths with reproducible verification evidence.
 4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
 
 ## Resume Pointers

@@ -42,9 +42,9 @@
       "family": "KEIHIN",
       "model": "KM602EU",
       "transport": "BLUETOOTH",
-      "status": "INFERRED",
-      "traceRef": "analysis/TRANSPORT_SEQUENCE_MAP.md",
-      "evidenceRef": "analysis/TRANSPORT_ENTRYPOINTS.md"
+      "status": "VALIDATED",
+      "traceRef": "analysis/fixtures/trace-bt-nominal.json",
+      "evidenceRef": "analysis/PHASE0_VALIDATION_REPORT.md"
     },
     {
       "family": "SIEMENS",

@@ -8,6 +8,7 @@ Define the initial compatibility baseline for read-only diagnostics and make sup
 
 - Version: `v0`
 - Operation scope: read-only identification only
+- Transport baseline: ELM327-compatible Bluetooth, USB cable, and WiFi adapter paths, selected by the user according to available hardware.
 - Data source for family support: `EcuCompatibilityGate.DEFAULT_SUPPORTED_FAMILIES`
 - Data source for model evidence: `EcuCompatibilityGate.DEFAULT_SUPPORTED_MODELS_BY_FAMILY`
 - Data source for model+transport evidence: `feature-diagnostics/src/main/resources/compatibility/model_transport_parity.v1.json`
@@ -23,7 +24,7 @@ Define the initial compatibility baseline for read-only diagnostics and make sup
 
 | ECU family | Identification (read-only) | Transport evidence | Status | Notes |
 | --- | --- | --- | --- | --- |
-| `KEIHIN` | Yes | Fake Bluetooth endpoint path in diagnostics tests | SUPPORTED | Included in `DEFAULT_SUPPORTED_FAMILIES`. |
+| `KEIHIN` | Yes | ELM327-compatible endpoint paths (Bluetooth, USB cable, WiFi) in diagnostics evidence plan | SUPPORTED | Included in `DEFAULT_SUPPORTED_FAMILIES`; protocol use depends on the user's available adapter/device. |
 | `SIEMENS` | Yes | Gate-level support; no family-specific payload fixture yet | SUPPORTED | Included in `DEFAULT_SUPPORTED_FAMILIES`. |
 | `MARELLI` | Yes | Gate-level support; no family-specific payload fixture yet | SUPPORTED | Included in `DEFAULT_SUPPORTED_FAMILIES`. |
 | `WALBRO` | Yes | Gate-level support; no family-specific payload fixture yet | SUPPORTED | Included in `DEFAULT_SUPPORTED_FAMILIES`. |
@@ -53,10 +54,14 @@ Define the initial compatibility baseline for read-only diagnostics and make sup
 | --- | --- | --- | --- | --- | --- |
 | `KEIHIN` | `KM601EU` | `BLUETOOTH` | VALIDATED | SUPPORTED | `TuneECU/analysis/fixtures/trace-bt-nominal.json`, `TuneECU/analysis/fixtures/trace-bt-failure.json`, `TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
 | `KEIHIN` | `KM601EU` | `USB` | VALIDATED | SUPPORTED | `TuneECU/analysis/fixtures/trace-usb-nominal.json`, `TuneECU/analysis/fixtures/trace-usb-permission-denied.json`, `TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
-| `KEIHIN` | `KM602EU` | `BLUETOOTH` | INFERRED | UNSUPPORTED | `TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
+| `KEIHIN` | `KM602EU` | `BLUETOOTH` | VALIDATED | SUPPORTED | `TuneECU/analysis/fixtures/trace-bt-nominal.json`, `TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
 | `SIEMENS` | `SIE-ECU-01` | `BLUETOOTH` | INFERRED | UNSUPPORTED | `TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
 | `MARELLI` | `IAW5AM` | `USB` | INFERRED | UNSUPPORTED | `TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
 | `WALBRO` | `WB-ECU-01` | `USB` | INFERRED | UNSUPPORTED | `TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
+
+Promotion note:
+- `KEIHIN/KM602EU + BLUETOOTH` is promoted to validated baseline support using existing TuneECU Phase 0 fixture/report references.
+- Fresh live-capture parity for non-KEIHIN tuples remains pending before broader promotion.
 
 ## Promotion Criteria for Next Matrix Revision
 

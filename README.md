@@ -29,6 +29,11 @@ The goal is to centralize architecture decisions, implementation milestones, and
 - Testable modules and CI-friendly project structure.
 - Explicit compatibility matrix per bike model/ECU family.
 
+## Transport Baseline
+
+- Baseline transport adapters: ELM327-compatible Bluetooth, USB cable, and WiFi interfaces.
+- Protocol choice for read-only diagnostics continuity is user-driven (Bluetooth, USB cable, or WiFi) based on the available ELM327-compatible adapter.
+
 ## Initial Roadmap
 
 The canonical roadmap is maintained in:
@@ -83,6 +88,7 @@ The repository now includes a baseline Android project with:
 - [Project Status](docs/PROJECT_STATUS.md)
 - [Module Dependency Rules](docs/MODULE_DEPENDENCY_RULES.md)
 - [Compatibility Matrix v0](docs/COMPATIBILITY_MATRIX_V0.md)
+- [ELM327 Transport Implementation Reference](docs/ELM327_TRANSPORT_IMPLEMENTATION_REFERENCE.md)
 
 ## Agent Working Contract
 
