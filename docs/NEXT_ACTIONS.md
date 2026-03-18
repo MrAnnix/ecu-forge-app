@@ -41,11 +41,12 @@ Execution status:
 - Task 19 (App DTC selector wiring baseline): app inputs now map to `VehicleCatalogContext` and opt-in catalog descriptions in diagnostics flow.
 - Task 20 (Telemetry export storage integration baseline): app-private export persistence + retention cleanup + deterministic export ids completed.
 - Task 21 (Compatibility transport evidence baseline): model+transport validated tuples loaded from versioned resource with TuneECU phase-0 references.
-- Next recommended task: expand compatibility evidence coverage with additional models and live captures.
+- Task 22 (Compatibility scenario coverage baseline): BT/USB nominal+failure references expanded for KEIHIN model baseline and inferred tuples tracked for additional families.
+- Next recommended task: promote additional models from inferred to validated using fresh live captures.
 
 ## Prioritized Pending Checklist
 
-- [ ] Expand compatibility evidence with transport/hardware parity traces per model and capture scenario coverage.
+- [ ] Promote additional family/model transport tuples from `INFERRED` to `VALIDATED` using live capture parity evidence.
 - [ ] Add i18n mapping for DTC `titleKey` resources (English first, other locales later).
 - [ ] Resolve DTC source redistribution/licensing status and update provenance metadata.
 - [ ] Execute phased AGP/Gradle deprecation cleanup to preserve Gradle 10 compatibility.

@@ -51,9 +51,12 @@ Define the initial compatibility baseline for read-only diagnostics and make sup
 
 | ECU family | ECU model | Transport | Evidence status | Runtime support | Evidence reference |
 | --- | --- | --- | --- | --- | --- |
-| `KEIHIN` | `KM601EU` | `BLUETOOTH` | VALIDATED | SUPPORTED | `TuneECU/analysis/fixtures/trace-bt-nominal.json`, `TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
-| `KEIHIN` | `KM601EU` | `USB` | VALIDATED | SUPPORTED | `TuneECU/analysis/fixtures/trace-usb-nominal.json`, `TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
+| `KEIHIN` | `KM601EU` | `BLUETOOTH` | VALIDATED | SUPPORTED | `TuneECU/analysis/fixtures/trace-bt-nominal.json`, `TuneECU/analysis/fixtures/trace-bt-failure.json`, `TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
+| `KEIHIN` | `KM601EU` | `USB` | VALIDATED | SUPPORTED | `TuneECU/analysis/fixtures/trace-usb-nominal.json`, `TuneECU/analysis/fixtures/trace-usb-permission-denied.json`, `TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
 | `KEIHIN` | `KM602EU` | `BLUETOOTH` | INFERRED | UNSUPPORTED | `TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
+| `SIEMENS` | `SIE-ECU-01` | `BLUETOOTH` | INFERRED | UNSUPPORTED | `TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
+| `MARELLI` | `IAW5AM` | `USB` | INFERRED | UNSUPPORTED | `TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
+| `WALBRO` | `WB-ECU-01` | `USB` | INFERRED | UNSUPPORTED | `TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
 
 ## Promotion Criteria for Next Matrix Revision
 

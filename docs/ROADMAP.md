@@ -181,7 +181,7 @@ Mitigation:
 
 ## Immediate Next 30 Days
 
-1. Expand transport parity evidence coverage with additional models and live-capture scenarios.
+1. Promote additional family/model tuples from inferred to validated using live-capture transport parity evidence.
 2. Resolve DTC dataset redistribution/licensing status and align provenance metadata.
 3. Prepare real transport provider implementation behind the new feature entry contracts.
 4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
