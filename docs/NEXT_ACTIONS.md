@@ -148,8 +148,8 @@ Before opening PR:
 ## Quick Resume Prompt
 
 If you return later, continue with:
-- Wire app vehicle selector to `ReadDtcRequest.vehicleCatalogContext` and enable `preferCatalogDescriptions` in selected flows.
-- Implement storage path integration for telemetry export artifacts.
 - Expand model-level compatibility evidence with transport/hardware parity validation traces.
+- Implement real transport providers behind `DiagnosticsFlowProvider` and `TelemetryFlowProvider` for non-demo read-only validation.
 - Add DTC i18n `titleKey` resource mapping and confirm dataset redistribution terms.
 - Track AGP/Gradle deprecation cleanup and remove temporary suppressions safely.
+- Keep map/write/flash work blocked until Phase 4 pre-check gates and rollback evidence are implemented and validated.

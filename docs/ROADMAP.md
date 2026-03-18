@@ -31,9 +31,29 @@ The roadmap is split into five tracks that progress in parallel:
 
 - Phase 0: complete.
 - Phase 1: complete for baseline scope.
-- Phase 2: in progress (identification, DTC, telemetry read, DTC catalog selection baseline).
-- Phase 3: started (telemetry export schema/policy baseline, pending storage integration).
+- Phase 2: in progress (identification, DTC, telemetry read, and DTC catalog selection are baseline-complete; pending real transport providers and broader parity validation).
+- Phase 3: started (telemetry export schema, policy, and storage integration baseline complete; reliability hardening pending).
 - Phase 4-5: not started (intentionally blocked by safety gates).
+
+## Functional Readiness Coverage (Audit 2026-03-18)
+
+This section validates that remaining work is documented explicitly for both release scopes.
+
+Read-only production-ready scope (no write/flash):
+- Transport parity evidence expansion is documented (validated live captures for additional model/family tuples).
+- Real transport provider implementation behind feature contracts is documented.
+- DTC i18n mapping for `titleKey` resources is documented.
+- DTC redistribution/licensing and provenance metadata closure is documented.
+- AGP/Gradle deprecation cleanup path for Gradle 10 compatibility is documented.
+
+Full-scope production-ready app (includes map/write/flash):
+- Phase 4 map backup/restore safety gates are documented and intentionally pending.
+- Phase 5 controlled write/flash enablement gates are documented and intentionally blocked.
+
+Tracking anchors:
+- Execution queue: `docs/NEXT_ACTIONS.md`
+- Current state and risks: `docs/PROJECT_STATUS.md`
+- Architecture constraints: `docs/MODULE_DEPENDENCY_RULES.md`
 
 ## Phase 0 - Foundation Stabilization (Near Term)
 
