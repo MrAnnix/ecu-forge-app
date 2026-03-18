@@ -7,6 +7,14 @@ config:
 style:
   MagicNumber:
     active: false
+  ForbiddenImport:
+    active: true
+    imports:
+      - 'org.junit.Assert'
+      - 'org.junit.Assert.*'
+      - 'kotlin.test.*'
+      - 'com.google.common.truth.Truth'
+      - 'com.google.common.truth.Truth.*'
 
 formatting:
   active: true

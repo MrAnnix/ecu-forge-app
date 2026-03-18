@@ -7,13 +7,12 @@ import com.ecuforge.transport.fake.FakeTransportOperation
 import com.ecuforge.transport.fake.FakeTransportScenario
 import com.ecuforge.transport.fake.FakeTransportStep
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class IdentifyEcuUseCaseTest {
     @Test
-    fun unsupportedFamilyReturnsErrorBeforeTransport() =
+    fun unsupportedFamilyReturnsErrorBeforeTransport() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -30,13 +29,18 @@ class IdentifyEcuUseCaseTest {
                     endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
                 )
 
-            assertTrue(result is IdentificationUiState.Error)
+            assertThat(result)
+                .describedAs("Unsupported ECU family should return Error before any transport read")
+                .isInstanceOf(IdentificationUiState.Error::class.java)
             val error = result as IdentificationUiState.Error
-            assertEquals("ECU_UNSUPPORTED", error.code)
+            assertThat(error.code)
+                .describedAs("Unsupported ECU family should map to ECU_UNSUPPORTED error code")
+                .isEqualTo("ECU_UNSUPPORTED")
         }
+    }
 
     @Test
-    fun connectFailureIsMappedToUiError() =
+    fun connectFailureIsMappedToUiError() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -58,13 +62,18 @@ class IdentifyEcuUseCaseTest {
                     endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
                 )
 
-            assertTrue(result is IdentificationUiState.Error)
+            assertThat(result)
+                .describedAs("Connect failure should be mapped to Error UI state")
+                .isInstanceOf(IdentificationUiState.Error::class.java)
             val error = result as IdentificationUiState.Error
-            assertEquals("CONNECTION_FAILED", error.code)
+            assertThat(error.code)
+                .describedAs("Connect failure should preserve CONNECTION_FAILED error code")
+                .isEqualTo("CONNECTION_FAILED")
         }
+    }
 
     @Test
-    fun nominalIdentificationReturnsSuccess() =
+    fun nominalIdentificationReturnsSuccess() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -88,15 +97,24 @@ class IdentifyEcuUseCaseTest {
                     endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
                 )
 
-            assertTrue(result is IdentificationUiState.Success)
+            assertThat(result)
+                .describedAs("Nominal identification scenario should return Success state")
+                .isInstanceOf(IdentificationUiState.Success::class.java)
             val success = result as IdentificationUiState.Success
-            assertEquals("KM601EU", success.identification.model)
-            assertEquals("2.10.4", success.identification.firmwareVersion)
-            assertEquals("A1B2C3", success.identification.serialNumber)
+            assertThat(success.identification.model)
+                .describedAs("Success state should include parsed ECU model")
+                .isEqualTo("KM601EU")
+            assertThat(success.identification.firmwareVersion)
+                .describedAs("Success state should include parsed firmware version")
+                .isEqualTo("2.10.4")
+            assertThat(success.identification.serialNumber)
+                .describedAs("Success state should include parsed serial number")
+                .isEqualTo("A1B2C3")
         }
+    }
 
     @Test
-    fun readTimeoutReturnsError() =
+    fun readTimeoutReturnsError() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -121,13 +139,18 @@ class IdentifyEcuUseCaseTest {
                     endpoint = TransportEndpoint.Usb(vendorId = 1027, productId = 48960),
                 )
 
-            assertTrue(result is IdentificationUiState.Error)
+            assertThat(result)
+                .describedAs("Timeout during identification read should return Error state")
+                .isInstanceOf(IdentificationUiState.Error::class.java)
             val error = result as IdentificationUiState.Error
-            assertEquals("TIMEOUT", error.code)
+            assertThat(error.code)
+                .describedAs("Timeout during identification should preserve TIMEOUT error code")
+                .isEqualTo("TIMEOUT")
         }
+    }
 
     @Test
-    fun coordinatorEmitsLoadingThenTerminalState() =
+    fun coordinatorEmitsLoadingThenTerminalState() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -153,8 +176,15 @@ class IdentifyEcuUseCaseTest {
                     endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
                 )
 
-            assertEquals(2, states.size)
-            assertEquals(IdentificationUiState.Loading, states[0])
-            assertTrue(states[1] is IdentificationUiState.Success)
+            assertThat(states)
+                .describedAs("Coordinator should emit exactly loading and terminal states")
+                .hasSize(2)
+            assertThat(states[0])
+                .describedAs("Coordinator should emit Loading as first state")
+                .isEqualTo(IdentificationUiState.Loading)
+            assertThat(states[1])
+                .describedAs("Coordinator should emit Success as terminal state in nominal scenario")
+                .isInstanceOf(IdentificationUiState.Success::class.java)
         }
+    }
 }

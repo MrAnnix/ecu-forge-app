@@ -37,6 +37,9 @@ Testing is mandatory for behavior changes.
 - Include negative-path and boundary-condition tests for critical logic.
 - Keep tests deterministic, isolated, and readable.
 - Do not treat coverage alone as proof of quality.
+- Use AssertJ assertions exclusively in tests.
+- Write AssertJ assertions in verbose form with `describedAs(...)` to make validation intent explicit.
+- Do not use JUnit assertion APIs, Kotlin test assertions, or Truth in this repository.
 
 For transport-related changes:
 

@@ -30,5 +30,6 @@ kotlin {
 dependencies {
     implementation(libs.androidx.core.ktx)
     testImplementation(libs.junit)
+    testImplementation(libs.assertj.core)
     detektPlugins(libs.detekt.formatting)
 }

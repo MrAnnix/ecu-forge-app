@@ -2,8 +2,7 @@ package com.ecuforge.app
 
 import com.ecuforge.feature.diagnostics.domain.DtcRecord
 import com.ecuforge.feature.diagnostics.domain.DtcUiState
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class DtcStatusFormatterTest {
@@ -11,7 +10,9 @@ class DtcStatusFormatterTest {
     fun formatterReturnsLoadingMessage() {
         val text = DtcStatusFormatter.format(DtcUiState.Loading)
 
-        assertEquals("Reading diagnostic trouble codes...", text)
+        assertThat(text)
+            .describedAs("Loading DTC state should render a progress message")
+            .isEqualTo("Reading diagnostic trouble codes...")
     }
 
     @Test
@@ -20,7 +21,9 @@ class DtcStatusFormatterTest {
 
         val text = DtcStatusFormatter.format(state)
 
-        assertEquals("No active DTC codes reported by ECU.", text)
+        assertThat(text)
+            .describedAs("Successful DTC response with empty list should explain that no active codes exist")
+            .isEqualTo("No active DTC codes reported by ECU.")
     }
 
     @Test
@@ -36,9 +39,15 @@ class DtcStatusFormatterTest {
 
         val text = DtcStatusFormatter.format(state)
 
-        assertTrue(text.contains("P0130"))
-        assertTrue(text.contains("O2 Sensor Circuit"))
-        assertTrue(text.contains("P0301"))
+        assertThat(text)
+            .describedAs("Rendered DTC message should include first DTC code")
+            .contains("P0130")
+        assertThat(text)
+            .describedAs("Rendered DTC message should include first DTC description")
+            .contains("O2 Sensor Circuit")
+        assertThat(text)
+            .describedAs("Rendered DTC message should include second DTC code")
+            .contains("P0301")
     }
 
     @Test
@@ -47,6 +56,8 @@ class DtcStatusFormatterTest {
 
         val text = DtcStatusFormatter.format(state)
 
-        assertEquals("DTC retrieval failed (TIMEOUT): Read timeout", text)
+        assertThat(text)
+            .describedAs("Error DTC state should include error code and reason")
+            .isEqualTo("DTC retrieval failed (TIMEOUT): Read timeout")
     }
 }

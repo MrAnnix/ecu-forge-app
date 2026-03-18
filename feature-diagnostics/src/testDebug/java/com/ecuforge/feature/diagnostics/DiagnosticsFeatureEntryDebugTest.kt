@@ -3,46 +3,63 @@ package com.ecuforge.feature.diagnostics
 import com.ecuforge.feature.diagnostics.domain.DtcUiState
 import com.ecuforge.feature.diagnostics.domain.IdentificationUiState
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class DiagnosticsFeatureEntryDebugTest {
     @Test
-    fun readOnlyDemoReturnsSuccess() =
+    fun readOnlyDemoReturnsSuccess() {
         runBlocking {
             val result = DiagnosticsFeatureEntry.identifyReadOnlyDemo()
 
-            assertTrue(result is IdentificationUiState.Success)
+            assertThat(result)
+                .describedAs("Debug identifyReadOnlyDemo should return Success state")
+                .isInstanceOf(IdentificationUiState.Success::class.java)
         }
+    }
 
     @Test
-    fun timeoutDemoReturnsTimeoutError() =
+    fun timeoutDemoReturnsTimeoutError() {
         runBlocking {
             val result = DiagnosticsFeatureEntry.identifyReadOnlyTimeoutDemo()
 
-            assertTrue(result is IdentificationUiState.Error)
+            assertThat(result)
+                .describedAs("Debug identifyReadOnlyTimeoutDemo should return Error state")
+                .isInstanceOf(IdentificationUiState.Error::class.java)
             val error = result as IdentificationUiState.Error
-            assertEquals("TIMEOUT", error.code)
+            assertThat(error.code)
+                .describedAs("Timeout demo should expose TIMEOUT error code in debug variant")
+                .isEqualTo("TIMEOUT")
         }
+    }
 
     @Test
-    fun readDtcDemoReturnsSuccess() =
+    fun readDtcDemoReturnsSuccess() {
         runBlocking {
             val result = DiagnosticsFeatureEntry.readDtcReadOnlyDemo()
 
-            assertTrue(result is DtcUiState.Success)
+            assertThat(result)
+                .describedAs("Debug readDtcReadOnlyDemo should return Success state")
+                .isInstanceOf(DtcUiState.Success::class.java)
             val success = result as DtcUiState.Success
-            assertTrue(success.dtcs.isNotEmpty())
+            assertThat(success.dtcs)
+                .describedAs("Debug DTC demo should include at least one scripted DTC record")
+                .isNotEmpty()
         }
+    }
 
     @Test
-    fun readDtcTimeoutDemoReturnsTimeoutError() =
+    fun readDtcTimeoutDemoReturnsTimeoutError() {
         runBlocking {
             val result = DiagnosticsFeatureEntry.readDtcReadOnlyTimeoutDemo()
 
-            assertTrue(result is DtcUiState.Error)
+            assertThat(result)
+                .describedAs("Debug readDtcReadOnlyTimeoutDemo should return Error state")
+                .isInstanceOf(DtcUiState.Error::class.java)
             val error = result as DtcUiState.Error
-            assertEquals("TIMEOUT", error.code)
+            assertThat(error.code)
+                .describedAs("DTC timeout demo should expose TIMEOUT error code in debug variant")
+                .isEqualTo("TIMEOUT")
         }
+    }
 }

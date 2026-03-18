@@ -7,13 +7,12 @@ import com.ecuforge.transport.fake.FakeTransportOperation
 import com.ecuforge.transport.fake.FakeTransportScenario
 import com.ecuforge.transport.fake.FakeTransportStep
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class ReadDtcUseCaseTest {
     @Test
-    fun unsupportedFamilyReturnsErrorBeforeTransport() =
+    fun unsupportedFamilyReturnsErrorBeforeTransport() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -27,13 +26,18 @@ class ReadDtcUseCaseTest {
                     endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
                 )
 
-            assertTrue(result is DtcUiState.Error)
+            assertThat(result)
+                .describedAs("Unsupported ECU family should return DTC Error state before transport interaction")
+                .isInstanceOf(DtcUiState.Error::class.java)
             val error = result as DtcUiState.Error
-            assertEquals("ECU_UNSUPPORTED", error.code)
+            assertThat(error.code)
+                .describedAs("Unsupported ECU family should map to ECU_UNSUPPORTED error code")
+                .isEqualTo("ECU_UNSUPPORTED")
         }
+    }
 
     @Test
-    fun connectFailureIsMappedToUiError() =
+    fun connectFailureIsMappedToUiError() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -55,13 +59,18 @@ class ReadDtcUseCaseTest {
                     endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
                 )
 
-            assertTrue(result is DtcUiState.Error)
+            assertThat(result)
+                .describedAs("Connection failure in DTC flow should return Error state")
+                .isInstanceOf(DtcUiState.Error::class.java)
             val error = result as DtcUiState.Error
-            assertEquals("CONNECTION_FAILED", error.code)
+            assertThat(error.code)
+                .describedAs("Connection failure should preserve CONNECTION_FAILED error code")
+                .isEqualTo("CONNECTION_FAILED")
         }
+    }
 
     @Test
-    fun writeFailureIsMappedToUiError() =
+    fun writeFailureIsMappedToUiError() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -85,13 +94,18 @@ class ReadDtcUseCaseTest {
                     endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
                 )
 
-            assertTrue(result is DtcUiState.Error)
+            assertThat(result)
+                .describedAs("Write failure in DTC flow should return Error state")
+                .isInstanceOf(DtcUiState.Error::class.java)
             val error = result as DtcUiState.Error
-            assertEquals("IO_ERROR", error.code)
+            assertThat(error.code)
+                .describedAs("Write failure should preserve IO_ERROR error code")
+                .isEqualTo("IO_ERROR")
         }
+    }
 
     @Test
-    fun readTimeoutIsMappedToUiError() =
+    fun readTimeoutIsMappedToUiError() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -116,13 +130,18 @@ class ReadDtcUseCaseTest {
                     endpoint = TransportEndpoint.Usb(vendorId = 1027, productId = 48960),
                 )
 
-            assertTrue(result is DtcUiState.Error)
+            assertThat(result)
+                .describedAs("Read timeout in DTC flow should return Error state")
+                .isInstanceOf(DtcUiState.Error::class.java)
             val error = result as DtcUiState.Error
-            assertEquals("TIMEOUT", error.code)
+            assertThat(error.code)
+                .describedAs("Read timeout should preserve TIMEOUT error code")
+                .isEqualTo("TIMEOUT")
         }
+    }
 
     @Test
-    fun invalidPayloadReturnsParseError() =
+    fun invalidPayloadReturnsParseError() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -146,13 +165,18 @@ class ReadDtcUseCaseTest {
                     endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
                 )
 
-            assertTrue(result is DtcUiState.Error)
+            assertThat(result)
+                .describedAs("Invalid DTC payload should return Error state")
+                .isInstanceOf(DtcUiState.Error::class.java)
             val error = result as DtcUiState.Error
-            assertEquals("DTC_PARSE", error.code)
+            assertThat(error.code)
+                .describedAs("Invalid DTC payload should map to DTC_PARSE error code")
+                .isEqualTo("DTC_PARSE")
         }
+    }
 
     @Test
-    fun nonePayloadReturnsSuccessWithEmptyList() =
+    fun nonePayloadReturnsSuccessWithEmptyList() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -176,8 +200,13 @@ class ReadDtcUseCaseTest {
                     endpoint = TransportEndpoint.Usb(vendorId = 1027, productId = 48960),
                 )
 
-            assertTrue(result is DtcUiState.Success)
+            assertThat(result)
+                .describedAs("NONE payload should return Success state with no DTC records")
+                .isInstanceOf(DtcUiState.Success::class.java)
             val success = result as DtcUiState.Success
-            assertTrue(success.dtcs.isEmpty())
+            assertThat(success.dtcs)
+                .describedAs("NONE payload should map to an empty DTC list")
+                .isEmpty()
         }
+    }
 }

@@ -1,8 +1,6 @@
 package com.ecuforge.core.session
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class SessionTransitionEvaluatorTest {
@@ -10,34 +8,54 @@ class SessionTransitionEvaluatorTest {
     fun startFromIdleMovesToInitializing() {
         val transition = SessionTransitionEvaluator.transition(SessionState.IDLE, SessionEvent.START)
 
-        assertTrue(transition.allowed)
-        assertEquals(SessionState.INITIALIZING, transition.to)
+        assertThat(transition.allowed)
+            .describedAs("START event from IDLE should be allowed")
+            .isTrue()
+        assertThat(transition.to)
+            .describedAs("START event from IDLE should move state to INITIALIZING")
+            .isEqualTo(SessionState.INITIALIZING)
     }
 
     @Test
     fun invalidTransitionIsRejectedWithReason() {
         val transition = SessionTransitionEvaluator.transition(SessionState.IDLE, SessionEvent.READ_REQUESTED)
 
-        assertFalse(transition.allowed)
-        assertEquals(SessionState.IDLE, transition.to)
-        assertTrue(transition.reason?.contains("Invalid transition") == true)
-        assertEquals(SessionTransitionErrorCode.INVALID_TRANSITION, transition.errorCode)
+        assertThat(transition.allowed)
+            .describedAs("READ_REQUESTED from IDLE should be rejected")
+            .isFalse()
+        assertThat(transition.to)
+            .describedAs("Rejected transition should keep current state")
+            .isEqualTo(SessionState.IDLE)
+        assertThat(transition.reason)
+            .describedAs("Rejected transition should include an invalid transition reason")
+            .contains("Invalid transition")
+        assertThat(transition.errorCode)
+            .describedAs("Rejected transition should expose INVALID_TRANSITION error code")
+            .isEqualTo(SessionTransitionErrorCode.INVALID_TRANSITION)
     }
 
     @Test
     fun transportLostFromReadingMovesToDisconnected() {
         val transition = SessionTransitionEvaluator.transition(SessionState.READING, SessionEvent.TRANSPORT_LOST)
 
-        assertTrue(transition.allowed)
-        assertEquals(SessionState.DISCONNECTED, transition.to)
+        assertThat(transition.allowed)
+            .describedAs("TRANSPORT_LOST from READING should be allowed")
+            .isTrue()
+        assertThat(transition.to)
+            .describedAs("TRANSPORT_LOST from READING should move state to DISCONNECTED")
+            .isEqualTo(SessionState.DISCONNECTED)
     }
 
     @Test
     fun resetFromFailedMovesToIdle() {
         val transition = SessionTransitionEvaluator.transition(SessionState.FAILED, SessionEvent.RESET)
 
-        assertTrue(transition.allowed)
-        assertEquals(SessionState.IDLE, transition.to)
+        assertThat(transition.allowed)
+            .describedAs("RESET from FAILED should be allowed")
+            .isTrue()
+        assertThat(transition.to)
+            .describedAs("RESET from FAILED should move state to IDLE")
+            .isEqualTo(SessionState.IDLE)
     }
 
     @Test
@@ -49,9 +67,15 @@ class SessionTransitionEvaluatorTest {
                 guardInput = SessionTransitionGuardInput(transportConnected = false),
             )
 
-        assertFalse(transition.allowed)
-        assertEquals(SessionState.READY, transition.to)
-        assertEquals(SessionTransitionErrorCode.TRANSPORT_NOT_CONNECTED, transition.errorCode)
+        assertThat(transition.allowed)
+            .describedAs("READ_REQUESTED should be rejected when transport is disconnected")
+            .isFalse()
+        assertThat(transition.to)
+            .describedAs("Guard rejection should keep READY state")
+            .isEqualTo(SessionState.READY)
+        assertThat(transition.errorCode)
+            .describedAs("Guard rejection should expose TRANSPORT_NOT_CONNECTED error code")
+            .isEqualTo(SessionTransitionErrorCode.TRANSPORT_NOT_CONNECTED)
     }
 
     @Test
@@ -63,9 +87,15 @@ class SessionTransitionEvaluatorTest {
                 guardInput = SessionTransitionGuardInput(retryCount = 1, maxRetries = 3),
             )
 
-        assertTrue(transition.allowed)
-        assertEquals(SessionState.RETRY_WAIT, transition.to)
-        assertEquals(null, transition.errorCode)
+        assertThat(transition.allowed)
+            .describedAs("RETRY_REQUESTED below max retries should be allowed")
+            .isTrue()
+        assertThat(transition.to)
+            .describedAs("Allowed retry should move state to RETRY_WAIT")
+            .isEqualTo(SessionState.RETRY_WAIT)
+        assertThat(transition.errorCode)
+            .describedAs("Allowed retry should not set an error code")
+            .isNull()
     }
 
     @Test
@@ -77,9 +107,15 @@ class SessionTransitionEvaluatorTest {
                 guardInput = SessionTransitionGuardInput(retryCount = 3, maxRetries = 3),
             )
 
-        assertTrue(transition.allowed)
-        assertEquals(SessionState.FAILED, transition.to)
-        assertEquals(SessionTransitionErrorCode.RETRY_LIMIT_REACHED, transition.errorCode)
+        assertThat(transition.allowed)
+            .describedAs("RETRY_REQUESTED at max retries should still be handled")
+            .isTrue()
+        assertThat(transition.to)
+            .describedAs("Retry at limit should move state to FAILED")
+            .isEqualTo(SessionState.FAILED)
+        assertThat(transition.errorCode)
+            .describedAs("Retry at limit should expose RETRY_LIMIT_REACHED error code")
+            .isEqualTo(SessionTransitionErrorCode.RETRY_LIMIT_REACHED)
     }
 
     @Test
@@ -90,7 +126,11 @@ class SessionTransitionEvaluatorTest {
                 event = SessionEvent.START,
             )
 
-        assertTrue(transition.allowed)
-        assertEquals(SessionState.INITIALIZING, transition.to)
+        assertThat(transition.allowed)
+            .describedAs("START from DISCONNECTED should be allowed")
+            .isTrue()
+        assertThat(transition.to)
+            .describedAs("START from DISCONNECTED should move state to INITIALIZING")
+            .isEqualTo(SessionState.INITIALIZING)
     }
 }

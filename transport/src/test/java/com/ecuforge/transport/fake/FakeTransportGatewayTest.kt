@@ -5,14 +5,12 @@ import com.ecuforge.core.transport.TransportEndpoint
 import com.ecuforge.core.transport.TransportFailureCode
 import com.ecuforge.core.transport.TransportOperationResult
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertArrayEquals
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class FakeTransportGatewayTest {
     @Test
-    fun nominalScenarioConnectWriteReadDisconnect() =
+    fun nominalScenarioConnectWriteReadDisconnect() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -26,22 +24,35 @@ class FakeTransportGatewayTest {
                 )
 
             val connect = gateway.connect(TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"))
-            assertTrue(connect is TransportOperationResult.Success)
-            assertEquals(TransportConnectionState.CONNECTED, gateway.currentState())
+            assertThat(connect)
+                .describedAs("Connect step should succeed in nominal scripted scenario")
+                .isInstanceOf(TransportOperationResult.Success::class.java)
+            assertThat(gateway.currentState())
+                .describedAs("Gateway state should be CONNECTED after successful connect")
+                .isEqualTo(TransportConnectionState.CONNECTED)
 
             val write = gateway.write(byteArrayOf(9, 8, 7, 6))
-            assertEquals(4, (write as TransportOperationResult.Success).value)
+            assertThat((write as TransportOperationResult.Success).value)
+                .describedAs("Write result should expose scripted bytes-written count")
+                .isEqualTo(4)
 
             val read = gateway.read()
-            assertArrayEquals(byteArrayOf(1, 2, 3), (read as TransportOperationResult.Success).value)
+            assertThat((read as TransportOperationResult.Success).value)
+                .describedAs("Read result should expose scripted payload bytes")
+                .containsExactly(1, 2, 3)
 
             val disconnect = gateway.disconnect()
-            assertTrue(disconnect is TransportOperationResult.Success)
-            assertEquals(TransportConnectionState.DISCONNECTED, gateway.currentState())
+            assertThat(disconnect)
+                .describedAs("Disconnect step should succeed in nominal scripted scenario")
+                .isInstanceOf(TransportOperationResult.Success::class.java)
+            assertThat(gateway.currentState())
+                .describedAs("Gateway state should be DISCONNECTED after successful disconnect")
+                .isEqualTo(TransportConnectionState.DISCONNECTED)
         }
+    }
 
     @Test
-    fun connectFailureReturnsScriptedError() =
+    fun connectFailureReturnsScriptedError() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -60,13 +71,20 @@ class FakeTransportGatewayTest {
             val result = gateway.connect(TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"))
             val failure = result as TransportOperationResult.Failure
 
-            assertEquals(TransportFailureCode.CONNECTION_FAILED, failure.error.code)
-            assertEquals("Adapter busy", failure.error.message)
-            assertEquals(TransportConnectionState.ERROR, gateway.currentState())
+            assertThat(failure.error.code)
+                .describedAs("Connection failure should preserve scripted error code")
+                .isEqualTo(TransportFailureCode.CONNECTION_FAILED)
+            assertThat(failure.error.message)
+                .describedAs("Connection failure should preserve scripted error message")
+                .isEqualTo("Adapter busy")
+            assertThat(gateway.currentState())
+                .describedAs("Gateway should transition to ERROR state after failed connect")
+                .isEqualTo(TransportConnectionState.ERROR)
         }
+    }
 
     @Test
-    fun invalidEndpointFailsFast() =
+    fun invalidEndpointFailsFast() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -79,12 +97,17 @@ class FakeTransportGatewayTest {
             val result = gateway.connect(TransportEndpoint.Bluetooth(""))
             val failure = result as TransportOperationResult.Failure
 
-            assertEquals(TransportFailureCode.INVALID_ENDPOINT, failure.error.code)
-            assertEquals(TransportConnectionState.ERROR, gateway.currentState())
+            assertThat(failure.error.code)
+                .describedAs("Invalid endpoint should be rejected with INVALID_ENDPOINT error code")
+                .isEqualTo(TransportFailureCode.INVALID_ENDPOINT)
+            assertThat(gateway.currentState())
+                .describedAs("Invalid endpoint should move gateway state to ERROR")
+                .isEqualTo(TransportConnectionState.ERROR)
         }
+    }
 
     @Test
-    fun readFailureCanRepresentTimeoutAndRemainRecoverable() =
+    fun readFailureCanRepresentTimeoutAndRemainRecoverable() {
         runBlocking {
             val gateway =
                 FakeTransportGateway(
@@ -103,14 +126,23 @@ class FakeTransportGatewayTest {
                 )
 
             val connect = gateway.connect(TransportEndpoint.Usb(vendorId = 1027, productId = 48960))
-            assertTrue(connect is TransportOperationResult.Success)
+            assertThat(connect)
+                .describedAs("Connect should succeed before timeout read simulation")
+                .isInstanceOf(TransportOperationResult.Success::class.java)
 
             val read = gateway.read()
             val failure = read as TransportOperationResult.Failure
-            assertEquals(TransportFailureCode.TIMEOUT, failure.error.code)
-            assertTrue(failure.error.recoverable)
+            assertThat(failure.error.code)
+                .describedAs("Read failure should map to scripted TIMEOUT code")
+                .isEqualTo(TransportFailureCode.TIMEOUT)
+            assertThat(failure.error.recoverable)
+                .describedAs("Scripted timeout should remain recoverable for retry flows")
+                .isTrue()
 
             val disconnect = gateway.disconnect()
-            assertTrue(disconnect is TransportOperationResult.Success)
+            assertThat(disconnect)
+                .describedAs("Disconnect should still succeed after recoverable read timeout")
+                .isInstanceOf(TransportOperationResult.Success::class.java)
         }
+    }
 }

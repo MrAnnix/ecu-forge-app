@@ -60,6 +60,8 @@ Use this file as the default working contract for all coding agents and contribu
 - Do not rely on coverage as a success criterion by itself.
 - Include negative-path tests and boundary-condition tests for critical logic.
 - Keep tests deterministic, isolated, and readable.
+- Use AssertJ assertions only in tests; do not use JUnit assertions, Kotlin test assertions, or Truth.
+- Prefer verbose AssertJ assertions with `describedAs(...)` so each validation intent is explicit.
 - For transport changes, include a reproducible verification plan.
 - For map/write paths, include rollback and failure-mode notes.
 

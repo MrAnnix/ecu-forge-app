@@ -1,8 +1,6 @@
 package com.ecuforge.core.transport
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class TransportOperationResultTest {
@@ -10,8 +8,13 @@ class TransportOperationResultTest {
     fun successFactoryReturnsSuccessResult() {
         val result = TransportOperationResult.success(7)
 
-        assertTrue(result is TransportOperationResult.Success)
-        assertEquals(7, (result as TransportOperationResult.Success).value)
+        assertThat(result)
+            .describedAs("Success factory should return a Success result type")
+            .isInstanceOf(TransportOperationResult.Success::class.java)
+        val success = result as TransportOperationResult.Success
+        assertThat(success.value)
+            .describedAs("Success result should preserve the provided payload value")
+            .isEqualTo(7)
     }
 
     @Test
@@ -23,11 +26,19 @@ class TransportOperationResultTest {
                 recoverable = true,
             )
 
-        assertTrue(result is TransportOperationResult.Failure)
+        assertThat(result)
+            .describedAs("Failure factory should return a Failure result type")
+            .isInstanceOf(TransportOperationResult.Failure::class.java)
         val failure = (result as TransportOperationResult.Failure).error
-        assertEquals(TransportFailureCode.TIMEOUT, failure.code)
-        assertEquals("Read timeout", failure.message)
-        assertTrue(failure.recoverable)
+        assertThat(failure.code)
+            .describedAs("Failure result should preserve the failure code")
+            .isEqualTo(TransportFailureCode.TIMEOUT)
+        assertThat(failure.message)
+            .describedAs("Failure result should preserve the failure message")
+            .isEqualTo("Read timeout")
+        assertThat(failure.recoverable)
+            .describedAs("Failure result should preserve recoverable flag")
+            .isTrue()
     }
 
     @Test
@@ -39,8 +50,12 @@ class TransportOperationResultTest {
                 recoverable = false,
             )
 
-        assertTrue(result is TransportOperationResult.Failure)
+        assertThat(result)
+            .describedAs("Non-recoverable failure declaration should still produce a Failure result type")
+            .isInstanceOf(TransportOperationResult.Failure::class.java)
         val failure = (result as TransportOperationResult.Failure).error
-        assertFalse(failure.recoverable)
+        assertThat(failure.recoverable)
+            .describedAs("Failure should remain marked as non-recoverable when explicitly configured")
+            .isFalse()
     }
 }

@@ -3,48 +3,67 @@ package com.ecuforge.feature.diagnostics
 import com.ecuforge.feature.diagnostics.domain.DtcUiState
 import com.ecuforge.feature.diagnostics.domain.IdentificationUiState
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class DiagnosticsFeatureEntryReleaseTest {
     @Test
-    fun readOnlyDemoIsDisabledInRelease() =
+    fun readOnlyDemoIsDisabledInRelease() {
         runBlocking {
             val result = DiagnosticsFeatureEntry.identifyReadOnlyDemo()
 
-            assertTrue(result is IdentificationUiState.Error)
+            assertThat(result)
+                .describedAs("Release identifyReadOnlyDemo should be blocked and return Error state")
+                .isInstanceOf(IdentificationUiState.Error::class.java)
             val error = result as IdentificationUiState.Error
-            assertEquals("DEMO_DISABLED", error.code)
+            assertThat(error.code)
+                .describedAs("Release identifyReadOnlyDemo should return DEMO_DISABLED code")
+                .isEqualTo("DEMO_DISABLED")
         }
+    }
 
     @Test
-    fun timeoutDemoIsDisabledInRelease() =
+    fun timeoutDemoIsDisabledInRelease() {
         runBlocking {
             val result = DiagnosticsFeatureEntry.identifyReadOnlyTimeoutDemo()
 
-            assertTrue(result is IdentificationUiState.Error)
+            assertThat(result)
+                .describedAs("Release identifyReadOnlyTimeoutDemo should be blocked and return Error state")
+                .isInstanceOf(IdentificationUiState.Error::class.java)
             val error = result as IdentificationUiState.Error
-            assertEquals("DEMO_DISABLED", error.code)
+            assertThat(error.code)
+                .describedAs("Release identifyReadOnlyTimeoutDemo should return DEMO_DISABLED code")
+                .isEqualTo("DEMO_DISABLED")
         }
+    }
 
     @Test
-    fun readDtcDemoIsDisabledInRelease() =
+    fun readDtcDemoIsDisabledInRelease() {
         runBlocking {
             val result = DiagnosticsFeatureEntry.readDtcReadOnlyDemo()
 
-            assertTrue(result is DtcUiState.Error)
+            assertThat(result)
+                .describedAs("Release readDtcReadOnlyDemo should be blocked and return Error state")
+                .isInstanceOf(DtcUiState.Error::class.java)
             val error = result as DtcUiState.Error
-            assertEquals("DEMO_DISABLED", error.code)
+            assertThat(error.code)
+                .describedAs("Release readDtcReadOnlyDemo should return DEMO_DISABLED code")
+                .isEqualTo("DEMO_DISABLED")
         }
+    }
 
     @Test
-    fun readDtcTimeoutDemoIsDisabledInRelease() =
+    fun readDtcTimeoutDemoIsDisabledInRelease() {
         runBlocking {
             val result = DiagnosticsFeatureEntry.readDtcReadOnlyTimeoutDemo()
 
-            assertTrue(result is DtcUiState.Error)
+            assertThat(result)
+                .describedAs("Release readDtcReadOnlyTimeoutDemo should be blocked and return Error state")
+                .isInstanceOf(DtcUiState.Error::class.java)
             val error = result as DtcUiState.Error
-            assertEquals("DEMO_DISABLED", error.code)
+            assertThat(error.code)
+                .describedAs("Release readDtcReadOnlyTimeoutDemo should return DEMO_DISABLED code")
+                .isEqualTo("DEMO_DISABLED")
         }
+    }
 }

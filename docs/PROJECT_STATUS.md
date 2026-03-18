@@ -23,6 +23,8 @@ CI and quality:
 - `verifyModuleDependencyRules` is enforced in CI and fails on forbidden edges or undeclared/stale module rules.
 - CI logs now include toolchain traceability (`java -version` and `./gradlew --version`).
 - Kotlin quality gates are enforced with `qualityCheck` (Ktlint + Detekt), including KDoc rules for public APIs.
+- Test assertions were standardized to AssertJ across modules (`app`, `core`, `transport`, `feature-diagnostics`) with explicit assertion descriptions.
+- Detekt now blocks alternative assertion imports (`org.junit.Assert`, `kotlin.test`, `Truth`) to keep AssertJ as the mandatory style.
 
 Build and toolchain hardening:
 - `compileSdk` is aligned to `36` across Android modules (`app`, `core`, `transport`, `feature-diagnostics`, `feature-telemetry`, `feature-map`).

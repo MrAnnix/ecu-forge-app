@@ -2,7 +2,7 @@ package com.ecuforge.app
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import org.junit.Assert.assertEquals
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -11,6 +11,8 @@ class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.ecuforge.app", appContext.packageName)
+        assertThat(appContext.packageName)
+            .describedAs("Instrumentation target context should resolve to the app package")
+            .isEqualTo("com.ecuforge.app")
     }
 }
