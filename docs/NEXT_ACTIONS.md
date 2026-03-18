@@ -53,6 +53,7 @@ Execution status:
 - Task 30 (WiFi transport contract baseline): added `TransportEndpoint.Wifi(host, port)` support in core/transport contracts and fake gateway validation coverage.
 - Task 31 (Diagnostics WiFi debug gateway pilot): added `DebugWifiTransportGateway` with deterministic boundary tests (invalid endpoint, connect failure, read timeout); non-demo promotion remains pending parity/hardware evidence.
 - Task 32 (Telemetry WiFi debug gateway pilot): added `DebugWifiTelemetryTransportGateway` with deterministic boundary tests (invalid endpoint, connect failure, read timeout); non-demo promotion remains pending parity/hardware evidence.
+- Task 33 (Compatibility WiFi hint normalization): updated `EcuCompatibilityGate` transport normalization to accept `WIFI`/`WI-FI` hints while still requiring validated tuple evidence for runtime support.
 - Next recommended task: expand live-capture parity evidence for remaining inferred tuples, then close DTC redistribution/licensing status.
 - Prepared promotion candidate in sprint template: `SIEMENS/SIE-ECU-01 + BLUETOOTH`.
 

@@ -63,6 +63,7 @@ class EcuCompatibilityGate(
         return when (endpointHint.uppercase().trim()) {
             "BT", "BLUETOOTH" -> "BLUETOOTH"
             "USB" -> "USB"
+            "WIFI", "WI-FI" -> "WIFI"
             else -> null
         }
     }
@@ -143,7 +144,7 @@ class EcuCompatibilityGate(
  *
  * @property family ECU family identifier.
  * @property model ECU model identifier.
- * @property transport Transport identifier (`BLUETOOTH` or `USB`).
+ * @property transport Transport identifier (`BLUETOOTH`, `USB`, or `WIFI`).
  */
 data class ModelTransportSupportKey(
     val family: String,

@@ -121,7 +121,42 @@ class EcuCompatibilityGateTest {
             )
 
         assertThat(supported)
-            .describedAs("Transport-aware compatibility should reject endpoint hints outside BLUETOOTH/USB baseline")
+            .describedAs("Transport-aware compatibility should reject WiFi transport until validated WiFi evidence exists")
             .isFalse()
+    }
+
+    @Test
+    fun modelTransportSupportAcceptsWifiTransportHintAliasesWhenValidatedEvidenceExists() {
+        val wifiGate =
+            EcuCompatibilityGate(
+                supportedModelTransports =
+                    setOf(
+                        ModelTransportSupportKey(
+                            family = "KEIHIN",
+                            model = "KM601EU",
+                            transport = "WIFI",
+                        ),
+                    ),
+            )
+
+        val supportedFromWifiHint =
+            wifiGate.isModelSupportedForTransport(
+                family = "KEIHIN",
+                model = "KM601EU",
+                endpointHint = "WIFI",
+            )
+        val supportedFromWiFiAlias =
+            wifiGate.isModelSupportedForTransport(
+                family = "KEIHIN",
+                model = "KM601EU",
+                endpointHint = "wi-fi",
+            )
+
+        assertThat(supportedFromWifiHint)
+            .describedAs("Transport-aware compatibility should normalize WIFI hint when validated evidence exists")
+            .isTrue()
+        assertThat(supportedFromWiFiAlias)
+            .describedAs("Transport-aware compatibility should normalize WI-FI alias when validated evidence exists")
+            .isTrue()
     }
 }
