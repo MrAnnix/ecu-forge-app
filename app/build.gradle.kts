@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.ecuforge.app"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.ecuforge.app"
