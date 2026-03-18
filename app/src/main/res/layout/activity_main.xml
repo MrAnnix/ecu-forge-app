@@ -49,6 +49,65 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/identifyButton" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/vehicleMakeInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="@string/vehicle_selector_make_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dtcStatusText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/vehicleMakeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/vehicleModelInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/vehicle_selector_model_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vehicleMakeInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/vehicleModelInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/vehicleYearInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/vehicle_selector_year_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vehicleModelInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/vehicleYearInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/useCatalogDescriptionsCheckbox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/diagnostics_dtc_catalog_opt_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vehicleYearInputLayout" />
+
     <Button
         android:id="@+id/readDtcButton"
         android:layout_width="0dp"
@@ -57,7 +116,7 @@
         android:text="@string/diagnostics_action_read_dtc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dtcStatusText" />
+        app:layout_constraintTop_toBottomOf="@id/useCatalogDescriptionsCheckbox" />
 
     <TextView
         android:id="@+id/telemetryStatusText"

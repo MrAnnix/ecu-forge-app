@@ -111,11 +111,22 @@ class MainActivity : AppCompatActivity() {
         binding.readDtcButton.isEnabled = false
         renderDtcState(DtcUiState.Loading)
 
+        val selection =
+            DtcCatalogSelectionMapper.map(
+                makeInput = binding.vehicleMakeInput.text?.toString().orEmpty(),
+                modelInput = binding.vehicleModelInput.text?.toString().orEmpty(),
+                yearInput = binding.vehicleYearInput.text?.toString().orEmpty(),
+                catalogOptIn = binding.useCatalogDescriptionsCheckbox.isChecked,
+            )
+
         screenScope.launch {
             try {
                 val result =
                     withContext(Dispatchers.IO) {
-                        DiagnosticsFeatureEntry.readDtcReadOnlyDemo()
+                        DiagnosticsFeatureEntry.readDtcReadOnlyDemo(
+                            vehicleCatalogContext = selection.vehicleCatalogContext,
+                            preferCatalogDescriptions = selection.preferCatalogDescriptions,
+                        )
                     }
                 renderDtcState(result)
             } catch (cancelled: CancellationException) {

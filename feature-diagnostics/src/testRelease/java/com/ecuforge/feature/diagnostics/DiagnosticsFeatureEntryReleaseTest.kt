@@ -2,6 +2,7 @@ package com.ecuforge.feature.diagnostics
 
 import com.ecuforge.feature.diagnostics.domain.DtcUiState
 import com.ecuforge.feature.diagnostics.domain.IdentificationUiState
+import com.ecuforge.feature.diagnostics.domain.VehicleCatalogContext
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -63,6 +64,30 @@ class DiagnosticsFeatureEntryReleaseTest {
             val error = result as DtcUiState.Error
             assertThat(error.code)
                 .describedAs("Release readDtcReadOnlyTimeoutDemo should return DEMO_DISABLED code")
+                .isEqualTo("DEMO_DISABLED")
+        }
+    }
+
+    @Test
+    fun readDtcCatalogAwareDemoIsDisabledInRelease() {
+        runBlocking {
+            val result =
+                DiagnosticsFeatureEntry.readDtcReadOnlyDemo(
+                    vehicleCatalogContext =
+                        VehicleCatalogContext(
+                            make = "Triumph",
+                            model = "Bonneville T120",
+                            modelYear = 2018,
+                        ),
+                    preferCatalogDescriptions = true,
+                )
+
+            assertThat(result)
+                .describedAs("Release catalog-aware DTC demo should be blocked and return Error state")
+                .isInstanceOf(DtcUiState.Error::class.java)
+            val error = result as DtcUiState.Error
+            assertThat(error.code)
+                .describedAs("Release catalog-aware DTC demo should return DEMO_DISABLED code")
                 .isEqualTo("DEMO_DISABLED")
         }
     }

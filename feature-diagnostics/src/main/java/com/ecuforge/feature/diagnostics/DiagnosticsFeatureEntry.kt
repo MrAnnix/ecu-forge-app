@@ -2,6 +2,7 @@ package com.ecuforge.feature.diagnostics
 
 import com.ecuforge.feature.diagnostics.domain.DtcUiState
 import com.ecuforge.feature.diagnostics.domain.IdentificationUiState
+import com.ecuforge.feature.diagnostics.domain.VehicleCatalogContext
 
 /**
  * Contract used to provide diagnostics flows behind a stable app-facing entrypoint.
@@ -21,6 +22,14 @@ interface DiagnosticsFlowProvider {
      * Executes read-only DTC flow.
      */
     suspend fun readDtcReadOnlyDemo(): DtcUiState
+
+    /**
+     * Executes read-only DTC flow with optional vehicle-aware catalog enrichment.
+     */
+    suspend fun readDtcReadOnlyDemo(
+        vehicleCatalogContext: VehicleCatalogContext?,
+        preferCatalogDescriptions: Boolean,
+    ): DtcUiState
 
     /**
      * Executes read-only DTC timeout flow.
@@ -73,6 +82,19 @@ object DiagnosticsFeatureEntry {
      */
     suspend fun readDtcReadOnlyDemo(): DtcUiState {
         return flowProvider.readDtcReadOnlyDemo()
+    }
+
+    /**
+     * Runs the read-only DTC demo flow with optional vehicle context and catalog preference.
+     */
+    suspend fun readDtcReadOnlyDemo(
+        vehicleCatalogContext: VehicleCatalogContext?,
+        preferCatalogDescriptions: Boolean,
+    ): DtcUiState {
+        return flowProvider.readDtcReadOnlyDemo(
+            vehicleCatalogContext = vehicleCatalogContext,
+            preferCatalogDescriptions = preferCatalogDescriptions,
+        )
     }
 
     /**

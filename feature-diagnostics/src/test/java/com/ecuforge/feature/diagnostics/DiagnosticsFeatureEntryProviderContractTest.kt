@@ -2,6 +2,7 @@ package com.ecuforge.feature.diagnostics
 
 import com.ecuforge.feature.diagnostics.domain.DtcUiState
 import com.ecuforge.feature.diagnostics.domain.IdentificationUiState
+import com.ecuforge.feature.diagnostics.domain.VehicleCatalogContext
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -24,6 +25,13 @@ class DiagnosticsFeatureEntryProviderContractTest {
                         return DtcUiState.Error(code = "PROVIDER", message = "custom dtc")
                     }
 
+                    override suspend fun readDtcReadOnlyDemo(
+                        vehicleCatalogContext: VehicleCatalogContext?,
+                        preferCatalogDescriptions: Boolean,
+                    ): DtcUiState {
+                        return DtcUiState.Error(code = "PROVIDER", message = "custom dtc catalog")
+                    }
+
                     override suspend fun readDtcReadOnlyTimeoutDemo(): DtcUiState {
                         return DtcUiState.Error(code = "PROVIDER", message = "custom dtc timeout")
                     }
@@ -33,6 +41,16 @@ class DiagnosticsFeatureEntryProviderContractTest {
             try {
                 val identify = DiagnosticsFeatureEntry.identifyReadOnlyDemo()
                 val dtc = DiagnosticsFeatureEntry.readDtcReadOnlyDemo()
+                val dtcCatalogAware =
+                    DiagnosticsFeatureEntry.readDtcReadOnlyDemo(
+                        vehicleCatalogContext =
+                            VehicleCatalogContext(
+                                make = "Triumph",
+                                model = "Bonneville T120",
+                                modelYear = 2018,
+                            ),
+                        preferCatalogDescriptions = true,
+                    )
 
                 assertThat(identify)
                     .describedAs("Installed diagnostics provider should override identification flow implementation")
@@ -46,6 +64,13 @@ class DiagnosticsFeatureEntryProviderContractTest {
                     .isInstanceOf(DtcUiState.Error::class.java)
                 assertThat((dtc as DtcUiState.Error).code)
                     .describedAs("Installed diagnostics provider should expose custom DTC error code")
+                    .isEqualTo("PROVIDER")
+
+                assertThat(dtcCatalogAware)
+                    .describedAs("Installed diagnostics provider should override catalog-aware DTC flow implementation")
+                    .isInstanceOf(DtcUiState.Error::class.java)
+                assertThat((dtcCatalogAware as DtcUiState.Error).code)
+                    .describedAs("Installed diagnostics provider should expose custom catalog-aware DTC error code")
                     .isEqualTo("PROVIDER")
             } finally {
                 DiagnosticsFeatureEntry.resetProvider()

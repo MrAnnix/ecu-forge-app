@@ -2,6 +2,7 @@ package com.ecuforge.feature.diagnostics
 
 import com.ecuforge.feature.diagnostics.domain.DtcUiState
 import com.ecuforge.feature.diagnostics.domain.IdentificationUiState
+import com.ecuforge.feature.diagnostics.domain.VehicleCatalogContext
 
 /**
  * Release-only demo delegate that blocks demo diagnostics entrypoints.
@@ -25,6 +26,16 @@ internal object DiagnosticsDemoDelegate : DiagnosticsFlowProvider {
      * Returns disabled state for DTC demo in release builds.
      */
     override suspend fun readDtcReadOnlyDemo(): DtcUiState {
+        return disabledDtcState()
+    }
+
+    /**
+     * Returns disabled state for catalog-aware DTC demo in release builds.
+     */
+    override suspend fun readDtcReadOnlyDemo(
+        vehicleCatalogContext: VehicleCatalogContext?,
+        preferCatalogDescriptions: Boolean,
+    ): DtcUiState {
         return disabledDtcState()
     }
 

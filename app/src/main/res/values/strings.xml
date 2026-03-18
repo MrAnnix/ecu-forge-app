@@ -4,6 +4,10 @@
     <string name="diagnostics_action_identify">Run ECU identification</string>
     <string name="diagnostics_dtc_status_idle">Ready for read-only DTC retrieval.</string>
     <string name="diagnostics_action_read_dtc">Read DTC codes</string>
+    <string name="vehicle_selector_make_label">Make</string>
+    <string name="vehicle_selector_model_label">Model</string>
+    <string name="vehicle_selector_year_label">Year (optional)</string>
+    <string name="diagnostics_dtc_catalog_opt_in">Use catalog descriptions from selected vehicle</string>
     <string name="telemetry_status_idle">Ready for read-only telemetry snapshot.</string>
     <string name="telemetry_action_read_snapshot">Read telemetry snapshot</string>
 </resources>

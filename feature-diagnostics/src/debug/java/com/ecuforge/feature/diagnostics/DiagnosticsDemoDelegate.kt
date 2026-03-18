@@ -2,12 +2,14 @@ package com.ecuforge.feature.diagnostics
 
 import com.ecuforge.core.transport.TransportEndpoint
 import com.ecuforge.core.transport.TransportFailureCode
+import com.ecuforge.feature.diagnostics.data.IndexedDtcCatalogRepository
 import com.ecuforge.feature.diagnostics.domain.DtcUiState
 import com.ecuforge.feature.diagnostics.domain.IdentificationRequest
 import com.ecuforge.feature.diagnostics.domain.IdentificationUiState
 import com.ecuforge.feature.diagnostics.domain.IdentifyEcuUseCase
 import com.ecuforge.feature.diagnostics.domain.ReadDtcRequest
 import com.ecuforge.feature.diagnostics.domain.ReadDtcUseCase
+import com.ecuforge.feature.diagnostics.domain.VehicleCatalogContext
 import com.ecuforge.transport.fake.FakeTransportGateway
 import com.ecuforge.transport.fake.FakeTransportOperation
 import com.ecuforge.transport.fake.FakeTransportScenario
@@ -91,6 +93,20 @@ internal object DiagnosticsDemoDelegate : DiagnosticsFlowProvider {
     }
 
     /**
+     * Executes the happy-path DTC read demo with optional catalog context.
+     */
+    override suspend fun readDtcReadOnlyDemo(
+        vehicleCatalogContext: VehicleCatalogContext?,
+        preferCatalogDescriptions: Boolean,
+    ): DtcUiState {
+        return executeDtc(
+            scenario = defaultDtcSuccessScenario(),
+            vehicleCatalogContext = vehicleCatalogContext,
+            preferCatalogDescriptions = preferCatalogDescriptions,
+        )
+    }
+
+    /**
      * Executes DTC read demo that simulates a read timeout.
      */
     override suspend fun readDtcReadOnlyTimeoutDemo(): DtcUiState {
@@ -100,10 +116,15 @@ internal object DiagnosticsDemoDelegate : DiagnosticsFlowProvider {
     /**
      * Runs DTC use case against the provided scripted fake scenario.
      */
-    private suspend fun executeDtc(scenario: FakeTransportScenario): DtcUiState {
+    private suspend fun executeDtc(
+        scenario: FakeTransportScenario,
+        vehicleCatalogContext: VehicleCatalogContext? = null,
+        preferCatalogDescriptions: Boolean = false,
+    ): DtcUiState {
         val useCase =
             ReadDtcUseCase(
                 transportGateway = FakeTransportGateway(scenario),
+                dtcCatalogRepository = IndexedDtcCatalogRepository(),
             )
 
         return useCase.execute(
@@ -111,6 +132,8 @@ internal object DiagnosticsDemoDelegate : DiagnosticsFlowProvider {
                 ReadDtcRequest(
                     ecuFamily = "KEIHIN",
                     endpointHint = "BT",
+                    vehicleCatalogContext = vehicleCatalogContext,
+                    preferCatalogDescriptions = preferCatalogDescriptions,
                 ),
             endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
         )
