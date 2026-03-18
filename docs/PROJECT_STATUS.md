@@ -125,4 +125,5 @@ Primary references:
 - `docs/NEXT_ACTIONS.md` (execution queue)
 - `docs/ROADMAP.md` (phase planning)
 - `docs/MODULE_DEPENDENCY_RULES.md` (architecture constraints)
+- `docs/SESSION_HANDOFF_2026-03-18.md` (latest session decisions, commits, and resume checklist)
 - `AGENTS.md` (quality/safety operating contract)

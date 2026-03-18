@@ -150,6 +150,7 @@ Before opening PR:
 ## Quick Resume Prompt
 
 If you return later, continue with:
+- Read `docs/SESSION_HANDOFF_2026-03-18.md` to restore latest decisions and commit anchors.
 - Expand model-level compatibility evidence with transport/hardware parity validation traces.
 - Wire concrete Bluetooth/USB transport adapters into `DiagnosticsFlowProvider` and `TelemetryFlowProvider` for non-demo read-only validation.
 - Define DTC i18n `titleKey` maintenance workflow and confirm dataset redistribution terms.
