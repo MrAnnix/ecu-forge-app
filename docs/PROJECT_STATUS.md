@@ -62,6 +62,8 @@ Telemetry baseline:
 - Telemetry unit tests cover success, timeout, invalid payload, and variant behavior.
 - Buffered sampling baseline added (multi-frame read, buffer validation, and signal-set stability checks).
 - Telemetry success state now includes buffered frame metadata for auditable read-only traces.
+- Telemetry export schema `telemetry-export.v1` and deterministic formatter added for support diagnostics artifacts.
+- Retention policy baseline defined (`maxAgeDays=30`, `maxExportCount=100`) with unit coverage.
 
 Provider contract baseline:
 - Feature entrypoints now expose provider contracts (`DiagnosticsFlowProvider`, `TelemetryFlowProvider`) to replace demo/fake wiring without changing app call sites.
@@ -72,6 +74,7 @@ Provider contract baseline:
 
 Near-term pending items:
 - Expand model-level compatibility evidence from baseline constants/tests to transport-specific parity evidence.
+- Implement storage path integration for telemetry exports using the new schema/policy contracts.
 
 ## Safety Validation Rules
 
@@ -95,7 +98,7 @@ Near-term pending items:
 Execute in this order:
 1. Expand model-level compatibility evidence with transport/hardware parity traces.
 2. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
-3. Define telemetry export format and retention policy for support diagnostics.
+3. Implement storage path integration for telemetry export artifacts.
 
 ## Resume Pointers
 

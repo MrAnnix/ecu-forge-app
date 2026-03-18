@@ -34,6 +34,7 @@ Execution status:
 - Task 12 (Provider contract baseline): feature entrypoint contracts added to swap demo/fake providers without app-flow changes.
 - Task 13 (Diagnostics input hardening): identification and DTC request validation + negative-path parser tests completed.
 - Task 14 (Compatibility matrix model baseline): model-level gate evidence and matrix entries added.
+- Task 15 (Telemetry export baseline): deterministic export schema and retention policy defined with tests.
 - Next recommended task: expand model-level evidence with transport/hardware parity traces.
 
 ## Priority Queue
@@ -145,4 +146,5 @@ Before opening PR:
 
 If you return later, continue with:
 - Expand model-level compatibility evidence with transport/hardware parity validation traces.
+- Implement storage path integration for telemetry export artifacts.
 - Track AGP/Gradle deprecation cleanup and remove temporary suppressions safely.

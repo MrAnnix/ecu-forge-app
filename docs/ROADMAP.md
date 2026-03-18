@@ -175,6 +175,6 @@ Mitigation:
 
 1. Expand model-level compatibility evidence with transport/hardware parity traces.
 2. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
-3. Define telemetry export format and retention policy for support diagnostics.
+3. Implement telemetry export storage path integration using the v1 schema and retention policy.
 4. Prepare real transport provider implementation behind the new feature entry contracts.
 5. Add diagnostics session history persistence with audit metadata for support cases.
