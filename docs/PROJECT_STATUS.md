@@ -23,7 +23,7 @@ CI and quality:
 - `verifyModuleDependencyRules` is enforced in CI and fails on forbidden edges or undeclared/stale module rules.
 - CI logs now include toolchain traceability (`java -version` and `./gradlew --version`).
 - Kotlin quality gates are enforced with `qualityCheck` (Ktlint + Detekt), including KDoc rules for public APIs.
-- Test assertions were standardized to AssertJ across modules (`app`, `core`, `transport`, `feature-diagnostics`) with explicit assertion descriptions.
+- Test assertions were standardized to AssertJ across modules (`app`, `core`, `transport`, `feature-diagnostics`, `feature-telemetry`) with explicit assertion descriptions.
 - Detekt now blocks alternative assertion imports (`org.junit.Assert`, `kotlin.test`, `Truth`) to keep AssertJ as the mandatory style.
 
 Build and toolchain hardening:
@@ -52,10 +52,16 @@ Diagnostics MVP baseline:
 - Variant-specific tests cover debug and release behavior.
 - App formatter tests cover DTC state rendering (loading, empty, populated, error).
 
+Telemetry baseline:
+- Read-only telemetry snapshot use case added in `feature-telemetry` with input validation and parse error handling.
+- Demo transport wiring is isolated by variant (`debug` uses fake transport, `release` returns `DEMO_DISABLED`).
+- App wiring added with dedicated telemetry action, UI state rendering, and formatter coverage.
+- Telemetry unit tests cover success, timeout, invalid payload, and variant behavior.
+
 ## In Progress / Pending
 
 Near-term pending items:
-- Continue telemetry read-only wiring after diagnostics baseline.
+- Evolve telemetry from single snapshot baseline to buffered sampling behavior.
 - Add model-level compatibility evidence beyond family-gate baseline.
 
 ## Safety Validation Rules
@@ -78,7 +84,7 @@ Near-term pending items:
 ## Recommended Next Step
 
 Execute in this order:
-1. Continue telemetry read-only wiring in `feature-telemetry` and `app`.
+1. Evolve telemetry from snapshot baseline to buffered sampling and stability checks.
 2. Expand compatibility matrix from family-level to model-level evidence.
 3. Prepare transport provider contract to replace demo fake wiring without touching app flow.
 

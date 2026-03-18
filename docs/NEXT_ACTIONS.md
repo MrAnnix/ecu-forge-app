@@ -29,7 +29,8 @@ Execution status:
 - Task 7 (Read-only identification MVP start): baseline use case, app wiring, and variant-specific behavior/tests added.
 - Task 8 (Compatibility matrix v0): completed in `docs/COMPATIBILITY_MATRIX_V0.md`.
 - Task 9 (Read-only DTC flow): baseline use case and app wiring completed.
-- Next recommended task: continue telemetry read-only wiring.
+- Task 10 (Read-only telemetry snapshot baseline): feature use case, app wiring, and tests completed.
+- Next recommended task: evolve telemetry to buffered sampling baseline.
 
 ## Priority Queue
 
@@ -139,5 +140,5 @@ Before opening PR:
 ## Quick Resume Prompt
 
 If you return later, continue with:
-- Continue telemetry read-only wiring.
+- Evolve telemetry read-only flow from single snapshot to buffered sampling.
 - Expand compatibility matrix with model-level validation evidence.

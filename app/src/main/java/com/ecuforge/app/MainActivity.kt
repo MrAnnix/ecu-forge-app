@@ -7,6 +7,8 @@ import com.ecuforge.app.databinding.ActivityMainBinding
 import com.ecuforge.feature.diagnostics.DiagnosticsFeatureEntry
 import com.ecuforge.feature.diagnostics.domain.DtcUiState
 import com.ecuforge.feature.diagnostics.domain.IdentificationUiState
+import com.ecuforge.feature.telemetry.TelemetryFeatureEntry
+import com.ecuforge.feature.telemetry.domain.TelemetryUiState
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -31,11 +33,15 @@ class MainActivity : AppCompatActivity() {
 
         renderIdentificationState(IdentificationUiState.Idle)
         renderDtcState(DtcUiState.Idle)
+        renderTelemetryState(TelemetryUiState.Idle)
         binding.identifyButton.setOnClickListener {
             runReadOnlyIdentification()
         }
         binding.readDtcButton.setOnClickListener {
             runReadOnlyDtc()
+        }
+        binding.readTelemetryButton.setOnClickListener {
+            runReadOnlyTelemetry()
         }
     }
 
@@ -128,6 +134,46 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
+     * Runs read-only telemetry snapshot retrieval in debug-enabled app builds.
+     */
+    private fun runReadOnlyTelemetry() {
+        val isDebuggableBuild = (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
+        if (!isDebuggableBuild) {
+            renderTelemetryState(
+                TelemetryUiState.Error(
+                    code = "DEMO_DISABLED",
+                    message = "Demo telemetry flow is only available in debug builds",
+                ),
+            )
+            return
+        }
+
+        binding.readTelemetryButton.isEnabled = false
+        renderTelemetryState(TelemetryUiState.Loading)
+
+        screenScope.launch {
+            try {
+                val result =
+                    withContext(Dispatchers.IO) {
+                        TelemetryFeatureEntry.readTelemetryReadOnlyDemo()
+                    }
+                renderTelemetryState(result)
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (exception: Exception) {
+                renderTelemetryState(
+                    TelemetryUiState.Error(
+                        code = "UNEXPECTED",
+                        message = exception.message ?: "Unexpected application error",
+                    ),
+                )
+            } finally {
+                binding.readTelemetryButton.isEnabled = true
+            }
+        }
+    }
+
+    /**
      * Renders identification state into the identification status text view.
      */
     private fun renderIdentificationState(state: IdentificationUiState) {
@@ -139,5 +185,12 @@ class MainActivity : AppCompatActivity() {
      */
     private fun renderDtcState(state: DtcUiState) {
         binding.dtcStatusText.text = DtcStatusFormatter.format(state)
+    }
+
+    /**
+     * Renders telemetry state into the telemetry status text view.
+     */
+    private fun renderTelemetryState(state: TelemetryUiState) {
+        binding.telemetryStatusText.text = TelemetryStatusFormatter.format(state)
     }
 }
