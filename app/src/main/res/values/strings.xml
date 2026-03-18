@@ -2,4 +2,6 @@
     <string name="app_name">ECU Forge</string>
     <string name="diagnostics_status_idle">Ready for read-only ECU identification.</string>
     <string name="diagnostics_action_identify">Run ECU identification</string>
+    <string name="diagnostics_dtc_status_idle">Ready for read-only DTC retrieval.</string>
+    <string name="diagnostics_action_read_dtc">Read DTC codes</string>
 </resources>

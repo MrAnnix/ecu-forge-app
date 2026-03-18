@@ -41,17 +41,18 @@ Transport testability:
 
 Diagnostics MVP baseline:
 - Read-only ECU identification use case in `feature-diagnostics`.
+- Read-only DTC retrieval flow wired in `app` with dedicated action and state rendering.
 - Compatibility gate before transport usage.
 - Compatibility matrix v0 published in `docs/COMPATIBILITY_MATRIX_V0.md`.
 - UI-state model (`Loading`, `Success`, `Error`) and coordinator.
 - Demo transport wiring is isolated by variant (`debug` uses fake transport, `release` returns `DEMO_DISABLED`).
 - Variant-specific tests cover debug and release behavior.
+- App formatter tests cover DTC state rendering (loading, empty, populated, error).
 
 ## In Progress / Pending
 
 Near-term pending items:
-- Extend diagnostics with read-only DTC flow.
-- Continue telemetry read-only wiring after DTC baseline.
+- Continue telemetry read-only wiring after diagnostics baseline.
 - Add model-level compatibility evidence beyond family-gate baseline.
 
 ## Safety Validation Rules
@@ -74,9 +75,9 @@ Near-term pending items:
 ## Recommended Next Step
 
 Execute in this order:
-1. Add read-only DTC flow in `feature-diagnostics`.
-2. Continue telemetry read-only wiring in `feature-telemetry` and `app`.
-3. Expand compatibility matrix from family-level to model-level evidence.
+1. Continue telemetry read-only wiring in `feature-telemetry` and `app`.
+2. Expand compatibility matrix from family-level to model-level evidence.
+3. Prepare transport provider contract to replace demo fake wiring without touching app flow.
 
 ## Resume Pointers
 
