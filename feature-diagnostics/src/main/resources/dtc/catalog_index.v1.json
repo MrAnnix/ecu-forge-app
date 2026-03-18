@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "defaultCatalog": "dtc/triumph_pcodes_2016_2019.v1.json",
+  "catalogs": [
+    {
+      "make": "Triumph",
+      "model": "*",
+      "yearFrom": 2016,
+      "yearTo": 2019,
+      "resourcePath": "dtc/triumph_pcodes_2016_2019.v1.json"
+    }
+  ]
+}
+

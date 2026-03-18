@@ -54,6 +54,12 @@ Diagnostics MVP baseline:
 - Identification and DTC requests now enforce explicit input validation (`REQUEST_INVALID`) before transport access.
 - Identification parser now rejects malformed payloads with unknown/duplicate keys through negative-path tests.
 - Compatibility gate now exposes model-level evidence checks (`isModelSupported`) with deterministic unit coverage.
+- DTC reference catalog baseline added in `feature-diagnostics` with a versioned JSON dataset (`triumph_pcodes_2016_2019.v1`) and deterministic validation (code format, duplicates, provenance metadata).
+- DTC data provenance documentation added in `docs/DTC_DATA_PROVENANCE.md` to track source metadata and licensing follow-up actions.
+- Multi-catalog DTC selection baseline added through `catalog_index.v1.json` and `IndexedDtcCatalogRepository` with deterministic fallback to `defaultCatalog`.
+- `ReadDtcRequest` now supports vehicle context (`make`, `model`, `modelYear`) and opt-in catalog description replacement in `ReadDtcUseCase`.
+- Selection behavior and integration notes documented in `docs/DTC_CATALOG_SELECTION.md`.
+- English UX copy baseline for vehicle selector and DTC catalog messaging documented in `docs/DTC_UX_COPY.md`.
 
 Telemetry baseline:
 - Read-only telemetry snapshot use case added in `feature-telemetry` with input validation and parse error handling.
@@ -75,6 +81,9 @@ Provider contract baseline:
 Near-term pending items:
 - Expand model-level compatibility evidence from baseline constants/tests to transport-specific parity evidence.
 - Implement storage path integration for telemetry exports using the new schema/policy contracts.
+- Add i18n resource mapping for DTC `titleKey` values before exposing the catalog in UI flows.
+- Verify redistribution terms for external DTC source material before broad release packaging.
+- Wire app vehicle selector to pass catalog context into diagnostics flow for brand/model-based DTC description resolution.
 
 ## Safety Validation Rules
 
@@ -97,8 +106,9 @@ Near-term pending items:
 
 Execute in this order:
 1. Expand model-level compatibility evidence with transport/hardware parity traces.
-2. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
+2. Wire app vehicle selection to `ReadDtcRequest.vehicleCatalogContext` and enable catalog description opt-in.
 3. Implement storage path integration for telemetry export artifacts.
+4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
 
 ## Resume Pointers
 

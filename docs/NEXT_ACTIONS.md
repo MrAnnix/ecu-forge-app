@@ -12,9 +12,9 @@ Current target phase:
 - Phase 0 (foundation stabilization)
 
 Safety validation rules:
-- Validar cada incremento por hito en modo read-only primero.
-- Evitar validación big-bang al final.
-- Mantener write/flash bloqueado hasta validación de seguridad dedicada.
+- Validate each milestone increment in read-only mode first.
+- Avoid big-bang validation at the end.
+- Keep write/flash blocked until dedicated safety validation is completed.
 
 Current objective:
 - Prepare architecture and tooling so transport/session work can be implemented safely in Phase 1.
@@ -35,7 +35,9 @@ Execution status:
 - Task 13 (Diagnostics input hardening): identification and DTC request validation + negative-path parser tests completed.
 - Task 14 (Compatibility matrix model baseline): model-level gate evidence and matrix entries added.
 - Task 15 (Telemetry export baseline): deterministic export schema and retention policy defined with tests.
-- Next recommended task: expand model-level evidence with transport/hardware parity traces.
+- Task 16 (DTC reference catalog baseline): versioned Triumph 2016-2019 dataset, validator, and provenance doc completed.
+- Task 17 (DTC multi-catalog selection baseline): catalog index, vehicle-context selector, and ReadDtc opt-in enrichment completed.
+- Next recommended task: wire app vehicle selector into diagnostics DTC catalog resolution.
 
 ## Priority Queue
 
@@ -145,6 +147,8 @@ Before opening PR:
 ## Quick Resume Prompt
 
 If you return later, continue with:
-- Expand model-level compatibility evidence with transport/hardware parity validation traces.
+- Wire app vehicle selector to `ReadDtcRequest.vehicleCatalogContext` and enable `preferCatalogDescriptions` in selected flows.
 - Implement storage path integration for telemetry export artifacts.
+- Expand model-level compatibility evidence with transport/hardware parity validation traces.
+- Add DTC i18n `titleKey` resource mapping and confirm dataset redistribution terms.
 - Track AGP/Gradle deprecation cleanup and remove temporary suppressions safely.
