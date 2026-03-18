@@ -173,8 +173,8 @@ Mitigation:
 
 ## Immediate Next 30 Days
 
-1. Implement read-only DTC retrieval flow in `feature-diagnostics`.
-2. Start telemetry read-only wiring with buffered sampling baseline.
-3. Harden diagnostics input validation and negative-path tests.
-4. Prepare a transport provider contract to replace demo fake wiring without touching `app` flow.
-5. Expand compatibility matrix from family-level baseline to model-level evidence.
+1. Start telemetry read-only wiring with buffered sampling baseline.
+2. Harden diagnostics input validation and negative-path tests.
+3. Prepare a transport provider contract to replace demo fake wiring without touching `app` flow.
+4. Expand compatibility matrix from family-level baseline to model-level evidence.
+5. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.

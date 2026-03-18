@@ -28,7 +28,8 @@ Execution status:
 - Task 6 (Fake adapters for tests): completed with scripted Bluetooth/USB fake gateway.
 - Task 7 (Read-only identification MVP start): baseline use case, app wiring, and variant-specific behavior/tests added.
 - Task 8 (Compatibility matrix v0): completed in `docs/COMPATIBILITY_MATRIX_V0.md`.
-- Next recommended task: implement read-only DTC flow, then continue telemetry wiring.
+- Task 9 (Read-only DTC flow): baseline use case and app wiring completed.
+- Next recommended task: continue telemetry read-only wiring.
 
 ## Priority Queue
 
@@ -138,6 +139,5 @@ Before opening PR:
 ## Quick Resume Prompt
 
 If you return later, continue with:
-- Implement read-only DTC flow in `feature-diagnostics`.
 - Continue telemetry read-only wiring.
 - Expand compatibility matrix with model-level validation evidence.

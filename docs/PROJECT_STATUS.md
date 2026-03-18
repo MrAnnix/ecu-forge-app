@@ -29,6 +29,7 @@ Build and toolchain hardening:
 - Version catalog updates applied for stable AndroidX/tooling revisions (`core-ktx`, `activity`, `material`, `versions` plugin).
 - Temporary warning suppression added in `gradle.properties`: `android.suppressUnsupportedCompileSdk=36`.
 - Minor Ktlint compliance fix applied in app formatting path (`IdentificationStatusFormatter`).
+- Continuity docs were aligned post-DTC (`docs/NEXT_ACTIONS.md`, `docs/ROADMAP.md`) to prioritize telemetry read-only wiring.
 
 Core contracts:
 - Typed transport contracts and failure model in `core`.
