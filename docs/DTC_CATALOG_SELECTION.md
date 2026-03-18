@@ -78,6 +78,7 @@ If user skips vehicle selection, use `preferCatalogDescriptions = false` to keep
 
 - Dataset redistribution rights must be verified before broad release packaging.
 - i18n resource mapping by `titleKey` is still pending before localized UX rollout.
+- App-level vehicle selector wiring is pending; catalog-based enrichment is available in domain but not yet fully activated in user flows.
 
 ## Related Docs
 

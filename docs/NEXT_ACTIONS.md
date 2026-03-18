@@ -9,7 +9,7 @@ Current snapshot reference: `docs/PROJECT_STATUS.md`.
 ## Current Focus
 
 Current target phase:
-- Phase 0 (foundation stabilization)
+- Phase 2 -> Phase 3 transition (read-only diagnostics and telemetry hardening)
 
 Safety validation rules:
 - Validate each milestone increment in read-only mode first.
@@ -17,7 +17,7 @@ Safety validation rules:
 - Keep write/flash blocked until dedicated safety validation is completed.
 
 Current objective:
-- Prepare architecture and tooling so transport/session work can be implemented safely in Phase 1.
+- Convert read-only baselines into app-visible workflows with auditable fallback behavior and storage integration.
 
 Execution status:
 - Task 1 (Module baseline): completed.
@@ -37,25 +37,19 @@ Execution status:
 - Task 15 (Telemetry export baseline): deterministic export schema and retention policy defined with tests.
 - Task 16 (DTC reference catalog baseline): versioned Triumph 2016-2019 dataset, validator, and provenance doc completed.
 - Task 17 (DTC multi-catalog selection baseline): catalog index, vehicle-context selector, and ReadDtc opt-in enrichment completed.
+- Task 18 (Default DTC fallback baseline): TuneECU-derived English fallback dictionary added as `defaultCatalog` with provisional `source.type=unknown`.
 - Next recommended task: wire app vehicle selector into diagnostics DTC catalog resolution.
 
-## Priority Queue
+## Prioritized Pending Checklist
 
-Priority 1:
-- Create module skeletons: `core`, `transport`, `feature-diagnostics`, `feature-telemetry`, `feature-map`.
-- Define allowed dependency directions between modules.
-- Add baseline quality checks (`lint`, unit tests) to CI.
+- [ ] Wire app vehicle selector to pass `VehicleCatalogContext` and opt-in `preferCatalogDescriptions`.
+- [ ] Implement telemetry export storage path integration using `telemetry-export.v1` and retention policy.
+- [ ] Expand compatibility evidence with transport/hardware parity traces per model.
+- [ ] Add i18n mapping for DTC `titleKey` resources (English first, other locales later).
+- [ ] Resolve DTC source redistribution/licensing status and update provenance metadata.
+- [ ] Execute phased AGP/Gradle deprecation cleanup to preserve Gradle 10 compatibility.
 
-Priority 2:
-- Define domain contracts for transport and session state.
-- Add fake adapters (Bluetooth/USB) for deterministic tests.
-- Create session transition tests for nominal and failure paths.
-
-Priority 3:
-- Build first read-only identification flow entry screen.
-- Add compatibility gate in domain layer before any operation starts.
-
-## Task List (Sequential)
+## Historical Baseline Task List (Completed)
 
 1. Module baseline
 - Add Gradle modules with minimal compile-ready setup.
@@ -125,6 +119,10 @@ Definition of done:
 Definition of done:
 - Compatibility matrix is published and accessible.
 - Initial configurations are verified to meet compatibility requirements.
+
+Note:
+- Tasks above are preserved for historical traceability.
+- Active execution should follow `## Prioritized Pending Checklist`.
 
 ## Stop Conditions
 

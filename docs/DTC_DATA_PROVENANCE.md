@@ -68,7 +68,8 @@
 
 ## Follow-up Actions
 
-1. Confirm redistribution rights for the referenced source material.
-2. Replace source type from `user-provided` to a verified distribution source when available.
+1. Confirm redistribution rights for both catalogs (`tuneecu-pcodes-en-default` and `triumph-modern-classics-2016-2019`).
+2. Replace provisional source metadata (`unknown` / `user-provided`) with verified source references once legal review is completed.
 3. Add per-locale string resources mapped via `titleKey` before UI exposure.
+4. Define catalog update cadence (version bump, changelog, and validation checklist) for future imports.
 

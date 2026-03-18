@@ -27,6 +27,14 @@ The roadmap is split into five tracks that progress in parallel:
 - Map safety and integrity
 - Quality, security, and delivery pipeline
 
+## Progress Snapshot (2026-03-18)
+
+- Phase 0: complete.
+- Phase 1: complete for baseline scope.
+- Phase 2: in progress (identification, DTC, telemetry read, DTC catalog selection baseline).
+- Phase 3: started (telemetry export schema/policy baseline, pending storage integration).
+- Phase 4-5: not started (intentionally blocked by safety gates).
+
 ## Phase 0 - Foundation Stabilization (Near Term)
 
 Goal:
@@ -173,8 +181,8 @@ Mitigation:
 
 ## Immediate Next 30 Days
 
-1. Expand model-level compatibility evidence with transport/hardware parity traces.
-2. Wire app vehicle selection to DTC catalog context (`make`/`model`/`modelYear`) and enable controlled catalog description enrichment.
-3. Implement telemetry export storage path integration using the v1 schema and retention policy.
-4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
-5. Prepare real transport provider implementation behind the new feature entry contracts.
+1. Wire app vehicle selection to DTC catalog context (`make`/`model`/`modelYear`) and enable controlled catalog description enrichment.
+2. Implement telemetry export storage path integration using the v1 schema and retention policy.
+3. Expand model-level compatibility evidence with transport/hardware parity traces.
+4. Resolve DTC dataset redistribution/licensing status and align provenance metadata.
+5. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.

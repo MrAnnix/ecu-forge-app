@@ -5,12 +5,13 @@ Last updated:
 
 ## Summary
 
-Project is in foundation-to-core transition.
+Project is in read-only feature consolidation.
 
 Current position:
-- Phase 0 mostly complete (architecture baseline and CI bootstrap done).
-- Phase 1 partially complete (transport/session contracts and fake adapters done).
-- Phase 2 started with read-only identification domain baseline.
+- Phase 0 complete (architecture and CI baseline stable).
+- Phase 1 complete for baseline scope (transport/session contracts and deterministic fake adapters).
+- Phase 2 in progress with identification, DTC read, telemetry read, and DTC catalog selection baseline.
+- Phase 3 started through telemetry export schema and reliability hardening tasks.
 
 ## Completed Work
 
@@ -80,11 +81,12 @@ Provider contract baseline:
 ## In Progress / Pending
 
 Near-term pending items:
+- Wire app vehicle selector to pass catalog context into diagnostics flow for brand/model-based DTC description resolution.
 - Expand model-level compatibility evidence from baseline constants/tests to transport-specific parity evidence.
 - Implement storage path integration for telemetry exports using the new schema/policy contracts.
 - Add i18n resource mapping for DTC `titleKey` values before exposing the catalog in UI flows.
 - Verify redistribution terms for external DTC source material before broad release packaging.
-- Wire app vehicle selector to pass catalog context into diagnostics flow for brand/model-based DTC description resolution.
+- Prepare real transport provider implementation behind feature provider contracts for non-demo read-only validation.
 
 ## Safety Validation Rules
 
@@ -106,10 +108,11 @@ Near-term pending items:
 ## Recommended Next Step
 
 Execute in this order:
-1. Expand model-level compatibility evidence with transport/hardware parity traces.
-2. Wire app vehicle selection to `ReadDtcRequest.vehicleCatalogContext` and enable catalog description opt-in.
-3. Implement storage path integration for telemetry export artifacts.
-4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
+1. Wire app vehicle selection to `ReadDtcRequest.vehicleCatalogContext` and enable catalog description opt-in.
+2. Implement storage path integration for telemetry export artifacts.
+3. Expand model-level compatibility evidence with transport/hardware parity traces.
+4. Verify DTC dataset redistribution status and align provenance metadata.
+5. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
 
 ## Resume Pointers
 
