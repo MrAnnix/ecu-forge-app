@@ -2,6 +2,9 @@ package com.ecuforge.feature.telemetry.domain
 
 /**
  * Retention policy for telemetry export artifacts.
+ *
+ * @property maxAgeDays Maximum export age in days before expiration.
+ * @property maxExportCount Maximum number of retained exports.
  */
 data class TelemetryRetentionPolicy(
     val maxAgeDays: Int = 30,

@@ -2,45 +2,112 @@ package com.ecuforge.core.session
 
 /**
  * High-level lifecycle states for an ECU session.
+ *
+ * @property IDLE Session is inactive and ready to start.
+ * @property INITIALIZING Session is running startup initialization steps.
+ * @property AUTHENTICATING Session is running authentication/handshake flow.
+ * @property READY Session is ready to execute read-only operations.
+ * @property READING Session is actively reading data from ECU.
+ * @property RETRY_WAIT Session is waiting before retrying a failed operation.
+ * @property DISCONNECTED Session lost transport connectivity.
+ * @property FAILED Session ended in a failure state awaiting reset.
  */
 enum class SessionState {
+    /** Session is inactive and ready to start. */
     IDLE,
+
+    /** Session is running startup initialization steps. */
     INITIALIZING,
+
+    /** Session is running authentication/handshake flow. */
     AUTHENTICATING,
+
+    /** Session is ready to execute read-only operations. */
     READY,
+
+    /** Session is actively reading data from ECU. */
     READING,
+
+    /** Session is waiting before retrying a failed operation. */
     RETRY_WAIT,
+
+    /** Session lost transport connectivity. */
     DISCONNECTED,
+
+    /** Session ended in a failure state awaiting reset. */
     FAILED,
 }
 
 /**
  * Events that can trigger session state transitions.
+ *
+ * @property START Starts a new session attempt.
+ * @property INIT_OK Initialization completed successfully.
+ * @property AUTH_OK Authentication completed successfully.
+ * @property READ_REQUESTED Read operation has been requested.
+ * @property READ_COMPLETED Read operation completed successfully.
+ * @property TRANSPORT_LOST Transport connection was lost.
+ * @property RETRY_REQUESTED Retry was requested after a failure.
+ * @property RETRY_TIMEOUT Retry wait timeout elapsed.
+ * @property RESET Session is reset back to idle.
+ * @property FAIL Session transitions to failed state.
  */
 enum class SessionEvent {
+    /** Starts a new session attempt. */
     START,
+
+    /** Initialization completed successfully. */
     INIT_OK,
+
+    /** Authentication completed successfully. */
     AUTH_OK,
+
+    /** Read operation has been requested. */
     READ_REQUESTED,
+
+    /** Read operation completed successfully. */
     READ_COMPLETED,
+
+    /** Transport connection was lost. */
     TRANSPORT_LOST,
+
+    /** Retry was requested after a failure. */
     RETRY_REQUESTED,
+
+    /** Retry wait timeout elapsed. */
     RETRY_TIMEOUT,
+
+    /** Session is reset back to idle. */
     RESET,
+
+    /** Session transitions to failed state. */
     FAIL,
 }
 
 /**
  * Canonical error codes for rejected or degraded transitions.
+ *
+ * @property INVALID_TRANSITION Current state and event combination is invalid.
+ * @property TRANSPORT_NOT_CONNECTED Transition requires an active transport connection.
+ * @property RETRY_LIMIT_REACHED Retry count exceeded configured retry limit.
  */
 enum class SessionTransitionErrorCode {
+    /** Current state and event combination is invalid. */
     INVALID_TRANSITION,
+
+    /** Transition requires an active transport connection. */
     TRANSPORT_NOT_CONNECTED,
+
+    /** Retry count exceeded configured retry limit. */
     RETRY_LIMIT_REACHED,
 }
 
 /**
  * Guard input evaluated before accepting a transition.
+ *
+ * @property transportConnected True when transport is currently connected.
+ * @property retryCount Current retry attempt count.
+ * @property maxRetries Maximum retry attempts allowed.
  */
 data class SessionTransitionGuardInput(
     val transportConnected: Boolean = true,
@@ -50,6 +117,13 @@ data class SessionTransitionGuardInput(
 
 /**
  * Result of evaluating a state transition.
+ *
+ * @property from Source session state before evaluating transition.
+ * @property event Event used to evaluate transition.
+ * @property to Target session state after evaluating transition.
+ * @property allowed True when transition is accepted.
+ * @property reason Optional human-readable reason for rejection or forced path.
+ * @property errorCode Optional canonical error code for rejected/forced transitions.
  */
 data class SessionTransition(
     val from: SessionState,

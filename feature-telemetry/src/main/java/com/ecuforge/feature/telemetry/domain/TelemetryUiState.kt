@@ -16,6 +16,10 @@ sealed interface TelemetryUiState {
 
     /**
      * Terminal success state with consolidated samples and buffered frame context.
+     *
+     * @property samples Consolidated telemetry samples shown to the user.
+     * @property capturedFrameCount Number of raw frames captured during acquisition.
+     * @property bufferedFrames Rolling buffered frames kept for diagnostics context.
      */
     data class Success(
         val samples: List<TelemetrySample>,
@@ -25,6 +29,9 @@ sealed interface TelemetryUiState {
 
     /**
      * Terminal failure state with stable error code and message.
+     *
+     * @property code Stable machine-readable error code.
+     * @property message Human-readable error message for UI.
      */
     data class Error(
         val code: String,

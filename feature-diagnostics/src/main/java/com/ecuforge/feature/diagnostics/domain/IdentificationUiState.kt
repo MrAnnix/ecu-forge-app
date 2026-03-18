@@ -16,6 +16,8 @@ sealed interface IdentificationUiState {
 
     /**
      * Terminal success state with parsed ECU identification data.
+     *
+     * @property identification Parsed ECU identification payload.
      */
     data class Success(
         val identification: EcuIdentification,
@@ -23,6 +25,9 @@ sealed interface IdentificationUiState {
 
     /**
      * Terminal failure state with stable code and message.
+     *
+     * @property code Stable machine-readable error code.
+     * @property message Human-readable error message for UI.
      */
     data class Error(
         val code: String,

@@ -42,6 +42,7 @@ Use this file as the default working contract for all coding agents and contribu
 - Split responsibilities into focused methods/classes to avoid spaghetti code.
 - Require production-ready code paths; avoid placeholder logic and partial implementations.
 - Document all production code with KDoc/JavaDoc (tests excluded).
+- Document every public property (`val`/`var`) with KDoc (`@property` tags or property-level KDoc) in production code.
 - Add concise comments only for non-obvious logic.
 - Do not introduce unrelated refactors in a feature fix.
 

@@ -20,6 +20,7 @@ All submitted code must be:
 - Keep side effects explicit and localized.
 - Prefer immutability and avoid broad shared mutable state.
 - Document all production code with KDoc/JavaDoc (tests excluded).
+- Document every public property (`val`/`var`) in production code using KDoc (`@property` tags or property-level KDoc).
 - Add concise comments only for non-obvious logic.
 
 ## Validation and Error Handling

@@ -16,6 +16,8 @@ sealed interface DtcUiState {
 
     /**
      * Terminal success state with zero or more DTC records.
+     *
+     * @property dtcs Deterministic list of parsed DTC records.
      */
     data class Success(
         val dtcs: List<DtcRecord>,
@@ -23,6 +25,9 @@ sealed interface DtcUiState {
 
     /**
      * Terminal failure state with stable error code and message.
+     *
+     * @property code Stable machine-readable error code.
+     * @property message Human-readable error message for UI.
      */
     data class Error(
         val code: String,

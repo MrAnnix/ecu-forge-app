@@ -38,7 +38,7 @@ comments:
       - '**/src/testDebug/**'
       - '**/src/testRelease/**'
   UndocumentedPublicProperty:
-    active: false
+    active: true
     excludes:
       - '**/src/test/**'
       - '**/src/androidTest/**'
