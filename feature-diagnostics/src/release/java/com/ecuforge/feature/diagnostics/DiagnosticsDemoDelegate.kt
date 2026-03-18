@@ -6,32 +6,32 @@ import com.ecuforge.feature.diagnostics.domain.IdentificationUiState
 /**
  * Release-only demo delegate that blocks demo diagnostics entrypoints.
  */
-internal object DiagnosticsDemoDelegate {
+internal object DiagnosticsDemoDelegate : DiagnosticsFlowProvider {
     /**
      * Returns disabled state for identification demo in release builds.
      */
-    suspend fun identifyReadOnlyDemo(): IdentificationUiState {
+    override suspend fun identifyReadOnlyDemo(): IdentificationUiState {
         return disabledState()
     }
 
     /**
      * Returns disabled state for identification timeout demo in release builds.
      */
-    suspend fun identifyReadOnlyTimeoutDemo(): IdentificationUiState {
+    override suspend fun identifyReadOnlyTimeoutDemo(): IdentificationUiState {
         return disabledState()
     }
 
     /**
      * Returns disabled state for DTC demo in release builds.
      */
-    suspend fun readDtcReadOnlyDemo(): DtcUiState {
+    override suspend fun readDtcReadOnlyDemo(): DtcUiState {
         return disabledDtcState()
     }
 
     /**
      * Returns disabled state for DTC timeout demo in release builds.
      */
-    suspend fun readDtcReadOnlyTimeoutDemo(): DtcUiState {
+    override suspend fun readDtcReadOnlyTimeoutDemo(): DtcUiState {
         return disabledDtcState()
     }
 

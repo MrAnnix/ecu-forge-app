@@ -60,11 +60,15 @@ Telemetry baseline:
 - Buffered sampling baseline added (multi-frame read, buffer validation, and signal-set stability checks).
 - Telemetry success state now includes buffered frame metadata for auditable read-only traces.
 
+Provider contract baseline:
+- Feature entrypoints now expose provider contracts (`DiagnosticsFlowProvider`, `TelemetryFlowProvider`) to replace demo/fake wiring without changing app call sites.
+- Default behavior remains variant-safe (`debug` demo provider, `release` demo-disabled provider) and can be swapped through `installProvider(...)`.
+- Contract tests were added to verify provider override behavior in both diagnostics and telemetry modules.
+
 ## In Progress / Pending
 
 Near-term pending items:
 - Add model-level compatibility evidence beyond family-gate baseline.
-- Prepare transport provider contract to replace demo fake wiring without touching app flow.
 
 ## Safety Validation Rules
 
@@ -87,8 +91,8 @@ Near-term pending items:
 
 Execute in this order:
 1. Expand compatibility matrix from family-level to model-level evidence.
-2. Prepare transport provider contract to replace demo fake wiring without touching app flow.
-3. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
+2. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
+3. Define telemetry export format and retention policy for support diagnostics.
 
 ## Resume Pointers
 

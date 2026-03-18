@@ -31,6 +31,7 @@ Execution status:
 - Task 9 (Read-only DTC flow): baseline use case and app wiring completed.
 - Task 10 (Read-only telemetry snapshot baseline): feature use case, app wiring, and tests completed.
 - Task 11 (Read-only telemetry buffered sampling baseline): multi-frame sampling, stability checks, and tests completed.
+- Task 12 (Provider contract baseline): feature entrypoint contracts added to swap demo/fake providers without app-flow changes.
 - Next recommended task: expand compatibility matrix with model-level evidence.
 
 ## Priority Queue
@@ -142,4 +143,4 @@ Before opening PR:
 
 If you return later, continue with:
 - Expand compatibility matrix with model-level validation evidence.
-- Prepare transport provider contract to replace demo fake wiring without touching app flow.
+- Track AGP/Gradle deprecation cleanup and remove temporary suppressions safely.

@@ -13,18 +13,18 @@ import com.ecuforge.transport.fake.FakeTransportStep
 /**
  * Debug-only demo delegate that wires telemetry flows to fake transport scenarios.
  */
-internal object TelemetryDemoDelegate {
+internal object TelemetryDemoDelegate : TelemetryFlowProvider {
     /**
      * Executes the happy-path telemetry snapshot demo.
      */
-    suspend fun readTelemetryReadOnlyDemo(): TelemetryUiState {
+    override suspend fun readTelemetryReadOnlyDemo(): TelemetryUiState {
         return executeTelemetry(defaultSuccessScenario())
     }
 
     /**
      * Executes telemetry snapshot demo that simulates a read timeout.
      */
-    suspend fun readTelemetryReadOnlyTimeoutDemo(): TelemetryUiState {
+    override suspend fun readTelemetryReadOnlyTimeoutDemo(): TelemetryUiState {
         return executeTelemetry(defaultTimeoutScenario())
     }
 

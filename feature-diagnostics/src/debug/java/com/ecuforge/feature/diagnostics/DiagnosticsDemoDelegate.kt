@@ -16,18 +16,18 @@ import com.ecuforge.transport.fake.FakeTransportStep
 /**
  * Debug-only demo delegate that wires diagnostics flows to fake transport scenarios.
  */
-internal object DiagnosticsDemoDelegate {
+internal object DiagnosticsDemoDelegate : DiagnosticsFlowProvider {
     /**
      * Executes the happy-path identification demo.
      */
-    suspend fun identifyReadOnlyDemo(): IdentificationUiState {
+    override suspend fun identifyReadOnlyDemo(): IdentificationUiState {
         return executeIdentification(defaultSuccessScenario())
     }
 
     /**
      * Executes identification demo that simulates a read timeout.
      */
-    suspend fun identifyReadOnlyTimeoutDemo(): IdentificationUiState {
+    override suspend fun identifyReadOnlyTimeoutDemo(): IdentificationUiState {
         return executeIdentification(defaultTimeoutScenario())
     }
 
@@ -86,14 +86,14 @@ internal object DiagnosticsDemoDelegate {
     /**
      * Executes the happy-path DTC read demo.
      */
-    suspend fun readDtcReadOnlyDemo(): DtcUiState {
+    override suspend fun readDtcReadOnlyDemo(): DtcUiState {
         return executeDtc(defaultDtcSuccessScenario())
     }
 
     /**
      * Executes DTC read demo that simulates a read timeout.
      */
-    suspend fun readDtcReadOnlyTimeoutDemo(): DtcUiState {
+    override suspend fun readDtcReadOnlyTimeoutDemo(): DtcUiState {
         return executeDtc(defaultDtcTimeoutScenario())
     }
 

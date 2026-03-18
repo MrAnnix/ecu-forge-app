@@ -5,18 +5,18 @@ import com.ecuforge.feature.telemetry.domain.TelemetryUiState
 /**
  * Release-only demo delegate that blocks telemetry demo entrypoints.
  */
-internal object TelemetryDemoDelegate {
+internal object TelemetryDemoDelegate : TelemetryFlowProvider {
     /**
      * Returns disabled state for telemetry demo in release builds.
      */
-    suspend fun readTelemetryReadOnlyDemo(): TelemetryUiState {
+    override suspend fun readTelemetryReadOnlyDemo(): TelemetryUiState {
         return disabledTelemetryState()
     }
 
     /**
      * Returns disabled state for telemetry timeout demo in release builds.
      */
-    suspend fun readTelemetryReadOnlyTimeoutDemo(): TelemetryUiState {
+    override suspend fun readTelemetryReadOnlyTimeoutDemo(): TelemetryUiState {
         return disabledTelemetryState()
     }
 
