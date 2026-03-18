@@ -36,6 +36,7 @@ Build and toolchain hardening:
 
 Core contracts:
 - Typed transport contracts and failure model in `core`.
+- Transport endpoint contract now includes WiFi host/port endpoint type for ELM327-compatible TCP adapter paths.
 - Session state model with transition guards and error codes in `core`.
 - Unit tests for transport result model and session transitions.
 
@@ -90,8 +91,10 @@ Provider contract baseline:
 - Debug diagnostics default provider now pilots transport-backed read-only identification and DTC flows through a concrete Bluetooth adapter wrapper (`DebugBluetoothTransportGateway`) while preserving release `DEMO_DISABLED` behavior.
 - Debug adapter boundary tests now cover invalid endpoint, connection failure, and read-timeout mappings with deterministic error codes.
 - Debug diagnostics provider pilot now includes USB adapter wiring (`DebugUsbTransportGateway`) as the default debug path, with deterministic connect and timeout behavior for read-only identification/DTC flows.
+- Debug diagnostics WiFi gateway pilot (`DebugWifiTransportGateway`) is now available with deterministic boundary tests (invalid endpoint, connection failure, read timeout); default debug path remains USB until parity evidence promotion.
 - Transport-backed telemetry provider scaffold is now available for read-only telemetry flows (`TransportBackedTelemetryFlowProvider`) behind existing feature contracts.
 - Debug telemetry default provider now pilots concrete USB adapter wiring (`DebugUsbTelemetryTransportGateway`) with deterministic boundary tests (invalid endpoint, connection failure, read timeout) while preserving release `DEMO_DISABLED` behavior.
+- Debug telemetry WiFi gateway pilot (`DebugWifiTelemetryTransportGateway`) is now available with deterministic boundary tests (invalid endpoint, connection failure, read timeout); default debug path remains USB until parity evidence promotion.
 
 ## In Progress / Pending
 

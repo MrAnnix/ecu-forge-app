@@ -50,6 +50,9 @@ Execution status:
 - Task 27 (Diagnostics USB debug adapter pilot): switched default debug diagnostics provider to concrete `DebugUsbTransportGateway` with deterministic boundary tests (invalid endpoint, connect failure, read timeout).
 - Task 28 (Telemetry USB debug adapter pilot): wired default debug telemetry flow through `TransportBackedTelemetryFlowProvider` using concrete `DebugUsbTelemetryTransportGateway` with deterministic boundary tests (invalid endpoint, connect failure, read timeout).
 - Task 29 (Transport requirement documentation): documented ELM327-compatible Bluetooth, USB cable, and WiFi as the explicit transport baseline for read-only diagnostics continuity.
+- Task 30 (WiFi transport contract baseline): added `TransportEndpoint.Wifi(host, port)` support in core/transport contracts and fake gateway validation coverage.
+- Task 31 (Diagnostics WiFi debug gateway pilot): added `DebugWifiTransportGateway` with deterministic boundary tests (invalid endpoint, connect failure, read timeout); non-demo promotion remains pending parity/hardware evidence.
+- Task 32 (Telemetry WiFi debug gateway pilot): added `DebugWifiTelemetryTransportGateway` with deterministic boundary tests (invalid endpoint, connect failure, read timeout); non-demo promotion remains pending parity/hardware evidence.
 - Next recommended task: expand live-capture parity evidence for remaining inferred tuples, then close DTC redistribution/licensing status.
 - Prepared promotion candidate in sprint template: `SIEMENS/SIE-ECU-01 + BLUETOOTH`.
 

@@ -194,6 +194,7 @@ class FakeTransportGateway(
         return when (endpoint) {
             is TransportEndpoint.Bluetooth -> endpoint.macAddress.isNotBlank()
             is TransportEndpoint.Usb -> endpoint.vendorId > 0 && endpoint.productId > 0
+            is TransportEndpoint.Wifi -> endpoint.host.isNotBlank() && endpoint.port in 1..65535
         }
     }
 }

@@ -18,6 +18,14 @@ sealed interface TransportEndpoint {
      * @property productId USB product identifier.
      */
     data class Usb(val vendorId: Int, val productId: Int) : TransportEndpoint
+
+    /**
+     * WiFi transport endpoint identified by host and TCP port.
+     *
+     * @property host Adapter host or IPv4 address.
+     * @property port Adapter TCP port.
+     */
+    data class Wifi(val host: String, val port: Int) : TransportEndpoint
 }
 
 /**

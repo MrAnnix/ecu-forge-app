@@ -145,4 +145,46 @@ class FakeTransportGatewayTest {
                 .isInstanceOf(TransportOperationResult.Success::class.java)
         }
     }
+
+    @Test
+    fun wifiEndpointConnectsWhenHostAndPortAreValid() {
+        runBlocking {
+            val gateway =
+                FakeTransportGateway(
+                    scenario =
+                        FakeTransportScenario.of(
+                            FakeTransportStep(operation = FakeTransportOperation.CONNECT, success = true),
+                        ),
+                )
+
+            val result = gateway.connect(TransportEndpoint.Wifi(host = "192.168.0.10", port = 35000))
+
+            assertThat(result)
+                .describedAs("Valid WiFi endpoint should be accepted by fake gateway endpoint validation")
+                .isInstanceOf(TransportOperationResult.Success::class.java)
+        }
+    }
+
+    @Test
+    fun wifiEndpointFailsFastWhenPortIsOutOfRange() {
+        runBlocking {
+            val gateway =
+                FakeTransportGateway(
+                    scenario =
+                        FakeTransportScenario.of(
+                            FakeTransportStep(operation = FakeTransportOperation.CONNECT, success = true),
+                        ),
+                )
+
+            val result = gateway.connect(TransportEndpoint.Wifi(host = "192.168.0.10", port = 0))
+            val failure = result as TransportOperationResult.Failure
+
+            assertThat(failure.error.code)
+                .describedAs("Invalid WiFi endpoint should be rejected with INVALID_ENDPOINT")
+                .isEqualTo(TransportFailureCode.INVALID_ENDPOINT)
+            assertThat(gateway.currentState())
+                .describedAs("Invalid WiFi endpoint should move gateway state to ERROR")
+                .isEqualTo(TransportConnectionState.ERROR)
+        }
+    }
 }
