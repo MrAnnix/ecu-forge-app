@@ -18,6 +18,11 @@ class ReadDtcUseCase(
         request: ReadDtcRequest,
         endpoint: TransportEndpoint,
     ): DtcUiState {
+        val requestValidationError = validateRequest(request)
+        if (requestValidationError != null) {
+            return requestValidationError
+        }
+
         if (!isSupported(request)) {
             return DtcUiState.Error(
                 code = "ECU_UNSUPPORTED",
@@ -92,6 +97,27 @@ class ReadDtcUseCase(
     private fun requestReadDtcPayload(request: ReadDtcRequest): ByteArray {
         val command = "DTC?;FAMILY=${request.ecuFamily};HINT=${request.endpointHint}"
         return command.encodeToByteArray()
+    }
+
+    /**
+     * Validates DTC request shape before transport access.
+     */
+    private fun validateRequest(request: ReadDtcRequest): DtcUiState.Error? {
+        if (request.ecuFamily.isBlank()) {
+            return DtcUiState.Error(
+                code = "REQUEST_INVALID",
+                message = "ECU family is required",
+            )
+        }
+
+        if (request.endpointHint.isBlank()) {
+            return DtcUiState.Error(
+                code = "REQUEST_INVALID",
+                message = "Endpoint hint is required",
+            )
+        }
+
+        return null
     }
 
     /**

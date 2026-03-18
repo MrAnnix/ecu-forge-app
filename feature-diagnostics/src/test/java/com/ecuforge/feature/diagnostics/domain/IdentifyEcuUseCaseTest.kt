@@ -12,6 +12,31 @@ import org.junit.Test
 
 class IdentifyEcuUseCaseTest {
     @Test
+    fun blankEndpointHintReturnsRequestValidationErrorBeforeTransport() {
+        runBlocking {
+            val gateway =
+                FakeTransportGateway(
+                    scenario = FakeTransportScenario.of(),
+                )
+
+            val useCase = IdentifyEcuUseCase(transportGateway = gateway)
+            val result =
+                useCase.execute(
+                    request = IdentificationRequest(ecuFamily = "KEIHIN", endpointHint = " "),
+                    endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
+                )
+
+            assertThat(result)
+                .describedAs("Blank endpoint hint should be rejected before transport operations")
+                .isInstanceOf(IdentificationUiState.Error::class.java)
+            val error = result as IdentificationUiState.Error
+            assertThat(error.code)
+                .describedAs("Blank endpoint hint should map to REQUEST_INVALID error code")
+                .isEqualTo("REQUEST_INVALID")
+        }
+    }
+
+    @Test
     fun unsupportedFamilyReturnsErrorBeforeTransport() {
         runBlocking {
             val gateway =
@@ -146,6 +171,41 @@ class IdentifyEcuUseCaseTest {
             assertThat(error.code)
                 .describedAs("Timeout during identification should preserve TIMEOUT error code")
                 .isEqualTo("TIMEOUT")
+        }
+    }
+
+    @Test
+    fun malformedPayloadWithUnknownKeyReturnsParseError() {
+        runBlocking {
+            val gateway =
+                FakeTransportGateway(
+                    scenario =
+                        FakeTransportScenario.of(
+                            FakeTransportStep(operation = FakeTransportOperation.CONNECT, success = true),
+                            FakeTransportStep(operation = FakeTransportOperation.WRITE, success = true),
+                            FakeTransportStep(
+                                operation = FakeTransportOperation.READ,
+                                success = true,
+                                readPayload = "MODEL=KM601EU|FW=2.10.4|EXTRA=A1B2C3".encodeToByteArray(),
+                            ),
+                            FakeTransportStep(operation = FakeTransportOperation.DISCONNECT, success = true),
+                        ),
+                )
+
+            val useCase = IdentifyEcuUseCase(transportGateway = gateway)
+            val result =
+                useCase.execute(
+                    request = IdentificationRequest(ecuFamily = "KEIHIN", endpointHint = "BT"),
+                    endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
+                )
+
+            assertThat(result)
+                .describedAs("Unknown identification payload keys should return parse Error state")
+                .isInstanceOf(IdentificationUiState.Error::class.java)
+            val error = result as IdentificationUiState.Error
+            assertThat(error.code)
+                .describedAs("Unknown identification payload keys should map to IDENT_PARSE")
+                .isEqualTo("IDENT_PARSE")
         }
     }
 

@@ -173,8 +173,8 @@ Mitigation:
 
 ## Immediate Next 30 Days
 
-1. Harden diagnostics input validation and negative-path tests.
-2. Expand compatibility matrix from family-level baseline to model-level evidence.
-3. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
-4. Define telemetry export format and retention policy for support diagnostics.
-5. Prepare real transport provider implementation behind the new feature entry contracts.
+1. Expand compatibility matrix from family-level baseline to model-level evidence.
+2. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
+3. Define telemetry export format and retention policy for support diagnostics.
+4. Prepare real transport provider implementation behind the new feature entry contracts.
+5. Add diagnostics session history persistence with audit metadata for support cases.

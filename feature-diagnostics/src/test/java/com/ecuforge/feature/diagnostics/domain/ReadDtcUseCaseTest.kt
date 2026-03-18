@@ -12,6 +12,31 @@ import org.junit.Test
 
 class ReadDtcUseCaseTest {
     @Test
+    fun blankEndpointHintReturnsRequestValidationErrorBeforeTransport() {
+        runBlocking {
+            val gateway =
+                FakeTransportGateway(
+                    scenario = FakeTransportScenario.of(),
+                )
+
+            val useCase = ReadDtcUseCase(transportGateway = gateway)
+            val result =
+                useCase.execute(
+                    request = ReadDtcRequest(ecuFamily = "KEIHIN", endpointHint = " "),
+                    endpoint = TransportEndpoint.Bluetooth("AA:BB:CC:DD:EE:FF"),
+                )
+
+            assertThat(result)
+                .describedAs("Blank endpoint hint should be rejected before DTC transport operations")
+                .isInstanceOf(DtcUiState.Error::class.java)
+            val error = result as DtcUiState.Error
+            assertThat(error.code)
+                .describedAs("Blank endpoint hint should map to REQUEST_INVALID error code")
+                .isEqualTo("REQUEST_INVALID")
+        }
+    }
+
+    @Test
     fun unsupportedFamilyReturnsErrorBeforeTransport() {
         runBlocking {
             val gateway =

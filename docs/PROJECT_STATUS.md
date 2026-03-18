@@ -51,6 +51,8 @@ Diagnostics MVP baseline:
 - Demo transport wiring is isolated by variant (`debug` uses fake transport, `release` returns `DEMO_DISABLED`).
 - Variant-specific tests cover debug and release behavior.
 - App formatter tests cover DTC state rendering (loading, empty, populated, error).
+- Identification and DTC requests now enforce explicit input validation (`REQUEST_INVALID`) before transport access.
+- Identification parser now rejects malformed payloads with unknown/duplicate keys through negative-path tests.
 
 Telemetry baseline:
 - Read-only telemetry snapshot use case added in `feature-telemetry` with input validation and parse error handling.

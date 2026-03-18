@@ -32,6 +32,7 @@ Execution status:
 - Task 10 (Read-only telemetry snapshot baseline): feature use case, app wiring, and tests completed.
 - Task 11 (Read-only telemetry buffered sampling baseline): multi-frame sampling, stability checks, and tests completed.
 - Task 12 (Provider contract baseline): feature entrypoint contracts added to swap demo/fake providers without app-flow changes.
+- Task 13 (Diagnostics input hardening): identification and DTC request validation + negative-path parser tests completed.
 - Next recommended task: expand compatibility matrix with model-level evidence.
 
 ## Priority Queue
