@@ -39,15 +39,16 @@ Execution status:
 - Task 17 (DTC multi-catalog selection baseline): catalog index, vehicle-context selector, and ReadDtc opt-in enrichment completed.
 - Task 18 (Default DTC fallback baseline): TuneECU-derived English fallback dictionary added as `defaultCatalog` with provisional `source.type=unknown`.
 - Task 19 (App DTC selector wiring baseline): app inputs now map to `VehicleCatalogContext` and opt-in catalog descriptions in diagnostics flow.
-- Next recommended task: implement storage path integration for telemetry export artifacts.
+- Task 20 (Telemetry export storage integration baseline): app-private export persistence + retention cleanup + deterministic export ids completed.
+- Next recommended task: expand compatibility evidence with transport/hardware parity traces.
 
 ## Prioritized Pending Checklist
 
-- [ ] Implement telemetry export storage path integration using `telemetry-export.v1` and retention policy.
 - [ ] Expand compatibility evidence with transport/hardware parity traces per model.
 - [ ] Add i18n mapping for DTC `titleKey` resources (English first, other locales later).
 - [ ] Resolve DTC source redistribution/licensing status and update provenance metadata.
 - [ ] Execute phased AGP/Gradle deprecation cleanup to preserve Gradle 10 compatibility.
+- [ ] Prepare real transport provider implementation behind feature provider contracts for non-demo read-only validation.
 
 ## Historical Baseline Task List (Completed)
 

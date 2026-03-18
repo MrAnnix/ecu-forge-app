@@ -73,6 +73,8 @@ Telemetry baseline:
 - Telemetry success state now includes buffered frame metadata for auditable read-only traces.
 - Telemetry export schema `telemetry-export.v1` and deterministic formatter added for support diagnostics artifacts.
 - Retention policy baseline defined (`maxAgeDays=30`, `maxExportCount=100`) with unit coverage.
+- Telemetry export storage integration added with app-private file persistence (`filesDir/telemetry-exports`), deterministic file naming, and retention cleanup flow.
+- Telemetry export persistence now validates successful telemetry state inputs and reports predictable write/list/delete failure outcomes.
 
 Provider contract baseline:
 - Feature entrypoints now expose provider contracts (`DiagnosticsFlowProvider`, `TelemetryFlowProvider`) to replace demo/fake wiring without changing app call sites.
@@ -83,7 +85,6 @@ Provider contract baseline:
 
 Near-term pending items:
 - Expand model-level compatibility evidence from baseline constants/tests to transport-specific parity evidence.
-- Implement storage path integration for telemetry exports using the new schema/policy contracts.
 - Add i18n resource mapping for DTC `titleKey` values before exposing the catalog in UI flows.
 - Verify redistribution terms for external DTC source material before broad release packaging.
 - Prepare real transport provider implementation behind feature provider contracts for non-demo read-only validation.
@@ -108,9 +109,9 @@ Near-term pending items:
 ## Recommended Next Step
 
 Execute in this order:
-1. Implement storage path integration for telemetry export artifacts.
-2. Expand model-level compatibility evidence with transport/hardware parity traces.
-3. Verify DTC dataset redistribution status and align provenance metadata.
+1. Expand model-level compatibility evidence with transport/hardware parity traces.
+2. Verify DTC dataset redistribution status and align provenance metadata.
+3. Prepare real transport provider implementation behind feature provider contracts for non-demo read-only validation.
 4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
 
 ## Resume Pointers

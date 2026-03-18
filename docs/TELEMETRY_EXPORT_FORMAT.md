@@ -54,9 +54,21 @@ Retention decisions use `TelemetryRetentionPolicy.shouldRetain(...)`:
   - age is within `maxAgeDays`, and
   - `newerExportCount < maxExportCount`.
 
+## Storage Integration Baseline
+
+- Storage target: app-private directory `filesDir/telemetry-exports`.
+- Export artifact naming: `telemetry-<exportedAtEpochMillis>.json`.
+- Persistence flow:
+  - validate `TelemetryUiState.Success` contains at least one sample,
+  - serialize deterministic JSON payload,
+  - write export file,
+  - list existing exports,
+  - apply retention cleanup by age/count,
+  - report non-fatal cleanup issues as warnings.
+
 ## Out of Scope
 
 - ECU write/flash workflows.
 - Encryption/signing of exported artifacts.
-- Device-level storage path implementation.
+- Shared/external user-selectable storage paths.
 

@@ -181,8 +181,8 @@ Mitigation:
 
 ## Immediate Next 30 Days
 
-1. Implement telemetry export storage path integration using the v1 schema and retention policy.
-2. Expand model-level compatibility evidence with transport/hardware parity traces.
-3. Resolve DTC dataset redistribution/licensing status and align provenance metadata.
+1. Expand model-level compatibility evidence with transport/hardware parity traces.
+2. Resolve DTC dataset redistribution/licensing status and align provenance metadata.
+3. Prepare real transport provider implementation behind the new feature entry contracts.
 4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
-5. Prepare real transport provider implementation behind the new feature entry contracts.
+5. Add i18n mapping for DTC `titleKey` resources (English first, additional locales later).
