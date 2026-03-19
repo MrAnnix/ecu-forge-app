@@ -63,6 +63,7 @@ Execution status:
 - Task 36 (Telemetry Bluetooth debug gateway pilot): added `DebugBluetoothTelemetryTransportGateway` with deterministic boundary tests and integrated runtime selection via telemetry provider contract.
 - Task 37 (Transport configuration profile analysis): documented required and advanced user-configurable parameters for Bluetooth/USB/WiFi in `docs/TRANSPORT_CONFIGURATION_PROFILE.md`.
 - Task 38 (Transport profile MVP implementation): added app transport profile factory/store, dynamic transport form fields, validation, and runtime profile application into diagnostics/telemetry debug providers.
+- Task 39 (Device settings screen split): moved transport profile editing from inline main screen panel to dedicated `DeviceSettingsActivity` launched from top app bar settings action.
 - Next recommended task: complete transport + searchable vehicle selector UX path, then expand live-capture parity evidence for remaining inferred tuples.
 - Prepared promotion candidate in sprint template: `SIEMENS/SIE-ECU-01 + BLUETOOTH`.
 
