@@ -12,7 +12,7 @@ Define the initial compatibility baseline for read-only diagnostics and make sup
 - Data source for family support: `EcuCompatibilityGate.DEFAULT_SUPPORTED_FAMILIES`
 - Data source for model evidence: `EcuCompatibilityGate.DEFAULT_SUPPORTED_MODELS_BY_FAMILY`
 - Data source for model+transport evidence: `feature-diagnostics/src/main/resources/compatibility/model_transport_parity.v1.json`
-- Upstream technical evidence base: `C:/Users/thean/Repos/TuneECU`
+- Upstream technical evidence base: `.reference/TuneECU`
 
 ## Support Status Legend
 
@@ -52,12 +52,12 @@ Define the initial compatibility baseline for read-only diagnostics and make sup
 
 | ECU family | ECU model | Transport | Evidence status | Runtime support | Evidence reference |
 | --- | --- | --- | --- | --- | --- |
-| `KEIHIN` | `KM601EU` | `BLUETOOTH` | VALIDATED | SUPPORTED | `TuneECU/analysis/fixtures/trace-bt-nominal.json`, `TuneECU/analysis/fixtures/trace-bt-failure.json`, `TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
-| `KEIHIN` | `KM601EU` | `USB` | VALIDATED | SUPPORTED | `TuneECU/analysis/fixtures/trace-usb-nominal.json`, `TuneECU/analysis/fixtures/trace-usb-permission-denied.json`, `TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
-| `KEIHIN` | `KM602EU` | `BLUETOOTH` | VALIDATED | SUPPORTED | `TuneECU/analysis/fixtures/trace-bt-nominal.json`, `TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
-| `SIEMENS` | `SIE-ECU-01` | `BLUETOOTH` | INFERRED | UNSUPPORTED | `TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
-| `MARELLI` | `IAW5AM` | `USB` | INFERRED | UNSUPPORTED | `TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
-| `WALBRO` | `WB-ECU-01` | `USB` | INFERRED | UNSUPPORTED | `TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
+| `KEIHIN` | `KM601EU` | `BLUETOOTH` | VALIDATED | SUPPORTED | `.reference/TuneECU/analysis/fixtures/trace-bt-nominal.json`, `.reference/TuneECU/analysis/fixtures/trace-bt-failure.json`, `.reference/TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
+| `KEIHIN` | `KM601EU` | `USB` | VALIDATED | SUPPORTED | `.reference/TuneECU/analysis/fixtures/trace-usb-nominal.json`, `.reference/TuneECU/analysis/fixtures/trace-usb-permission-denied.json`, `.reference/TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
+| `KEIHIN` | `KM602EU` | `BLUETOOTH` | VALIDATED | SUPPORTED | `.reference/TuneECU/analysis/fixtures/trace-bt-nominal.json`, `.reference/TuneECU/analysis/PHASE0_VALIDATION_REPORT.md` |
+| `SIEMENS` | `SIE-ECU-01` | `BLUETOOTH` | INFERRED | UNSUPPORTED | `.reference/TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `.reference/TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
+| `MARELLI` | `IAW5AM` | `USB` | INFERRED | UNSUPPORTED | `.reference/TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `.reference/TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
+| `WALBRO` | `WB-ECU-01` | `USB` | INFERRED | UNSUPPORTED | `.reference/TuneECU/analysis/TRANSPORT_SEQUENCE_MAP.md`, `.reference/TuneECU/analysis/TRANSPORT_ENTRYPOINTS.md` |
 
 Promotion note:
 - `KEIHIN/KM602EU + BLUETOOTH` is promoted to validated baseline support using existing TuneECU Phase 0 fixture/report references.

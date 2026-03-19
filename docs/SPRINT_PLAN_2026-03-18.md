@@ -13,9 +13,9 @@ Planning anchors:
 - `AGENTS.md`
 
 External continuity anchors (reference only):
-- `C:/Users/thean/Repos/TuneECU/analysis/PHASE0_VALIDATION_REPORT.md`
-- `C:/Users/thean/Repos/TuneECU/analysis/PHASE0_CONTINUATION_HANDOFF.md`
-- `C:/Users/thean/Repos/TuneECU/analysis/phase0/task-0.6/tools/run-all-scenarios-parity.ps1`
+- `.reference/TuneECU/analysis/PHASE0_VALIDATION_REPORT.md`
+- `.reference/TuneECU/analysis/PHASE0_CONTINUATION_HANDOFF.md`
+- `.reference/TuneECU/analysis/phase0/task-0.6/tools/run-all-scenarios-parity.ps1`
 
 ## Hard Constraints
 

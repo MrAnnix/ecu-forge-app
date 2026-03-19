@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "source": {
     "type": "reverse-engineering",
-    "reference": "C:/Users/thean/Repos/TuneECU",
+    "reference": "TuneECU",
     "capturedAt": "2026-03-18"
   },
   "entries": [

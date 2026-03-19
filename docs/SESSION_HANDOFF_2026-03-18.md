@@ -6,9 +6,10 @@ Provide a compact continuity snapshot so work can resume quickly without re-disc
 
 ## Scope Completed In This Session
 
-- Roadmap and execution docs were aligned to current implementation status.
-- DTC i18n strategy was clarified and reverted to JSON-catalog single source for now.
-- Diagnostics transport-backed provider scaffold was introduced behind existing feature contracts.
+- Continuity docs were aligned and expanded for ELM327 transport baseline (Bluetooth, USB cable, WiFi) with user-driven protocol selection.
+- Compatibility tuple promotion and diagnostics/telemetry debug transport-backed pilots were completed and validated.
+- WiFi transport endpoint support was added to transport contracts, fake gateway validation, and diagnostics/telemetry debug gateway pilots.
+- ELM327 implementation reference was added, including architecture, adapter selection guidance, troubleshooting by symptom, and L1/L2 operational runbook.
 
 ## Key Decisions
 
@@ -20,36 +21,59 @@ Provide a compact continuity snapshot so work can resume quickly without re-disc
 - Current DTC descriptions in app flows come from JSON catalog/default ECU payload descriptions.
 - Android titleKey string lookup is deferred until a maintainable generation/mapping workflow exists.
 
-3. Provider rollout strategy.
-- Transport-backed diagnostics provider scaffold exists, but default app behavior remains variant-safe demo wiring.
-- Real adapter wiring is pending and must be enabled in controlled increments.
+3. Transport strategy.
+- ELM327-compatible Bluetooth, USB cable, and WiFi are explicitly documented as baseline options.
+- No protocol is prioritized by policy; user hardware determines selected transport.
+
+4. Provider rollout strategy.
+- Debug pilots now include concrete transport-backed paths for diagnostics and telemetry.
+- Release behavior remains demo-disabled and unchanged.
 
 ## Commits Created
 
-- feaf2de: feat: add transport-backed diagnostics provider scaffold
-- 809021c: chore: align dtc i18n strategy with json catalogs
-- 0e881aa: docs: updated roadmap
+- d59f3bd: feat: add transport-backed debug pilots and ELM327 implementation reference
+- f937a1c: feat: add wifi debug transport pilots for diagnostics and telemetry
+- 0930f65: feat: normalize wifi transport hints in compatibility gate
 
 ## Main Artifacts Added/Updated
 
-Diagnostics provider scaffold:
+Continuity docs:
+- docs/SPRINT_PLAN_2026-03-18.md
 - docs/NEXT_ACTIONS.md
 - docs/PROJECT_STATUS.md
 - docs/ROADMAP.md
-- feature-diagnostics/src/main/java/com/ecuforge/feature/diagnostics/TransportBackedDiagnosticsFlowProvider.kt
-- feature-diagnostics/src/test/java/com/ecuforge/feature/diagnostics/TransportBackedDiagnosticsFlowProviderTest.kt
+- docs/COMPATIBILITY_MATRIX_V0.md
+- README.md
 
-DTC i18n strategy alignment:
-- app/src/main/java/com/ecuforge/app/MainActivity.kt
-- app/src/main/java/com/ecuforge/app/DtcStatusFormatter.kt
-- app/src/main/res/values/strings.xml
-- app/src/test/java/com/ecuforge/app/DtcStatusFormatterTest.kt
-- feature-diagnostics/src/main/java/com/ecuforge/feature/diagnostics/domain/DtcModels.kt
-- feature-diagnostics/src/main/java/com/ecuforge/feature/diagnostics/domain/ReadDtcUseCase.kt
-- feature-diagnostics/src/test/java/com/ecuforge/feature/diagnostics/domain/ReadDtcUseCaseTest.kt
-- docs/NEXT_ACTIONS.md
-- docs/PROJECT_STATUS.md
-- docs/ROADMAP.md
+ELM327 implementation references:
+- docs/ELM327_TRANSPORT_IMPLEMENTATION_REFERENCE.md
+
+Diagnostics transport-backed debug pilots:
+- feature-diagnostics/src/debug/java/com/ecuforge/feature/diagnostics/DebugBluetoothTransportGateway.kt
+- feature-diagnostics/src/debug/java/com/ecuforge/feature/diagnostics/DebugUsbTransportGateway.kt
+- feature-diagnostics/src/debug/java/com/ecuforge/feature/diagnostics/DebugWifiTransportGateway.kt
+- feature-diagnostics/src/debug/java/com/ecuforge/feature/diagnostics/DiagnosticsDemoDelegate.kt
+- feature-diagnostics/src/testDebug/java/com/ecuforge/feature/diagnostics/DebugBluetoothTransportGatewayTest.kt
+- feature-diagnostics/src/testDebug/java/com/ecuforge/feature/diagnostics/DebugUsbTransportGatewayTest.kt
+- feature-diagnostics/src/testDebug/java/com/ecuforge/feature/diagnostics/DebugWifiTransportGatewayTest.kt
+
+Telemetry transport-backed debug pilots:
+- feature-telemetry/src/main/java/com/ecuforge/feature/telemetry/TransportBackedTelemetryFlowProvider.kt
+- feature-telemetry/src/debug/java/com/ecuforge/feature/telemetry/DebugUsbTelemetryTransportGateway.kt
+- feature-telemetry/src/debug/java/com/ecuforge/feature/telemetry/DebugWifiTelemetryTransportGateway.kt
+- feature-telemetry/src/debug/java/com/ecuforge/feature/telemetry/TelemetryDemoDelegate.kt
+- feature-telemetry/src/test/java/com/ecuforge/feature/telemetry/TransportBackedTelemetryFlowProviderTest.kt
+- feature-telemetry/src/testDebug/java/com/ecuforge/feature/telemetry/DebugUsbTelemetryTransportGatewayTest.kt
+- feature-telemetry/src/testDebug/java/com/ecuforge/feature/telemetry/DebugWifiTelemetryTransportGatewayTest.kt
+
+Transport contracts:
+- core/src/main/java/com/ecuforge/core/transport/TransportContracts.kt
+- transport/src/main/java/com/ecuforge/transport/fake/FakeTransportGateway.kt
+- transport/src/test/java/com/ecuforge/transport/fake/FakeTransportGatewayTest.kt
+
+Compatibility gate updates:
+- feature-diagnostics/src/main/java/com/ecuforge/feature/diagnostics/domain/EcuCompatibilityGate.kt
+- feature-diagnostics/src/test/java/com/ecuforge/feature/diagnostics/domain/EcuCompatibilityGateTest.kt
 
 ## Validation Executed
 
@@ -65,28 +89,42 @@ Combined check:
 - ./gradlew :feature-diagnostics:test :app:testDebugUnitTest
 - Result: BUILD SUCCESSFUL
 
+Transport/WiFi increment checks:
+- ./gradlew :core:test :transport:test :feature-diagnostics:testDebugUnitTest
+- Result: BUILD SUCCESSFUL
+- ./gradlew :core:test :transport:test :feature-diagnostics:testDebugUnitTest :feature-telemetry:testDebugUnitTest
+- Result: BUILD SUCCESSFUL
+
 ## Current Pending Work (Priority Order)
 
 1. Promote model/family transport tuples from INFERRED to VALIDATED with live capture parity evidence.
-2. Wire concrete Bluetooth and USB adapters into transport-backed providers for non-demo read-only validation.
+2. Promote debug transport pilots (Bluetooth, USB cable, WiFi) into non-demo hardware-backed validation with reproducible parity evidence.
 3. Resolve DTC redistribution/licensing status and update provenance metadata.
 4. Define maintainable DTC titleKey i18n workflow before enabling Android resource lookup.
 5. Continue phased AGP/Gradle deprecation cleanup for Gradle 10 compatibility.
 
+Parity blocker snapshot:
+- `bt-nominal` parity pass confirmed.
+- Missing/insufficient captures still block closure for `bt-failure`, `usb-nominal`, and `usb-permission-denied`.
+- Capture files without `TransportEvent` JSON entries are non-actionable and must be recaptured while scenario is actively reproduced.
+
 ## Safe Resume Plan (Next Session)
 
-1. Start with transport-backed diagnostics provider integration in debug only.
-- Target: one concrete adapter path first (Bluetooth or USB).
-- Keep release behavior unchanged and demo-safe.
+1. Execute parity capture closure in TuneECU workspace.
+- Capture `bt-failure`, `usb-nominal`, and `usb-permission-denied` with real scenario activity.
+- Re-run `run-all-scenarios-parity.ps1` and verify schema/sequence/payload status for each scenario.
 
-2. Add tests for adapter integration boundaries.
-- Include connection failure, timeout, and unsupported endpoint cases.
-- Keep deterministic behavior and explicit error-code assertions.
+2. Promote the next tuple from inferred to validated using collected evidence.
+- Candidate prepared: `SIEMENS/SIE-ECU-01 + BLUETOOTH`.
+- Update compatibility resource + tests + matrix/status/next-actions in the same cycle.
 
-3. Update continuity docs in the same cycle.
-- docs/PROJECT_STATUS.md
-- docs/NEXT_ACTIONS.md
-- docs/ROADMAP.md
+3. Prepare PR using sprint template.
+- Use `docs/SPRINT_PLAN_2026-03-18.md` section `Parity Promotion PR Template`.
+- Include problem/scope/risk/validation/rollback explicitly.
+
+4. Keep release safety unchanged.
+- No write/flash behavior changes.
+- No release adapter enablement in this increment.
 
 ## Guardrails Reminder
 
@@ -94,3 +132,9 @@ Combined check:
 - Add tests for every behavior change.
 - Avoid unrelated refactors.
 - Keep map/write/flash blocked until Phase 4/5 safety gates are complete.
+
+## End-of-Day State
+
+- Branch: `main`
+- Working tree: clean
+- Latest commit: `0930f65`
