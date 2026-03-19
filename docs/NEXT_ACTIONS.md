@@ -58,6 +58,11 @@ Execution status:
 - Task 31 (Diagnostics WiFi debug gateway pilot): added `DebugWifiTransportGateway` with deterministic boundary tests (invalid endpoint, connect failure, read timeout); non-demo promotion remains pending parity/hardware evidence.
 - Task 32 (Telemetry WiFi debug gateway pilot): added `DebugWifiTelemetryTransportGateway` with deterministic boundary tests (invalid endpoint, connect failure, read timeout); non-demo promotion remains pending parity/hardware evidence.
 - Task 33 (Compatibility WiFi hint normalization): updated `EcuCompatibilityGate` transport normalization to accept `WIFI`/`WI-FI` hints while still requiring validated tuple evidence for runtime support.
+- Task 34 (App transport selector wiring baseline): added app-level transport selector mapping and feature-entry transport configuration hooks so diagnostics and telemetry flows can switch between Bluetooth/USB/WiFi in debug read-only mode.
+- Task 35 (Searchable vehicle selector baseline): migrated make/model/year inputs to searchable dropdown UX with deterministic option lists for read-only DTC catalog context mapping.
+- Task 36 (Telemetry Bluetooth debug gateway pilot): added `DebugBluetoothTelemetryTransportGateway` with deterministic boundary tests and integrated runtime selection via telemetry provider contract.
+- Task 37 (Transport configuration profile analysis): documented required and advanced user-configurable parameters for Bluetooth/USB/WiFi in `docs/TRANSPORT_CONFIGURATION_PROFILE.md`.
+- Task 38 (Transport profile MVP implementation): added app transport profile factory/store, dynamic transport form fields, validation, and runtime profile application into diagnostics/telemetry debug providers.
 - Next recommended task: complete transport + searchable vehicle selector UX path, then expand live-capture parity evidence for remaining inferred tuples.
 - Prepared promotion candidate in sprint template: `SIEMENS/SIE-ECU-01 + BLUETOOTH`.
 
@@ -81,6 +86,7 @@ Parity blocker snapshot (2026-03-18):
 ## Prioritized Pending Checklist
 
 - [ ] Complete end-to-end read-only app flow integration: transport selector -> searchable vehicle selector -> DTC retrieval -> telemetry retrieval.
+- [x] Implement transport configuration profile MVP fields and validation in app flow (Bluetooth/USB/WiFi required fields).
 - [ ] Promote additional family/model transport tuples from `INFERRED` to `VALIDATED` using live capture parity evidence.
 - [ ] Promote debug adapter pilots into non-demo hardware-backed validation paths with reproducible transport verification evidence (ELM327 Bluetooth, USB cable, and WiFi) based on user-available hardware.
 - [ ] Execute phased AGP/Gradle deprecation cleanup to preserve Gradle 10 compatibility.

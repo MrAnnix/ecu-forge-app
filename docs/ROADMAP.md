@@ -96,6 +96,7 @@ Goal:
 Deliverables:
 - ECU identification and compatibility check flow.
 - Transport selector flow for ELM327-compatible Bluetooth, USB cable, and WiFi adapter paths.
+- Transport configuration profile flow for required user parameters per adapter type (Bluetooth/USB/WiFi).
 - Searchable vehicle selector (make/model/year) used by diagnostics catalog resolution.
 - Read-only DTC retrieval and display.
 - Read-only live sensor stream with buffered sampling and session logs.
@@ -103,6 +104,7 @@ Deliverables:
 
 Acceptance criteria:
 - End-to-end read-only flow demonstrated on supported ECU targets from app entry through transport selection, vehicle selection, DTC retrieval, and telemetry retrieval.
+- Required transport settings are validated before connect attempts with predictable user-visible errors.
 - Negative-path handling for unsupported ECU, transport loss, and timeouts.
 - User-visible error states are explicit and actionable.
 
@@ -230,3 +232,4 @@ Mitigation:
 3. Promote completed debug adapter pilots (diagnostics and telemetry) into non-demo hardware-backed validation increments (ELM327 Bluetooth, USB cable, and WiFi) according to user-available hardware.
 4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
 5. Keep DTC licensing/provenance as a pre-release packaging gate while continuing read-only diagnostics implementation.
+6. Deliver transport configuration profile MVP according to `docs/TRANSPORT_CONFIGURATION_PROFILE.md`.

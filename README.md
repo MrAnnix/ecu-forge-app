@@ -93,6 +93,7 @@ The repository now includes a baseline Android project with:
 - [Project Status](docs/PROJECT_STATUS.md)
 - [Module Dependency Rules](docs/MODULE_DEPENDENCY_RULES.md)
 - [Compatibility Matrix v0](docs/COMPATIBILITY_MATRIX_V0.md)
+- [Transport Configuration Profile](docs/TRANSPORT_CONFIGURATION_PROFILE.md)
 - [ELM327 Transport Implementation Reference](docs/ELM327_TRANSPORT_IMPLEMENTATION_REFERENCE.md)
 
 ## Agent Working Contract

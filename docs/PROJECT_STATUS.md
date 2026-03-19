@@ -69,6 +69,11 @@ Diagnostics MVP baseline:
 - Selection behavior and integration notes documented in `docs/DTC_CATALOG_SELECTION.md`.
 - English UX copy baseline for vehicle selector and DTC catalog messaging documented in `docs/DTC_UX_COPY.md`.
 - App vehicle selector baseline is now wired to diagnostics DTC flow (`VehicleCatalogContext` + `preferCatalogDescriptions`) with mapper tests in `app` and contract coverage in `feature-diagnostics`.
+- App read-only transport selector baseline is now wired to diagnostics and telemetry feature entrypoints (Bluetooth, USB cable, WiFi) through transport-configurable provider contracts in debug flows.
+- App vehicle selector baseline now uses searchable dropdown inputs for make/model/year to support deterministic catalog context selection in read-only DTC flows.
+- Transport configuration profile baseline is documented in `docs/TRANSPORT_CONFIGURATION_PROFILE.md` with required/advanced parameters and validation rules per adapter type.
+- App transport configuration MVP fields are now implemented (Bluetooth MAC, USB vendor/product IDs, WiFi host/port, and timeout inputs) with deterministic validation and app-private profile persistence.
+- Diagnostics and telemetry debug providers now accept explicit read-only profile overrides so app-configured endpoints are applied at runtime.
 - App DTC rendering currently uses catalog/ECU descriptions from JSON datasets only; Android `titleKey` string lookup is intentionally deferred.
 
 Telemetry baseline:
@@ -95,6 +100,7 @@ Provider contract baseline:
 - Transport-backed telemetry provider scaffold is now available for read-only telemetry flows (`TransportBackedTelemetryFlowProvider`) behind existing feature contracts.
 - Debug telemetry default provider now pilots concrete USB adapter wiring (`DebugUsbTelemetryTransportGateway`) with deterministic boundary tests (invalid endpoint, connection failure, read timeout) while preserving release `DEMO_DISABLED` behavior.
 - Debug telemetry WiFi gateway pilot (`DebugWifiTelemetryTransportGateway`) is now available with deterministic boundary tests (invalid endpoint, connection failure, read timeout); default debug path remains USB until parity evidence promotion.
+- Debug telemetry Bluetooth gateway pilot (`DebugBluetoothTelemetryTransportGateway`) is now available with deterministic boundary tests (invalid endpoint, connection failure, read timeout) and transport-selector integration.
 
 ## In Progress / Pending
 
