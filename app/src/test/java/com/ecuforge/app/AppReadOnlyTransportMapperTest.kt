@@ -31,4 +31,3 @@ class AppReadOnlyTransportMapperTest {
             .isEqualTo(AppReadOnlyTransport.USB)
     }
 }
-

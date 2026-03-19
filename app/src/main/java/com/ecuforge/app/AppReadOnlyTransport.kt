@@ -49,4 +49,3 @@ internal fun AppReadOnlyTransport.toTelemetryTransport(): TelemetryReadOnlyTrans
         AppReadOnlyTransport.WIFI -> TelemetryReadOnlyTransport.WIFI
     }
 }
-

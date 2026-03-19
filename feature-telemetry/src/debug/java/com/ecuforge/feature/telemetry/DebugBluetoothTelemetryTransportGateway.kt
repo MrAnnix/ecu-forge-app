@@ -117,4 +117,3 @@ internal class DebugBluetoothTelemetryTransportGateway(
         return TransportOperationResult.success(payload)
     }
 }
-

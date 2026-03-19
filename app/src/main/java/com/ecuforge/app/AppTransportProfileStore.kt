@@ -101,4 +101,3 @@ internal class AppTransportProfileStore(context: Context) {
         const val DEFAULT_WIFI_PORT: Int = 35000
     }
 }
-

@@ -185,7 +185,11 @@ internal object AppTransportProfileFactory {
         val validation: AppTransportProfileValidationResult,
     )
 
-    private fun parseTimeout(label: String, value: String, errors: MutableList<String>): Int? {
+    private fun parseTimeout(
+        label: String,
+        value: String,
+        errors: MutableList<String>,
+    ): Int? {
         val parsed = value.trim().toIntOrNull()
         if (parsed == null || parsed !in MIN_TIMEOUT_MS..MAX_TIMEOUT_MS) {
             errors.add("$label must be in range $MIN_TIMEOUT_MS..$MAX_TIMEOUT_MS ms")
@@ -254,4 +258,3 @@ internal fun AppTransportProfile.toTelemetryConnectionSettings(): TelemetryReadO
             )
     }
 }
-
