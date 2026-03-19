@@ -12,6 +12,9 @@
     <string name="device_settings_title">Device settings</string>
     <string name="device_settings_save">Save device settings</string>
     <string name="device_settings_saved">Device settings saved.</string>
+    <string name="active_transport_summary_bluetooth">Using Bluetooth (%1$s)</string>
+    <string name="active_transport_summary_usb">Using USB cable (VID %1$d / PID %2$d)</string>
+    <string name="active_transport_summary_wifi">Using WiFi (%1$s:%2$d)</string>
     <string name="transport_primary_label">Primary transport value</string>
     <string name="transport_secondary_label">Secondary transport value</string>
     <string name="transport_connect_timeout_label">Connection timeout (ms)</string>

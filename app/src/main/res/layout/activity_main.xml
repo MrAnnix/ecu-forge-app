@@ -64,6 +64,17 @@
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/activeTransportSummaryText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transportSelectorInputLayout"
+        tools:text="Using USB cable (VID 1027 / PID 48960)" />
+
     <Button
         android:id="@+id/identifyButton"
         android:layout_width="0dp"
@@ -72,7 +83,7 @@
         android:text="@string/diagnostics_action_identify"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/transportSelectorInputLayout" />
+        app:layout_constraintTop_toBottomOf="@id/activeTransportSummaryText" />
 
     <TextView
         android:id="@+id/dtcStatusText"

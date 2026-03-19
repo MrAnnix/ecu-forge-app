@@ -83,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         val selectedTransport = transportProfileStore.loadSelectedTransport()
         binding.transportSelectorInput.setText(transportLabelFor(selectedTransport), false)
+        renderActiveTransportSummary(selectedTransport)
     }
 
     /**
@@ -369,6 +370,13 @@ class MainActivity : AppCompatActivity() {
                 binding.transportSelectorInput.showDropDown()
             }
         }
+        binding.transportSelectorInput.setOnItemClickListener { _, _, _, _ ->
+            val selectedTransport =
+                AppReadOnlyTransportMapper.map(
+                    binding.transportSelectorInput.text?.toString().orEmpty(),
+                )
+            renderActiveTransportSummary(selectedTransport)
+        }
 
         binding.vehicleMakeInput.setAdapter(
             ArrayAdapter(
@@ -397,6 +405,7 @@ class MainActivity : AppCompatActivity() {
             transportLabelFor(selectedTransport),
             false,
         )
+        renderActiveTransportSummary(selectedTransport)
     }
 
     /**
@@ -420,6 +429,37 @@ class MainActivity : AppCompatActivity() {
             profile.toTelemetryConnectionSettings(),
         )
         return true
+    }
+
+    /**
+     * Renders a concise summary of the active saved transport profile.
+     */
+    private fun renderActiveTransportSummary(selectedTransport: AppReadOnlyTransport) {
+        val profile = transportProfileStore.load(selectedTransport)
+        val summaryText =
+            when (profile) {
+                is AppTransportProfile.Bluetooth ->
+                    getString(
+                        R.string.active_transport_summary_bluetooth,
+                        profile.macAddress,
+                    )
+
+                is AppTransportProfile.Usb ->
+                    getString(
+                        R.string.active_transport_summary_usb,
+                        profile.vendorId,
+                        profile.productId,
+                    )
+
+                is AppTransportProfile.Wifi ->
+                    getString(
+                        R.string.active_transport_summary_wifi,
+                        profile.host,
+                        profile.port,
+                    )
+            }
+
+        binding.activeTransportSummaryText.text = summaryText
     }
 
     private fun transportLabelFor(transport: AppReadOnlyTransport): String {
