@@ -75,6 +75,7 @@ Diagnostics MVP baseline:
 - App transport configuration MVP fields are now implemented (Bluetooth MAC, USB vendor/product IDs, WiFi host/port, and timeout inputs) with deterministic validation and app-private profile persistence.
 - Device transport configuration now has a dedicated app screen (`DeviceSettingsActivity`) opened from the top-right settings action, keeping the main diagnostics screen focused on read-only operations.
 - Diagnostics and telemetry debug providers now accept explicit read-only profile overrides so app-configured endpoints are applied at runtime.
+- Main app flow now includes deterministic read-only prechecks: DTC and telemetry actions require successful identification first; DTC catalog opt-in requires make/model context.
 - App DTC rendering currently uses catalog/ECU descriptions from JSON datasets only; Android `titleKey` string lookup is intentionally deferred.
 
 Telemetry baseline:

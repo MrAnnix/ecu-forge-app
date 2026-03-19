@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var exportUseCase: PersistTelemetryExportUseCase
     private lateinit var transportProfileStore: AppTransportProfileStore
     private var latestTelemetrySuccessState: TelemetryUiState.Success? = null
+    private var hasSuccessfulIdentification: Boolean = false
 
     /**
      * Initializes the view binding and registers UI actions.
@@ -134,6 +135,17 @@ class MainActivity : AppCompatActivity() {
      * Runs read-only DTC retrieval in debug-enabled app builds.
      */
     private fun runReadOnlyDtc() {
+        val dtcPrecheck = validateReadOnlyPrecheck(ReadOnlyFlowPreflightValidator.Action.DTC)
+        if (dtcPrecheck != null) {
+            renderDtcState(
+                DtcUiState.Error(
+                    code = dtcPrecheck.code,
+                    message = dtcPrecheck.message,
+                ),
+            )
+            return
+        }
+
         if (!applyTransportConfiguration()) {
             return
         }
@@ -189,6 +201,17 @@ class MainActivity : AppCompatActivity() {
      * Runs read-only telemetry snapshot retrieval in debug-enabled app builds.
      */
     private fun runReadOnlyTelemetry() {
+        val telemetryPrecheck = validateReadOnlyPrecheck(ReadOnlyFlowPreflightValidator.Action.TELEMETRY)
+        if (telemetryPrecheck != null) {
+            renderTelemetryState(
+                TelemetryUiState.Error(
+                    code = telemetryPrecheck.code,
+                    message = telemetryPrecheck.message,
+                ),
+            )
+            return
+        }
+
         if (!applyTransportConfiguration()) {
             return
         }
@@ -294,6 +317,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun renderIdentificationState(state: IdentificationUiState) {
         binding.statusText.text = IdentificationStatusFormatter.format(state)
+        hasSuccessfulIdentification = state is IdentificationUiState.Success
     }
 
     /**
@@ -469,4 +493,50 @@ class MainActivity : AppCompatActivity() {
             AppReadOnlyTransport.WIFI -> getString(R.string.transport_option_wifi)
         }
     }
+
+    /**
+     * Validates preconditions before read-only actions and maps deterministic failures.
+     */
+    private fun validateReadOnlyPrecheck(action: ReadOnlyFlowPreflightValidator.Action): PrecheckFailure? {
+        val result =
+            ReadOnlyFlowPreflightValidator.validate(
+                request =
+                    ReadOnlyFlowPreflightValidator.Request(
+                        action = action,
+                        hasSuccessfulIdentification = hasSuccessfulIdentification,
+                        catalogOptIn = binding.useCatalogDescriptionsCheckbox.isChecked,
+                        vehicleMake = binding.vehicleMakeInput.text?.toString().orEmpty(),
+                        vehicleModel = binding.vehicleModelInput.text?.toString().orEmpty(),
+                    ),
+            )
+
+        return if (result is ReadOnlyFlowPreflightValidator.Result.Failure) {
+            PrecheckFailure(
+                code = result.code,
+                message = precheckMessage(result.code),
+            )
+        } else {
+            null
+        }
+    }
+
+    /**
+     * Maps stable precheck failure code to user-visible message.
+     */
+    private fun precheckMessage(code: String): String {
+        return when (code) {
+            ReadOnlyFlowPreflightValidator.PRECHECK_IDENTIFICATION_REQUIRED ->
+                getString(R.string.precheck_identification_required)
+
+            ReadOnlyFlowPreflightValidator.PRECHECK_VEHICLE_SELECTION_REQUIRED ->
+                getString(R.string.precheck_vehicle_selection_required)
+
+            else -> getString(R.string.precheck_unknown_failure)
+        }
+    }
+
+    private data class PrecheckFailure(
+        val code: String,
+        val message: String,
+    )
 }
