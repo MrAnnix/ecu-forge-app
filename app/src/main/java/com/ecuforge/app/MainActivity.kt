@@ -353,6 +353,15 @@ class MainActivity : AppCompatActivity() {
                 transportOptions,
             ),
         )
+        binding.transportSelectorInput.keyListener = null
+        binding.transportSelectorInput.setOnClickListener {
+            binding.transportSelectorInput.showDropDown()
+        }
+        binding.transportSelectorInput.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.transportSelectorInput.showDropDown()
+            }
+        }
         binding.transportSelectorInput.setOnItemClickListener { _, _, _, _ ->
             val selectedTransport =
                 AppReadOnlyTransportMapper.map(
