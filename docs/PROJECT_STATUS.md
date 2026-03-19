@@ -1,17 +1,17 @@
 # ECU Forge Project Status
 
 Last updated:
-- 2026-03-18
+- 2026-03-19
 
 ## Summary
 
-Project is in read-only feature consolidation.
+Project is in read-only diagnostics completion.
 
 Current position:
 - Phase 0 complete (architecture and CI baseline stable).
 - Phase 1 complete for baseline scope (transport/session contracts and deterministic fake adapters).
-- Phase 2 in progress with identification, DTC read, telemetry read, and DTC catalog selection baseline.
-- Phase 3 started through telemetry export schema and reliability hardening tasks.
+- Phase 2 in progress with identification, DTC read, telemetry read, and DTC catalog selection baseline; current delivery focus is full app UX completion for this read-only path.
+- Next gated write phase is service-light reset only; broader write/map scope remains blocked.
 
 ## Completed Work
 
@@ -99,9 +99,10 @@ Provider contract baseline:
 ## In Progress / Pending
 
 Near-term pending items:
+- Complete end-to-end app UX for read-only diagnostics: transport selector (Bluetooth/USB/WiFi), searchable vehicle selector (make/model/year), DTC retrieval, and telemetry retrieval.
 - Expand transport-specific parity evidence from baseline tuples to additional validated models and fresh live captures.
 - Add Android i18n resource mapping for DTC `titleKey` values once generation/maintenance workflow is defined.
-- Verify redistribution terms for external DTC source material before broad release packaging.
+- Verify redistribution terms for external DTC source material before broad release packaging (tracked as release gate, not current implementation blocker).
 - Promote debug adapter pilots into non-demo hardware-backed validation paths (ELM327 Bluetooth, USB cable, and WiFi) with reproducible verification evidence aligned to user-selected hardware.
 
 Parity evidence blocker snapshot (2026-03-18):
@@ -121,6 +122,7 @@ Parity evidence blocker snapshot (2026-03-18):
 - Read-only identification is wired and testable, but still demo-scaffolded pending real transport provider wiring.
 - Model-level baseline evidence exists, but transport/hardware parity validation by model remains pending.
 - Live parity closure is currently gated by missing TuneECU capture files for 3 of 4 baseline scenarios.
+- Vehicle selector UX currently provides baseline context wiring; searchable make/model/year UX completion and validation evidence are still pending.
 
 ## Status Update Policy
 
@@ -129,10 +131,11 @@ Parity evidence blocker snapshot (2026-03-18):
 ## Recommended Next Step
 
 Execute in this order:
-1. Expand transport parity evidence for remaining inferred tuples with fresh live-capture traces.
-2. Verify DTC dataset redistribution status and align provenance metadata.
+1. Complete full read-only diagnostics UX path (transport selector -> searchable vehicle selector -> DTC retrieval -> telemetry retrieval) and validate end-to-end behavior.
+2. Expand transport parity evidence for remaining inferred tuples with fresh live-capture traces.
 3. Promote debug adapter pilots into non-demo hardware-backed validation paths with reproducible verification evidence.
 4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
+5. Keep service-light reset as the first controlled write increment after read-only completion; keep broader write/flash blocked.
 
 ## Resume Pointers
 

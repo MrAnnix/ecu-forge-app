@@ -27,19 +27,21 @@ The roadmap is split into five tracks that progress in parallel:
 - Map safety and integrity
 - Quality, security, and delivery pipeline
 
-## Progress Snapshot (2026-03-18)
+## Progress Snapshot (2026-03-19)
 
 - Phase 0: complete.
 - Phase 1: complete for baseline scope.
-- Phase 2: in progress (identification, DTC, telemetry read, and DTC catalog selection are baseline-complete; pending real transport providers and broader parity validation).
-- Phase 3: started (telemetry export schema, policy, and storage integration baseline complete; reliability hardening pending).
-- Phase 4-5: not started (intentionally blocked by safety gates).
+- Phase 2: in progress (identification, DTC, telemetry read, and DTC catalog selection are baseline-complete; next priority is full app flow completion with transport + vehicle selection UX and hardware-backed validation).
+- Phase 3: not started (reserved for controlled service-light reset write enablement).
+- Phase 4: started (telemetry export schema, policy, and storage integration baseline complete; reliability hardening pending).
+- Phase 5-6: not started (write/map tracks intentionally blocked by safety gates).
 
 ## Functional Readiness Coverage (Audit 2026-03-18)
 
 This section validates that remaining work is documented explicitly for both release scopes.
 
 Read-only production-ready scope (no write/flash):
+- End-to-end user flow is documented: app entry -> transport selection (Bluetooth/USB/WiFi) -> searchable vehicle selection (make/model/year) -> DTC retrieval -> telemetry retrieval.
 - Transport parity evidence expansion is documented (validated live captures for additional model/family tuples).
 - Real transport provider implementation behind feature contracts is documented.
 - DTC i18n mapping for `titleKey` resources is documented.
@@ -93,16 +95,35 @@ Goal:
 
 Deliverables:
 - ECU identification and compatibility check flow.
+- Transport selector flow for ELM327-compatible Bluetooth, USB cable, and WiFi adapter paths.
+- Searchable vehicle selector (make/model/year) used by diagnostics catalog resolution.
 - Read-only DTC retrieval and display.
 - Read-only live sensor stream with buffered sampling and session logs.
 - Session history storage for support diagnostics.
 
 Acceptance criteria:
-- End-to-end read-only flow demonstrated on supported ECU targets.
+- End-to-end read-only flow demonstrated on supported ECU targets from app entry through transport selection, vehicle selection, DTC retrieval, and telemetry retrieval.
 - Negative-path handling for unsupported ECU, transport loss, and timeouts.
 - User-visible error states are explicit and actionable.
 
-## Phase 3 - Telemetry and Reliability Hardening (Mid Term)
+## Phase 3 - Service-Light Reset Enablement (Mid Term, Controlled Write Scope)
+
+Goal:
+- Introduce the first controlled ECU write operation: service light reset.
+
+Deliverables:
+- Dedicated write gate for service-light reset with explicit user confirmation.
+- Preconditions before reset (stable connection, validated compatibility tuple, session state checks).
+- Timestamped audit logging for request/result/failure path.
+- Deterministic failure handling and rollback guidance in UX copy.
+
+Acceptance criteria:
+- Reset command remains disabled unless all pre-checks are satisfied.
+- Negative-path tests cover connection drop, incompatible ECU, timeout, and denied pre-checks.
+- Operator-visible outcomes are explicit and reproducible.
+- No map/write/flash broadening in this phase.
+
+## Phase 4 - Telemetry and Reliability Hardening (Mid Term)
 
 Goal:
 - Improve observability, runtime resilience, and UX quality.
@@ -118,7 +139,7 @@ Acceptance criteria:
 - No critical ANR/crash regressions in telemetry workflows.
 - Deterministic export format validated in tests.
 
-## Phase 4 - Map Backup and Restore Safety (Mid to Long Term)
+## Phase 5 - Map Backup and Restore Safety (Mid to Long Term)
 
 Goal:
 - Introduce safe map operations with backup-first guarantees.
@@ -134,7 +155,7 @@ Acceptance criteria:
 - Failure-mode scenarios tested and documented.
 - Clear audit trail for critical ECU operations.
 
-## Phase 5 - Controlled Write/Flash Enablement (Long Term)
+## Phase 6 - Controlled Write/Flash and Map Enablement (Long Term)
 
 Goal:
 - Enable write/flash features progressively with strict safeguards.
@@ -171,10 +192,13 @@ M2 - Core transport ready:
 M3 - Read-only MVP shipped:
 - Identification, DTC read, telemetry read live.
 
-M4 - Map safety baseline:
+M4 - Service-light reset controlled write baseline:
+- Service reset pre-check gate and audit path complete.
+
+M5 - Map safety baseline:
 - Backup/restore safe flow complete.
 
-M5 - Write/flash staged:
+M6 - Write/flash staged:
 - Feature-flagged rollout with full safety evidence.
 
 ## Risks and Mitigations
@@ -201,8 +225,8 @@ Mitigation:
 
 ## Immediate Next 30 Days
 
-1. Promote additional non-KEIHIN family/model tuples from inferred to validated using live-capture transport parity evidence.
-2. Resolve DTC dataset redistribution/licensing status and align provenance metadata.
+1. Complete read-only app flow UX integration: transport selector + searchable vehicle selector + DTC and telemetry retrieval in one user path.
+2. Promote additional non-KEIHIN family/model tuples from inferred to validated using live-capture transport parity evidence.
 3. Promote completed debug adapter pilots (diagnostics and telemetry) into non-demo hardware-backed validation increments (ELM327 Bluetooth, USB cable, and WiFi) according to user-available hardware.
 4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
-5. Define a maintainable DTC `titleKey` i18n workflow before enabling Android resource lookup at scale.
+5. Keep DTC licensing/provenance as a pre-release packaging gate while continuing read-only diagnostics implementation.

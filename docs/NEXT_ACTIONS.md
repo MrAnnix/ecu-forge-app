@@ -10,7 +10,7 @@ Current sprint brief: `docs/SPRINT_PLAN_2026-03-18.md`.
 ## Current Focus
 
 Current target phase:
-- Phase 2 -> Phase 3 transition (read-only diagnostics and telemetry hardening)
+- Phase 2 completion (full read-only diagnostics user flow) -> Phase 3 preparation (controlled service-light reset)
 
 Safety validation rules:
 - Validate each milestone increment in read-only mode first.
@@ -18,7 +18,11 @@ Safety validation rules:
 - Keep write/flash blocked until dedicated safety validation is completed.
 
 Current objective:
-- Convert read-only baselines into app-visible workflows with auditable fallback behavior and storage integration.
+- Deliver a fully functional read-only diagnostics path in app-visible UX:
+  - transport selection (Bluetooth, USB cable, WiFi),
+  - searchable vehicle selection (make/model/year),
+  - full DTC retrieval,
+  - telemetry retrieval.
 
 Execution status:
 - Task 1 (Module baseline): completed.
@@ -54,7 +58,7 @@ Execution status:
 - Task 31 (Diagnostics WiFi debug gateway pilot): added `DebugWifiTransportGateway` with deterministic boundary tests (invalid endpoint, connect failure, read timeout); non-demo promotion remains pending parity/hardware evidence.
 - Task 32 (Telemetry WiFi debug gateway pilot): added `DebugWifiTelemetryTransportGateway` with deterministic boundary tests (invalid endpoint, connect failure, read timeout); non-demo promotion remains pending parity/hardware evidence.
 - Task 33 (Compatibility WiFi hint normalization): updated `EcuCompatibilityGate` transport normalization to accept `WIFI`/`WI-FI` hints while still requiring validated tuple evidence for runtime support.
-- Next recommended task: expand live-capture parity evidence for remaining inferred tuples, then close DTC redistribution/licensing status.
+- Next recommended task: complete transport + searchable vehicle selector UX path, then expand live-capture parity evidence for remaining inferred tuples.
 - Prepared promotion candidate in sprint template: `SIEMENS/SIE-ECU-01 + BLUETOOTH`.
 
 Parity blocker snapshot (2026-03-18):
@@ -76,11 +80,13 @@ Parity blocker snapshot (2026-03-18):
 
 ## Prioritized Pending Checklist
 
+- [ ] Complete end-to-end read-only app flow integration: transport selector -> searchable vehicle selector -> DTC retrieval -> telemetry retrieval.
 - [ ] Promote additional family/model transport tuples from `INFERRED` to `VALIDATED` using live capture parity evidence.
-- [ ] Define and implement a maintainable workflow for DTC `titleKey` i18n (generation or controlled mapping) before enabling Android string lookup.
-- [ ] Resolve DTC source redistribution/licensing status and update provenance metadata.
-- [ ] Execute phased AGP/Gradle deprecation cleanup to preserve Gradle 10 compatibility.
 - [ ] Promote debug adapter pilots into non-demo hardware-backed validation paths with reproducible transport verification evidence (ELM327 Bluetooth, USB cable, and WiFi) based on user-available hardware.
+- [ ] Execute phased AGP/Gradle deprecation cleanup to preserve Gradle 10 compatibility.
+- [ ] Define and implement a maintainable workflow for DTC `titleKey` i18n (generation or controlled mapping) before enabling Android string lookup.
+- [ ] Track DTC redistribution/licensing closure as a pre-release packaging gate (non-blocking for ongoing read-only development).
+- [ ] Keep service-light reset and all broader write/flash capabilities blocked until read-only completion criteria and safety gates are explicitly met.
 
 ## Historical Baseline Task List (Completed)
 
@@ -163,6 +169,7 @@ Do not start map write/flash work until all are true:
 - Backup-first policy and pre-check gates are implemented.
 - Compatibility matrix rules are in place.
 - Failure and rollback behavior are documented and tested.
+- Read-only diagnostics flow is fully functional in app UX (transport select + vehicle select + DTC + telemetry) with reproducible validation evidence.
 
 ## Daily Working Rhythm
 
