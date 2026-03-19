@@ -31,7 +31,7 @@ The roadmap is split into five tracks that progress in parallel:
 
 - Phase 0: complete.
 - Phase 1: complete for baseline scope.
-- Phase 2: in progress (identification, DTC, telemetry read, and DTC catalog selection are baseline-complete; next priority is full app flow completion with transport + vehicle selection UX and hardware-backed validation).
+- Phase 2: in progress (identification, DTC, telemetry read, DTC catalog selection, read-only preflight validation, and transport permission gating are baseline-complete; next priority is permission-result UX completion and hardware-backed validation).
 - Phase 3: not started (reserved for controlled service-light reset write enablement).
 - Phase 4: started (telemetry export schema, policy, and storage integration baseline complete; reliability hardening pending).
 - Phase 5-6: not started (write/map tracks intentionally blocked by safety gates).
@@ -227,9 +227,9 @@ Mitigation:
 
 ## Immediate Next 30 Days
 
-1. Complete read-only app flow UX integration: transport selector + searchable vehicle selector + DTC and telemetry retrieval in one user path.
+1. Complete read-only permission UX loop for Bluetooth paths (request result handling, denied-permanently guidance, and retry path messaging).
 2. Promote additional non-KEIHIN family/model tuples from inferred to validated using live-capture transport parity evidence.
 3. Promote completed debug adapter pilots (diagnostics and telemetry) into non-demo hardware-backed validation increments (ELM327 Bluetooth, USB cable, and WiFi) according to user-available hardware.
 4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
 5. Keep DTC licensing/provenance as a pre-release packaging gate while continuing read-only diagnostics implementation.
-6. Deliver transport configuration profile MVP according to `docs/TRANSPORT_CONFIGURATION_PROFILE.md`.
+6. Extend read-only UX validation evidence for transport + vehicle selection + permission gating continuity.

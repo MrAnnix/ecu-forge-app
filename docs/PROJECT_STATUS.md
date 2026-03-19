@@ -76,6 +76,9 @@ Diagnostics MVP baseline:
 - Device transport configuration now has a dedicated app screen (`DeviceSettingsActivity`) opened from the top-right settings action, keeping the main diagnostics screen focused on read-only operations.
 - Diagnostics and telemetry debug providers now accept explicit read-only profile overrides so app-configured endpoints are applied at runtime.
 - Main app flow now includes deterministic read-only prechecks: DTC and telemetry actions require successful identification first; DTC catalog opt-in requires make/model context.
+- Main app flow now includes deterministic action availability gating: DTC and telemetry actions are disabled until identification succeeds.
+- Read-only transport permission precheck is now enforced before identification, DTC, and telemetry actions with deterministic failure mapping and runtime permission request trigger.
+- Android manifest now declares Bluetooth and legacy location permissions required for ELM327-compatible Bluetooth paths (`BLUETOOTH_CONNECT`, `BLUETOOTH_SCAN`, and `ACCESS_FINE_LOCATION` for API <= 30).
 - App DTC rendering currently uses catalog/ECU descriptions from JSON datasets only; Android `titleKey` string lookup is intentionally deferred.
 
 Telemetry baseline:
@@ -108,6 +111,7 @@ Provider contract baseline:
 
 Near-term pending items:
 - Complete end-to-end app UX for read-only diagnostics: transport selector (Bluetooth/USB/WiFi), searchable vehicle selector (make/model/year), DTC retrieval, and telemetry retrieval.
+- Complete permission-result UX loop for read-only Bluetooth transport (handle deny/permanently-deny outcomes and settings guidance).
 - Expand transport-specific parity evidence from baseline tuples to additional validated models and fresh live captures.
 - Add Android i18n resource mapping for DTC `titleKey` values once generation/maintenance workflow is defined.
 - Verify redistribution terms for external DTC source material before broad release packaging (tracked as release gate, not current implementation blocker).
@@ -131,6 +135,7 @@ Parity evidence blocker snapshot (2026-03-18):
 - Model-level baseline evidence exists, but transport/hardware parity validation by model remains pending.
 - Live parity closure is currently gated by missing TuneECU capture files for 3 of 4 baseline scenarios.
 - Vehicle selector UX currently provides baseline context wiring; searchable make/model/year UX completion and validation evidence are still pending.
+- Read-only transport permission precheck is implemented, but post-request decision UX is still pending (explicit deny/permanently-deny guidance).
 
 ## Status Update Policy
 
@@ -140,10 +145,11 @@ Parity evidence blocker snapshot (2026-03-18):
 
 Execute in this order:
 1. Complete full read-only diagnostics UX path (transport selector -> searchable vehicle selector -> DTC retrieval -> telemetry retrieval) and validate end-to-end behavior.
-2. Expand transport parity evidence for remaining inferred tuples with fresh live-capture traces.
-3. Promote debug adapter pilots into non-demo hardware-backed validation paths with reproducible verification evidence.
-4. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
-5. Keep service-light reset as the first controlled write increment after read-only completion; keep broader write/flash blocked.
+2. Complete permission-result UX handling for Bluetooth runtime requests (deny/permanently-deny) and validate error messaging.
+3. Expand transport parity evidence for remaining inferred tuples with fresh live-capture traces.
+4. Promote debug adapter pilots into non-demo hardware-backed validation paths with reproducible verification evidence.
+5. Track AGP/Gradle deprecation cleanup to keep CI future-proof for Gradle 10.
+6. Keep service-light reset as the first controlled write increment after read-only completion; keep broader write/flash blocked.
 
 ## Resume Pointers
 
@@ -151,5 +157,5 @@ Primary references:
 - `docs/NEXT_ACTIONS.md` (execution queue)
 - `docs/ROADMAP.md` (phase planning)
 - `docs/MODULE_DEPENDENCY_RULES.md` (architecture constraints)
-- `docs/SESSION_HANDOFF_2026-03-18.md` (latest session decisions, commits, and resume checklist)
+- `docs/SESSION_HANDOFF_2026-03-19.md` (latest session decisions, commits, and resume checklist)
 - `AGENTS.md` (quality/safety operating contract)

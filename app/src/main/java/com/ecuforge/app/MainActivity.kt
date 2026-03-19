@@ -1,9 +1,14 @@
 package com.ecuforge.app
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -91,6 +96,17 @@ class MainActivity : AppCompatActivity() {
      * Runs read-only ECU identification in debug-enabled app builds.
      */
     private fun runReadOnlyIdentification() {
+        val transportPermissionFailure = validateTransportPermissionPrecheck()
+        if (transportPermissionFailure != null) {
+            renderIdentificationState(
+                IdentificationUiState.Error(
+                    code = transportPermissionFailure.code,
+                    message = transportPermissionFailure.message,
+                ),
+            )
+            return
+        }
+
         if (!applyTransportConfiguration()) {
             return
         }
@@ -146,6 +162,17 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        val transportPermissionFailure = validateTransportPermissionPrecheck()
+        if (transportPermissionFailure != null) {
+            renderDtcState(
+                DtcUiState.Error(
+                    code = transportPermissionFailure.code,
+                    message = transportPermissionFailure.message,
+                ),
+            )
+            return
+        }
+
         if (!applyTransportConfiguration()) {
             return
         }
@@ -192,7 +219,7 @@ class MainActivity : AppCompatActivity() {
                     ),
                 )
             } finally {
-                binding.readDtcButton.isEnabled = true
+                renderActionAvailability()
             }
         }
     }
@@ -207,6 +234,17 @@ class MainActivity : AppCompatActivity() {
                 TelemetryUiState.Error(
                     code = telemetryPrecheck.code,
                     message = telemetryPrecheck.message,
+                ),
+            )
+            return
+        }
+
+        val transportPermissionFailure = validateTransportPermissionPrecheck()
+        if (transportPermissionFailure != null) {
+            renderTelemetryState(
+                TelemetryUiState.Error(
+                    code = transportPermissionFailure.code,
+                    message = transportPermissionFailure.message,
                 ),
             )
             return
@@ -247,7 +285,7 @@ class MainActivity : AppCompatActivity() {
                     ),
                 )
             } finally {
-                binding.readTelemetryButton.isEnabled = true
+                renderActionAvailability()
             }
         }
     }
@@ -318,6 +356,23 @@ class MainActivity : AppCompatActivity() {
     private fun renderIdentificationState(state: IdentificationUiState) {
         binding.statusText.text = IdentificationStatusFormatter.format(state)
         hasSuccessfulIdentification = state is IdentificationUiState.Success
+        renderActionAvailability()
+    }
+
+    /**
+     * Updates read-only action buttons based on current identification availability rules.
+     */
+    private fun renderActionAvailability() {
+        val availability =
+            ReadOnlyActionAvailability.evaluate(
+                state =
+                    ReadOnlyActionAvailability.State(
+                        hasSuccessfulIdentification = hasSuccessfulIdentification,
+                    ),
+            )
+
+        binding.readDtcButton.isEnabled = availability.isReadDtcEnabled
+        binding.readTelemetryButton.isEnabled = availability.isReadTelemetryEnabled
     }
 
     /**
@@ -436,10 +491,7 @@ class MainActivity : AppCompatActivity() {
      * Applies current transport selector value to both diagnostics and telemetry providers.
      */
     private fun applyTransportConfiguration(): Boolean {
-        val selectedTransport =
-            AppReadOnlyTransportMapper.map(
-                rawSelection = binding.transportSelectorInput.text?.toString().orEmpty(),
-            )
+        val selectedTransport = selectedTransport()
 
         val profile = transportProfileStore.load(selectedTransport)
         transportProfileStore.save(profile)
@@ -453,6 +505,66 @@ class MainActivity : AppCompatActivity() {
             profile.toTelemetryConnectionSettings(),
         )
         return true
+    }
+
+    /**
+     * Validates runtime transport permissions and requests missing ones.
+     */
+    private fun validateTransportPermissionPrecheck(): PrecheckFailure? {
+        val permissionResult =
+            ReadOnlyTransportPermissionPolicy.evaluate(
+                state =
+                    ReadOnlyTransportPermissionPolicy.State(
+                        selectedTransport = selectedTransport(),
+                        sdkInt = Build.VERSION.SDK_INT,
+                        hasBluetoothConnectPermission = hasPermission(Manifest.permission.BLUETOOTH_CONNECT),
+                        hasBluetoothScanPermission = hasPermission(Manifest.permission.BLUETOOTH_SCAN),
+                        hasFineLocationPermission = hasPermission(Manifest.permission.ACCESS_FINE_LOCATION),
+                    ),
+            )
+
+        if (permissionResult.isGranted) {
+            return null
+        }
+
+        ActivityCompat.requestPermissions(
+            this,
+            permissionResult.missingPermissions.toTypedArray(),
+            REQUEST_CODE_READ_ONLY_TRANSPORT_PERMISSIONS,
+        )
+        val permissionLabelText = permissionLabelText(permissionResult.missingPermissions)
+        return PrecheckFailure(
+            code = ReadOnlyTransportPermissionPolicy.PRECHECK_TRANSPORT_PERMISSION_REQUIRED,
+            message = getString(R.string.precheck_transport_permission_required, permissionLabelText),
+        )
+    }
+
+    private fun selectedTransport(): AppReadOnlyTransport {
+        return AppReadOnlyTransportMapper.map(
+            rawSelection = binding.transportSelectorInput.text?.toString().orEmpty(),
+        )
+    }
+
+    private fun hasPermission(permission: String): Boolean {
+        return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun permissionLabelText(missingPermissions: List<String>): String {
+        val labels =
+            missingPermissions
+                .mapNotNull { permission ->
+                    when (permission) {
+                        ReadOnlyTransportPermissionPolicy.PERMISSION_BLUETOOTH_CONNECT,
+                        ReadOnlyTransportPermissionPolicy.PERMISSION_BLUETOOTH_SCAN,
+                        -> getString(R.string.permission_label_nearby_devices)
+
+                        ReadOnlyTransportPermissionPolicy.PERMISSION_ACCESS_FINE_LOCATION ->
+                            getString(R.string.permission_label_location)
+
+                        else -> null
+                    }
+                }.distinct()
+        return labels.joinToString(separator = ", ")
     }
 
     /**
@@ -539,4 +651,8 @@ class MainActivity : AppCompatActivity() {
         val code: String,
         val message: String,
     )
+
+    private companion object {
+        private const val REQUEST_CODE_READ_ONLY_TRANSPORT_PERMISSIONS: Int = 1001
+    }
 }

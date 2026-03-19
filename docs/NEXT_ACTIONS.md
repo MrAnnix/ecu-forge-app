@@ -65,7 +65,9 @@ Execution status:
 - Task 38 (Transport profile MVP implementation): added app transport profile factory/store, dynamic transport form fields, validation, and runtime profile application into diagnostics/telemetry debug providers.
 - Task 39 (Device settings screen split): moved transport profile editing from inline main screen panel to dedicated `DeviceSettingsActivity` launched from top app bar settings action.
 - Task 40 (Read-only preflight validation): added app prechecks enforcing identification-first DTC/telemetry flow and vehicle context requirement when catalog descriptions are enabled.
-- Next recommended task: complete transport + searchable vehicle selector UX path, then expand live-capture parity evidence for remaining inferred tuples.
+- Task 41 (Read-only action availability gating): DTC and telemetry actions are now disabled until identification succeeds, while precheck guard remains active as a second safety barrier.
+- Task 42 (Read-only transport permission gating): Bluetooth runtime permission precheck added for identification/DTC/telemetry actions with deterministic error mapping and Android 12+/legacy branching.
+- Next recommended task: complete permission-result UX loop (deny/permanently-deny guidance) for Bluetooth runtime requests, then expand live-capture parity evidence for remaining inferred tuples.
 - Prepared promotion candidate in sprint template: `SIEMENS/SIE-ECU-01 + BLUETOOTH`.
 
 Parity blocker snapshot (2026-03-18):
@@ -89,6 +91,9 @@ Parity blocker snapshot (2026-03-18):
 
 - [ ] Complete end-to-end read-only app flow integration: transport selector -> searchable vehicle selector -> DTC retrieval -> telemetry retrieval.
 - [x] Implement transport configuration profile MVP fields and validation in app flow (Bluetooth/USB/WiFi required fields).
+- [x] Gate DTC/telemetry action availability on successful identification.
+- [x] Gate read-only Bluetooth actions behind runtime transport permission precheck.
+- [ ] Add explicit post-request permission UX handling (deny/permanently-deny + settings guidance) for read-only Bluetooth flow.
 - [ ] Promote additional family/model transport tuples from `INFERRED` to `VALIDATED` using live capture parity evidence.
 - [ ] Promote debug adapter pilots into non-demo hardware-backed validation paths with reproducible transport verification evidence (ELM327 Bluetooth, USB cable, and WiFi) based on user-available hardware.
 - [ ] Execute phased AGP/Gradle deprecation cleanup to preserve Gradle 10 compatibility.
@@ -193,7 +198,7 @@ Before opening PR:
 ## Quick Resume Prompt
 
 If you return later, continue with:
-- Read `docs/SESSION_HANDOFF_2026-03-18.md` to restore latest decisions and commit anchors.
+- Read `docs/SESSION_HANDOFF_2026-03-19.md` to restore latest decisions and commit anchors.
 - Expand model-level compatibility evidence with transport/hardware parity validation traces.
 - Wire concrete Bluetooth/USB transport adapters into `DiagnosticsFlowProvider` and `TelemetryFlowProvider` for non-demo read-only validation.
 - Define DTC i18n `titleKey` maintenance workflow and confirm dataset redistribution terms.
