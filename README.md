@@ -73,10 +73,15 @@ The repository now includes a baseline Android project with:
 
 ## Next Steps
 
-1. Define module boundaries (`app`, `core`, `ecu`, `feature-*`).
-2. Add Gradle wrapper files (`gradlew`, `gradlew.bat`, and `gradle/wrapper/*`) from Android Studio sync.
-3. Add static analysis, formatting, and CI checks.
-4. Create an implementation board from the roadmap.
+1. Complete the end-to-end read-only diagnostics UX flow:
+   - transport selection (Bluetooth, USB cable, WiFi),
+   - searchable vehicle selection (make/model/year),
+   - DTC retrieval,
+   - telemetry retrieval.
+2. Expand live parity evidence for additional model+transport tuples.
+3. Promote debug transport pilots into hardware-backed validation paths while keeping release safety unchanged.
+4. Execute phased AGP/Gradle deprecation cleanup.
+5. After read-only completion and safety gates, enable controlled write scope starting with service-light reset.
 
 ## Contributing Manuals
 

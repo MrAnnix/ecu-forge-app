@@ -21,6 +21,13 @@ Scope:
 - Model: `Model`
 - Year (optional): `Year (optional)`
 
+### Search and Selection
+
+- Search placeholder: `Search make or model`
+- Search helper: `Type at least 2 characters to filter vehicles.`
+- Empty search result: `No vehicles match your search.`
+- Loading state: `Loading vehicle options...`
+
 ### Helper Text
 
 - `We use this selection to show more accurate DTC descriptions for your motorcycle.`
@@ -66,6 +73,10 @@ Scope:
 <string name="vehicle_selector_make_label">Make</string>
 <string name="vehicle_selector_model_label">Model</string>
 <string name="vehicle_selector_year_label">Year (optional)</string>
+<string name="vehicle_selector_search_placeholder">Search make or model</string>
+<string name="vehicle_selector_search_helper">Type at least 2 characters to filter vehicles.</string>
+<string name="vehicle_selector_search_empty">No vehicles match your search.</string>
+<string name="vehicle_selector_loading">Loading vehicle options...</string>
 <string name="vehicle_selector_helper">We use this selection to show more accurate DTC descriptions for your motorcycle.</string>
 <string name="vehicle_selector_apply_cta">Apply vehicle</string>
 <string name="vehicle_selector_skip_cta">Continue without selection</string>
@@ -86,6 +97,8 @@ Scope:
 2. If no mapping exists for a code, preserve ECU description.
 3. If catalog loading fails, degrade to ECU description and show a non-blocking message.
 4. If the user skips vehicle selection, keep the base ECU flow without enrichment.
+5. Search filtering must be deterministic and case-insensitive for make/model values.
+6. Search input must not block DTC retrieval; user can continue without selection.
 
 ## Recommended Integration
 

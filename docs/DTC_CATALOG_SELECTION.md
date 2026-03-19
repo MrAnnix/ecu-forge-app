@@ -74,11 +74,18 @@ To use this in the app flow, the vehicle selector screen should provide `make`, 
 
 If user skips vehicle selection, use `preferCatalogDescriptions = false` to keep raw ECU wording.
 
+### Searchable Vehicle UX Contract
+
+- Vehicle selection UX should provide searchable make/model filtering before year selection.
+- Search matching should be case-insensitive and deterministic.
+- Search failure or empty results must not block diagnostics: users can continue without selection.
+- Selector should return `VehicleCatalogContext` only after explicit user confirmation.
+
 ## Open Risks
 
 - Dataset redistribution rights must be verified before broad release packaging.
 - i18n resource mapping by `titleKey` is still pending before localized UX rollout.
-- App-level vehicle selector wiring is pending; catalog-based enrichment is available in domain but not yet fully activated in user flows.
+- Searchable vehicle selector UX still requires end-to-end validation evidence in app flows.
 
 ## Related Docs
 
