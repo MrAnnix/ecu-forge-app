@@ -8,6 +8,7 @@
     <string name="transport_option_bluetooth">Bluetooth</string>
     <string name="transport_option_usb">USB cable</string>
     <string name="transport_option_wifi">WiFi</string>
+    <string name="device_settings_action">Device settings</string>
     <string name="transport_primary_label">Primary transport value</string>
     <string name="transport_secondary_label">Secondary transport value</string>
     <string name="transport_connect_timeout_label">Connection timeout (ms)</string>

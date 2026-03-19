@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var exportUseCase: PersistTelemetryExportUseCase
     private lateinit var transportProfileStore: AppTransportProfileStore
     private var latestTelemetrySuccessState: TelemetryUiState.Success? = null
+    private var isDeviceSettingsVisible: Boolean = false
 
     /**
      * Initializes the view binding and registers UI actions.
@@ -46,7 +47,9 @@ class MainActivity : AppCompatActivity() {
         renderIdentificationState(IdentificationUiState.Idle)
         renderDtcState(DtcUiState.Idle)
         renderTelemetryState(TelemetryUiState.Idle)
+        setupTopAppBar()
         setupSelectorDropdowns()
+        renderDeviceSettingsVisibility()
 
         binding.identifyButton.setOnClickListener {
             runReadOnlyIdentification()
@@ -297,6 +300,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
+     * Sets up top app bar actions.
+     */
+    private fun setupTopAppBar() {
+        binding.topAppBar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_device_settings -> {
+                    isDeviceSettingsVisible = !isDeviceSettingsVisible
+                    renderDeviceSettingsVisibility()
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    /**
      * Sets up searchable dropdowns for transport and vehicle catalog context fields.
      */
     private fun setupSelectorDropdowns() {
@@ -348,6 +368,18 @@ class MainActivity : AppCompatActivity() {
             false,
         )
         bindTransportProfileToInputs(transportProfileStore.load(selectedTransport))
+    }
+
+    /**
+     * Applies panel visibility state for device transport settings.
+     */
+    private fun renderDeviceSettingsVisibility() {
+        binding.deviceSettingsPanel.visibility =
+            if (isDeviceSettingsVisible) {
+                android.view.View.VISIBLE
+            } else {
+                android.view.View.GONE
+            }
     }
 
     /**
