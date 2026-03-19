@@ -4,6 +4,9 @@ import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.ecuforge.app.databinding.ActivityMainBinding
 import com.ecuforge.feature.diagnostics.DiagnosticsFeatureEntry
 import com.ecuforge.feature.diagnostics.domain.DtcUiState
@@ -47,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         renderIdentificationState(IdentificationUiState.Idle)
         renderDtcState(DtcUiState.Idle)
         renderTelemetryState(TelemetryUiState.Idle)
+        applySystemBarInsets()
         setupTopAppBar()
         setupSelectorDropdowns()
         renderDeviceSettingsVisibility()
@@ -297,6 +301,23 @@ class MainActivity : AppCompatActivity() {
         binding.telemetryStatusText.text = TelemetryStatusFormatter.format(state)
         latestTelemetrySuccessState = state as? TelemetryUiState.Success
         binding.exportTelemetryButton.isEnabled = latestTelemetrySuccessState != null
+    }
+
+    /**
+     * Applies status/navigation bar insets so content does not overlap system bars.
+     */
+    private fun applySystemBarInsets() {
+        val initialTopPadding = binding.root.paddingTop
+        val initialBottomPadding = binding.root.paddingBottom
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.updatePadding(
+                top = initialTopPadding + systemBarsInsets.top,
+                bottom = initialBottomPadding + systemBarsInsets.bottom,
+            )
+            insets
+        }
     }
 
     /**
