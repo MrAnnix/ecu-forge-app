@@ -1,5 +1,6 @@
 package com.ecuforge.app
 
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -32,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var exportUseCase: PersistTelemetryExportUseCase
     private lateinit var transportProfileStore: AppTransportProfileStore
     private var latestTelemetrySuccessState: TelemetryUiState.Success? = null
-    private var isDeviceSettingsVisible: Boolean = false
 
     /**
      * Initializes the view binding and registers UI actions.
@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         applySystemBarInsets()
         setupTopAppBar()
         setupSelectorDropdowns()
-        renderDeviceSettingsVisibility()
 
         binding.identifyButton.setOnClickListener {
             runReadOnlyIdentification()
@@ -75,6 +74,15 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         screenScope.cancel()
         super.onDestroy()
+    }
+
+    /**
+     * Refreshes selected transport label after returning from settings screen.
+     */
+    override fun onResume() {
+        super.onResume()
+        val selectedTransport = transportProfileStore.loadSelectedTransport()
+        binding.transportSelectorInput.setText(transportLabelFor(selectedTransport), false)
     }
 
     /**
@@ -327,8 +335,7 @@ class MainActivity : AppCompatActivity() {
         binding.topAppBar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.action_device_settings -> {
-                    isDeviceSettingsVisible = !isDeviceSettingsVisible
-                    renderDeviceSettingsVisibility()
+                    startActivity(Intent(this, DeviceSettingsActivity::class.java))
                     true
                 }
 
@@ -362,13 +369,6 @@ class MainActivity : AppCompatActivity() {
                 binding.transportSelectorInput.showDropDown()
             }
         }
-        binding.transportSelectorInput.setOnItemClickListener { _, _, _, _ ->
-            val selectedTransport =
-                AppReadOnlyTransportMapper.map(
-                    binding.transportSelectorInput.text?.toString().orEmpty(),
-                )
-            bindTransportProfileToInputs(transportProfileStore.load(selectedTransport))
-        }
 
         binding.vehicleMakeInput.setAdapter(
             ArrayAdapter(
@@ -397,19 +397,6 @@ class MainActivity : AppCompatActivity() {
             transportLabelFor(selectedTransport),
             false,
         )
-        bindTransportProfileToInputs(transportProfileStore.load(selectedTransport))
-    }
-
-    /**
-     * Applies panel visibility state for device transport settings.
-     */
-    private fun renderDeviceSettingsVisibility() {
-        binding.deviceSettingsPanel.visibility =
-            if (isDeviceSettingsVisible) {
-                android.view.View.VISIBLE
-            } else {
-                android.view.View.GONE
-            }
     }
 
     /**
@@ -421,41 +408,8 @@ class MainActivity : AppCompatActivity() {
                 rawSelection = binding.transportSelectorInput.text?.toString().orEmpty(),
             )
 
-        val profileBuildResult =
-            AppTransportProfileFactory.build(
-                transport = selectedTransport,
-                primaryValue = binding.transportPrimaryInput.text?.toString().orEmpty(),
-                secondaryValue = binding.transportSecondaryInput.text?.toString().orEmpty(),
-                connectTimeoutValue = binding.connectTimeoutInput.text?.toString().orEmpty(),
-                readTimeoutValue = binding.readTimeoutInput.text?.toString().orEmpty(),
-            )
-
-        if (!profileBuildResult.validation.isValid || profileBuildResult.profile == null) {
-            val errorMessage = profileBuildResult.validation.errors.joinToString(separator = "\n")
-            renderIdentificationState(
-                IdentificationUiState.Error(
-                    code = "TRANSPORT_CONFIG_INVALID",
-                    message = errorMessage,
-                ),
-            )
-            renderDtcState(
-                DtcUiState.Error(
-                    code = "TRANSPORT_CONFIG_INVALID",
-                    message = errorMessage,
-                ),
-            )
-            renderTelemetryState(
-                TelemetryUiState.Error(
-                    code = "TRANSPORT_CONFIG_INVALID",
-                    message = errorMessage,
-                ),
-            )
-            return false
-        }
-
-        val profile = profileBuildResult.profile
+        val profile = transportProfileStore.load(selectedTransport)
         transportProfileStore.save(profile)
-        bindTransportFieldHints(profile.transport)
 
         DiagnosticsFeatureEntry.configureReadOnlyTransport(profile.transport.toDiagnosticsTransport())
         TelemetryFeatureEntry.configureReadOnlyTransport(profile.transport.toTelemetryTransport())
@@ -466,57 +420,6 @@ class MainActivity : AppCompatActivity() {
             profile.toTelemetryConnectionSettings(),
         )
         return true
-    }
-
-    private fun bindTransportProfileToInputs(profile: AppTransportProfile) {
-        bindTransportFieldHints(profile.transport)
-        binding.connectTimeoutInput.setText(profile.connectTimeoutMs.toString())
-        binding.readTimeoutInput.setText(profile.readTimeoutMs.toString())
-
-        when (profile) {
-            is AppTransportProfile.Bluetooth -> {
-                binding.transportPrimaryInput.setText(profile.macAddress)
-                binding.transportSecondaryInput.setText("")
-            }
-
-            is AppTransportProfile.Usb -> {
-                binding.transportPrimaryInput.setText(profile.vendorId.toString())
-                binding.transportSecondaryInput.setText(profile.productId.toString())
-            }
-
-            is AppTransportProfile.Wifi -> {
-                binding.transportPrimaryInput.setText(profile.host)
-                binding.transportSecondaryInput.setText(profile.port.toString())
-            }
-        }
-    }
-
-    private fun bindTransportFieldHints(transport: AppReadOnlyTransport) {
-        when (transport) {
-            AppReadOnlyTransport.BLUETOOTH -> {
-                binding.transportPrimaryInputLayout.hint = getString(R.string.transport_primary_hint_bluetooth)
-                binding.transportSecondaryInputLayout.hint = getString(R.string.transport_secondary_label)
-                binding.transportSecondaryInputLayout.isEnabled = false
-                binding.transportSecondaryInputLayout.isHintEnabled = false
-                binding.transportSecondaryInputLayout.visibility = android.view.View.GONE
-            }
-
-            AppReadOnlyTransport.USB -> {
-                binding.transportPrimaryInputLayout.hint = getString(R.string.transport_primary_hint_usb)
-                binding.transportSecondaryInputLayout.hint = getString(R.string.transport_secondary_hint_usb)
-                binding.transportSecondaryInputLayout.isEnabled = true
-                binding.transportSecondaryInputLayout.isHintEnabled = true
-                binding.transportSecondaryInputLayout.visibility = android.view.View.VISIBLE
-            }
-
-            AppReadOnlyTransport.WIFI -> {
-                binding.transportPrimaryInputLayout.hint = getString(R.string.transport_primary_hint_wifi)
-                binding.transportSecondaryInputLayout.hint = getString(R.string.transport_secondary_hint_wifi)
-                binding.transportSecondaryInputLayout.isEnabled = true
-                binding.transportSecondaryInputLayout.isHintEnabled = true
-                binding.transportSecondaryInputLayout.visibility = android.view.View.VISIBLE
-            }
-        }
     }
 
     private fun transportLabelFor(transport: AppReadOnlyTransport): String {
