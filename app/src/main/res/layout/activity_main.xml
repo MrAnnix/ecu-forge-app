@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
+    android:fillViewport="true"
     tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
 
     <TextView
         android:id="@+id/titleText"
@@ -28,6 +33,92 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleText" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/transportSelectorInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="@string/transport_selector_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statusText">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/transportSelectorInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:completionThreshold="1"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/transportPrimaryInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/transport_primary_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transportSelectorInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/transportPrimaryInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/transportSecondaryInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/transport_secondary_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transportPrimaryInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/transportSecondaryInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/connectTimeoutInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/transport_connect_timeout_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transportSecondaryInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/connectTimeoutInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/readTimeoutInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/transport_read_timeout_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/connectTimeoutInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/readTimeoutInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/identifyButton"
         android:layout_width="0dp"
@@ -36,7 +127,7 @@
         android:text="@string/diagnostics_action_identify"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/statusText" />
+        app:layout_constraintTop_toBottomOf="@id/readTimeoutInputLayout" />
 
     <TextView
         android:id="@+id/dtcStatusText"
@@ -59,10 +150,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dtcStatusText">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/vehicleMakeInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:completionThreshold="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -75,10 +167,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vehicleMakeInputLayout">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/vehicleModelInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:completionThreshold="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -91,10 +184,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vehicleModelInputLayout">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/vehicleYearInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:completionThreshold="1"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -150,4 +244,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/readTelemetryButton" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
+

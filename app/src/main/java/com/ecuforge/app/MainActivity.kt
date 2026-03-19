@@ -2,6 +2,7 @@ package com.ecuforge.app
 
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.ecuforge.app.databinding.ActivityMainBinding
 import com.ecuforge.feature.diagnostics.DiagnosticsFeatureEntry
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val screenScope = MainScope()
     private lateinit var exportUseCase: PersistTelemetryExportUseCase
+    private lateinit var transportProfileStore: AppTransportProfileStore
     private var latestTelemetrySuccessState: TelemetryUiState.Success? = null
 
     /**
@@ -39,10 +41,13 @@ class MainActivity : AppCompatActivity() {
             PersistTelemetryExportUseCase(
                 exportStore = AppTelemetryExportStore(File(filesDir, "telemetry-exports")),
             )
+        transportProfileStore = AppTransportProfileStore(this)
 
         renderIdentificationState(IdentificationUiState.Idle)
         renderDtcState(DtcUiState.Idle)
         renderTelemetryState(TelemetryUiState.Idle)
+        setupSelectorDropdowns()
+
         binding.identifyButton.setOnClickListener {
             runReadOnlyIdentification()
         }
@@ -69,6 +74,10 @@ class MainActivity : AppCompatActivity() {
      * Runs read-only ECU identification in debug-enabled app builds.
      */
     private fun runReadOnlyIdentification() {
+        if (!applyTransportConfiguration()) {
+            return
+        }
+
         val isDebuggableBuild = (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
         if (!isDebuggableBuild) {
             renderIdentificationState(
@@ -109,6 +118,10 @@ class MainActivity : AppCompatActivity() {
      * Runs read-only DTC retrieval in debug-enabled app builds.
      */
     private fun runReadOnlyDtc() {
+        if (!applyTransportConfiguration()) {
+            return
+        }
+
         val isDebuggableBuild = (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
         if (!isDebuggableBuild) {
             renderDtcState(
@@ -160,6 +173,10 @@ class MainActivity : AppCompatActivity() {
      * Runs read-only telemetry snapshot retrieval in debug-enabled app builds.
      */
     private fun runReadOnlyTelemetry() {
+        if (!applyTransportConfiguration()) {
+            return
+        }
+
         val isDebuggableBuild = (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
         if (!isDebuggableBuild) {
             renderTelemetryState(
@@ -234,7 +251,11 @@ class MainActivity : AppCompatActivity() {
                         val warningSuffix =
                             result.receipt.warning?.let { warning -> " Warning: $warning" }.orEmpty()
                         binding.telemetryStatusText.text =
-                            "Telemetry export saved (${result.receipt.exportId})." + warningSuffix
+                            getString(
+                                R.string.telemetry_export_saved,
+                                result.receipt.exportId,
+                                warningSuffix,
+                            )
                     }
                 }
             } catch (cancelled: CancellationException) {
@@ -273,5 +294,174 @@ class MainActivity : AppCompatActivity() {
         binding.telemetryStatusText.text = TelemetryStatusFormatter.format(state)
         latestTelemetrySuccessState = state as? TelemetryUiState.Success
         binding.exportTelemetryButton.isEnabled = latestTelemetrySuccessState != null
+    }
+
+    /**
+     * Sets up searchable dropdowns for transport and vehicle catalog context fields.
+     */
+    private fun setupSelectorDropdowns() {
+        val transportOptions = resources.getStringArray(R.array.transport_selector_options)
+        val makeOptions = resources.getStringArray(R.array.vehicle_make_options)
+        val modelOptions = resources.getStringArray(R.array.vehicle_model_options)
+        val yearOptions = resources.getStringArray(R.array.vehicle_year_options)
+
+        binding.transportSelectorInput.setAdapter(
+            ArrayAdapter(
+                this,
+                android.R.layout.simple_list_item_1,
+                transportOptions,
+            ),
+        )
+        binding.transportSelectorInput.setOnItemClickListener { _, _, _, _ ->
+            val selectedTransport =
+                AppReadOnlyTransportMapper.map(
+                    binding.transportSelectorInput.text?.toString().orEmpty(),
+                )
+            bindTransportProfileToInputs(transportProfileStore.load(selectedTransport))
+        }
+
+        binding.vehicleMakeInput.setAdapter(
+            ArrayAdapter(
+                this,
+                android.R.layout.simple_list_item_1,
+                makeOptions,
+            ),
+        )
+        binding.vehicleModelInput.setAdapter(
+            ArrayAdapter(
+                this,
+                android.R.layout.simple_list_item_1,
+                modelOptions,
+            ),
+        )
+        binding.vehicleYearInput.setAdapter(
+            ArrayAdapter(
+                this,
+                android.R.layout.simple_list_item_1,
+                yearOptions,
+            ),
+        )
+
+        val selectedTransport = transportProfileStore.loadSelectedTransport()
+        binding.transportSelectorInput.setText(
+            transportLabelFor(selectedTransport),
+            false,
+        )
+        bindTransportProfileToInputs(transportProfileStore.load(selectedTransport))
+    }
+
+    /**
+     * Applies current transport selector value to both diagnostics and telemetry providers.
+     */
+    private fun applyTransportConfiguration(): Boolean {
+        val selectedTransport =
+            AppReadOnlyTransportMapper.map(
+                rawSelection = binding.transportSelectorInput.text?.toString().orEmpty(),
+            )
+
+        val profileBuildResult =
+            AppTransportProfileFactory.build(
+                transport = selectedTransport,
+                primaryValue = binding.transportPrimaryInput.text?.toString().orEmpty(),
+                secondaryValue = binding.transportSecondaryInput.text?.toString().orEmpty(),
+                connectTimeoutValue = binding.connectTimeoutInput.text?.toString().orEmpty(),
+                readTimeoutValue = binding.readTimeoutInput.text?.toString().orEmpty(),
+            )
+
+        if (!profileBuildResult.validation.isValid || profileBuildResult.profile == null) {
+            val errorMessage = profileBuildResult.validation.errors.joinToString(separator = "\n")
+            renderIdentificationState(
+                IdentificationUiState.Error(
+                    code = "TRANSPORT_CONFIG_INVALID",
+                    message = errorMessage,
+                ),
+            )
+            renderDtcState(
+                DtcUiState.Error(
+                    code = "TRANSPORT_CONFIG_INVALID",
+                    message = errorMessage,
+                ),
+            )
+            renderTelemetryState(
+                TelemetryUiState.Error(
+                    code = "TRANSPORT_CONFIG_INVALID",
+                    message = errorMessage,
+                ),
+            )
+            return false
+        }
+
+        val profile = profileBuildResult.profile
+        transportProfileStore.save(profile)
+        bindTransportFieldHints(profile.transport)
+
+        DiagnosticsFeatureEntry.configureReadOnlyTransport(profile.transport.toDiagnosticsTransport())
+        TelemetryFeatureEntry.configureReadOnlyTransport(profile.transport.toTelemetryTransport())
+        DiagnosticsFeatureEntry.configureReadOnlyConnectionSettings(
+            profile.toDiagnosticsConnectionSettings(),
+        )
+        TelemetryFeatureEntry.configureReadOnlyConnectionSettings(
+            profile.toTelemetryConnectionSettings(),
+        )
+        return true
+    }
+
+    private fun bindTransportProfileToInputs(profile: AppTransportProfile) {
+        bindTransportFieldHints(profile.transport)
+        binding.connectTimeoutInput.setText(profile.connectTimeoutMs.toString())
+        binding.readTimeoutInput.setText(profile.readTimeoutMs.toString())
+
+        when (profile) {
+            is AppTransportProfile.Bluetooth -> {
+                binding.transportPrimaryInput.setText(profile.macAddress)
+                binding.transportSecondaryInput.setText("")
+            }
+
+            is AppTransportProfile.Usb -> {
+                binding.transportPrimaryInput.setText(profile.vendorId.toString())
+                binding.transportSecondaryInput.setText(profile.productId.toString())
+            }
+
+            is AppTransportProfile.Wifi -> {
+                binding.transportPrimaryInput.setText(profile.host)
+                binding.transportSecondaryInput.setText(profile.port.toString())
+            }
+        }
+    }
+
+    private fun bindTransportFieldHints(transport: AppReadOnlyTransport) {
+        when (transport) {
+            AppReadOnlyTransport.BLUETOOTH -> {
+                binding.transportPrimaryInputLayout.hint = getString(R.string.transport_primary_hint_bluetooth)
+                binding.transportSecondaryInputLayout.hint = getString(R.string.transport_secondary_label)
+                binding.transportSecondaryInputLayout.isEnabled = false
+                binding.transportSecondaryInputLayout.isHintEnabled = false
+                binding.transportSecondaryInputLayout.visibility = android.view.View.GONE
+            }
+
+            AppReadOnlyTransport.USB -> {
+                binding.transportPrimaryInputLayout.hint = getString(R.string.transport_primary_hint_usb)
+                binding.transportSecondaryInputLayout.hint = getString(R.string.transport_secondary_hint_usb)
+                binding.transportSecondaryInputLayout.isEnabled = true
+                binding.transportSecondaryInputLayout.isHintEnabled = true
+                binding.transportSecondaryInputLayout.visibility = android.view.View.VISIBLE
+            }
+
+            AppReadOnlyTransport.WIFI -> {
+                binding.transportPrimaryInputLayout.hint = getString(R.string.transport_primary_hint_wifi)
+                binding.transportSecondaryInputLayout.hint = getString(R.string.transport_secondary_hint_wifi)
+                binding.transportSecondaryInputLayout.isEnabled = true
+                binding.transportSecondaryInputLayout.isHintEnabled = true
+                binding.transportSecondaryInputLayout.visibility = android.view.View.VISIBLE
+            }
+        }
+    }
+
+    private fun transportLabelFor(transport: AppReadOnlyTransport): String {
+        return when (transport) {
+            AppReadOnlyTransport.BLUETOOTH -> getString(R.string.transport_option_bluetooth)
+            AppReadOnlyTransport.USB -> getString(R.string.transport_option_usb)
+            AppReadOnlyTransport.WIFI -> getString(R.string.transport_option_wifi)
+        }
     }
 }

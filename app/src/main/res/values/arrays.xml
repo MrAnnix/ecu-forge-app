@@ -1,0 +1,31 @@
+<resources>
+    <string-array name="transport_selector_options">
+        <item>@string/transport_option_bluetooth</item>
+        <item>@string/transport_option_usb</item>
+        <item>@string/transport_option_wifi</item>
+    </string-array>
+
+    <string-array name="vehicle_make_options">
+        <item>Triumph</item>
+    </string-array>
+
+    <string-array name="vehicle_model_options">
+        <item>Bonneville T100</item>
+        <item>Bonneville T120</item>
+        <item>Bobber</item>
+        <item>Speedmaster</item>
+        <item>Speed Twin</item>
+        <item>Thruxton</item>
+        <item>Street Twin</item>
+        <item>Street Cup</item>
+        <item>Street Scrambler</item>
+    </string-array>
+
+    <string-array name="vehicle_year_options">
+        <item>2016</item>
+        <item>2017</item>
+        <item>2018</item>
+        <item>2019</item>
+    </string-array>
+</resources>
+

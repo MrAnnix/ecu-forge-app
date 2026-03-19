@@ -1,13 +1,20 @@
 package com.ecuforge.feature.diagnostics
 
+import com.ecuforge.core.transport.TransportEndpoint
 import com.ecuforge.feature.diagnostics.domain.DtcUiState
 import com.ecuforge.feature.diagnostics.domain.IdentificationUiState
 import com.ecuforge.feature.diagnostics.domain.VehicleCatalogContext
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.After
 import org.junit.Test
 
 class DiagnosticsFeatureEntryDebugTest {
+    @After
+    fun resetTransportSelection() {
+        DiagnosticsFeatureEntry.configureReadOnlyTransport(DiagnosticsReadOnlyTransport.USB)
+    }
+
     @Test
     fun readOnlyDemoReturnsSuccess() {
         runBlocking {
@@ -96,6 +103,42 @@ class DiagnosticsFeatureEntryDebugTest {
                         .describedAs("Catalog-aware DTC demo should replace ECU description with catalog description")
                         .contains("Oxygen sensor cyl 1")
                 }
+        }
+    }
+
+    @Test
+    fun configureTransportToBluetoothChangesIdentificationModel() {
+        runBlocking {
+            DiagnosticsFeatureEntry.configureReadOnlyTransport(DiagnosticsReadOnlyTransport.BLUETOOTH)
+
+            val result = DiagnosticsFeatureEntry.identifyReadOnlyDemo()
+
+            assertThat(result)
+                .describedAs("Bluetooth transport selection should keep identification flow successful")
+                .isInstanceOf(IdentificationUiState.Success::class.java)
+            val success = result as IdentificationUiState.Success
+            assertThat(success.identification.model)
+                .describedAs("Bluetooth transport path should return KM602EU scripted model")
+                .isEqualTo("KM602EU")
+        }
+    }
+
+    @Test
+    fun configureProfileOverrideAppliesCustomBluetoothEndpoint() {
+        runBlocking {
+            DiagnosticsFeatureEntry.configureReadOnlyProfile(
+                DiagnosticsReadOnlyProfile(
+                    ecuFamily = "KEIHIN",
+                    endpointHint = "BLUETOOTH",
+                    endpoint = TransportEndpoint.Bluetooth(macAddress = "AA:BB:CC:DD:EE:FF"),
+                ),
+            )
+
+            val result = DiagnosticsFeatureEntry.identifyReadOnlyDemo()
+
+            assertThat(result)
+                .describedAs("Explicit diagnostics profile override should preserve successful identification")
+                .isInstanceOf(IdentificationUiState.Success::class.java)
         }
     }
 }
